@@ -1,0 +1,8 @@
+C:\Projects\FinBoard\API\obj\Debug\net6.0\API.csproj.AssemblyReference.cache
+C:\Projects\FinBoard\API\obj\Debug\net6.0\API.dll.config
+C:\Projects\FinBoard\API\obj\Debug\net6.0\API.GeneratedMSBuildEditorConfig.editorconfig
+C:\Projects\FinBoard\API\obj\Debug\net6.0\API.AssemblyInfoInputs.cache
+C:\Projects\FinBoard\API\obj\Debug\net6.0\API.AssemblyInfo.cs
+C:\Projects\FinBoard\API\obj\Debug\net6.0\API.csproj.CoreCompileInputs.cache
+C:\Projects\FinBoard\API\obj\Debug\net6.0\API.MvcApplicationPartsAssemblyInfo.cs
+C:\Projects\FinBoard\API\obj\Debug\net6.0\API.MvcApplicationPartsAssemblyInfo.cache
