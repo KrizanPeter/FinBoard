@@ -1,22 +1,23 @@
 using Microsoft.AspNetCore.Mvc;
 
-namespace API.Controllers;
-
-[ApiController]
-[Route("api/[controller]")]
-public class AppUserController : ControllerBase
+namespace API.Controllers
 {
-
-    private readonly ILogger<AppUserController> _logger;
-
-    public AppUserController(ILogger<AppUserController> logger)
+    [ApiController]
+    [Route("api/[controller]")]
+    public class AppUserController : ControllerBase
     {
-        _logger = logger;
-    }
 
-    [HttpGet(Name = "GetWeatherForecast")]
-    public async Task<IActionResult> GetAsync()
-    {
-        return Ok();
+        private readonly ILogger<AppUserController> _logger;
+
+        public AppUserController(ILogger<AppUserController> logger)
+        {
+            _logger = logger;
+        }
+
+        [HttpGet(Name = "GetUser")]
+        public async Task<IActionResult> GetUsersAsync()
+        {
+            return Ok("trololo");
+        }
     }
 }
