@@ -23,6 +23,9 @@ import {
   NbToastrModule,
   NbWindowModule,
   NbDialogModule,
+  NbCardModule,
+  NbInputModule,
+  NbTreeGridModule,
 } from '@nebular/theme';
 import { FooterComponent } from './components/footer/footer.component';
 import { LayoutService } from './nbutils/layout.service';
@@ -110,6 +113,9 @@ import { AccountFormComponent } from './pages/account/account-form/account-form.
     NbButtonModule,
     NbSelectModule,
     NbIconModule,
+    NbInputModule,
+    NbTreeGridModule,
+    NbCardModule,
     NbMenuModule.forRoot(),
     NbDialogModule.forRoot(),
     NbWindowModule.forRoot(),
