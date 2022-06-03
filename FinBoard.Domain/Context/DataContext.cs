@@ -15,7 +15,7 @@ namespace FinBoard.Domain.Context
 
         }
 
-        public DbSet<AppUser> AppUsers { get; set; }
+        public DbSet<User> Users { get; set; }
 
     }
 }

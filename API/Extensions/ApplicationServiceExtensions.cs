@@ -1,5 +1,6 @@
 ﻿using System;
 using FinBoard.Domain.Context;
+using FinBoard.Services.Mapper;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -11,6 +12,8 @@ namespace API.Extensions
     {
         public static IServiceCollection AddApplicationServices(this IServiceCollection services, IConfiguration config)
         {
+
+            services.AddAutoMapper(typeof(AutoMapperProfile).Assembly);
 
             services.AddDbContext<DataContext>(options =>
             {

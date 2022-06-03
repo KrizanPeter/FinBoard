@@ -20,6 +20,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\FinBoard.Domain\FinBoard.Domain.csproj" />
+    <ProjectReference Include="..\FinBoard.Services\FinBoard.Services.csproj" />
   </ItemGroup>
 
 </Project>
