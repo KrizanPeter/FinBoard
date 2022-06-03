@@ -1153,6 +1153,7 @@
         "dependencies": {
           "AutoMapper.Extensions.Microsoft.DependencyInjection": "11.0.0",
           "FinBoard.Domain": "1.0.0",
+          "FinBoard.Utils": "1.0.0",
           "Microsoft.Extensions.Logging.Abstractions": "6.0.1"
         },
         "compile": {
@@ -1160,6 +1161,16 @@
         },
         "runtime": {
           "bin/placeholder/FinBoard.Services.dll": {}
+        }
+      },
+      "FinBoard.Utils/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "compile": {
+          "bin/placeholder/FinBoard.Utils.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/FinBoard.Utils.dll": {}
         }
       }
     }
@@ -3093,6 +3104,11 @@
       "type": "project",
       "path": "../FinBoard.Services/FinBoard.Services.csproj",
       "msbuildProject": "../FinBoard.Services/FinBoard.Services.csproj"
+    },
+    "FinBoard.Utils/1.0.0": {
+      "type": "project",
+      "path": "../FinBoard.Utils/FinBoard.Utils.csproj",
+      "msbuildProject": "../FinBoard.Utils/FinBoard.Utils.csproj"
     }
   },
   "projectFileDependencyGroups": {

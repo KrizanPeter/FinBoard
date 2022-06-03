@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
@@ -17,5 +17,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\FinBoard.Domain\FinBoard.Domain.csproj" />
+    <ProjectReference Include="..\FinBoard.Utils\FinBoard.Utils.csproj" />
   </ItemGroup>
 </Project>

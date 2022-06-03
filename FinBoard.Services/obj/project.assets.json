@@ -1051,6 +1051,16 @@
         "runtime": {
           "bin/placeholder/FinBoard.Domain.dll": {}
         }
+      },
+      "FinBoard.Utils/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "compile": {
+          "bin/placeholder/FinBoard.Utils.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/FinBoard.Utils.dll": {}
+        }
       }
     }
   },
@@ -2822,12 +2832,18 @@
       "type": "project",
       "path": "../FinBoard.Domain/FinBoard.Domain.csproj",
       "msbuildProject": "../FinBoard.Domain/FinBoard.Domain.csproj"
+    },
+    "FinBoard.Utils/1.0.0": {
+      "type": "project",
+      "path": "../FinBoard.Utils/FinBoard.Utils.csproj",
+      "msbuildProject": "../FinBoard.Utils/FinBoard.Utils.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net6.0": [
       "AutoMapper.Extensions.Microsoft.DependencyInjection >= 11.0.0",
       "FinBoard.Domain >= 1.0.0",
+      "FinBoard.Utils >= 1.0.0",
       "Microsoft.Extensions.Logging.Abstractions >= 6.0.1"
     ]
   },
@@ -2864,6 +2880,9 @@
           "projectReferences": {
             "C:\\Projects\\FinBoard\\FinBoard.Domain\\FinBoard.Domain.csproj": {
               "projectPath": "C:\\Projects\\FinBoard\\FinBoard.Domain\\FinBoard.Domain.csproj"
+            },
+            "C:\\Projects\\FinBoard\\FinBoard.Utils\\FinBoard.Utils.csproj": {
+              "projectPath": "C:\\Projects\\FinBoard\\FinBoard.Utils\\FinBoard.Utils.csproj"
             }
           }
         }

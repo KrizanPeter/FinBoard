@@ -1,6 +1,7 @@
 using API.Controllers.Base;
 using FinBoard.Services.AuthServices;
 using FinBoard.Services.DTOs.User;
+using FinBoard.Utils.Result;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
@@ -24,7 +25,11 @@ namespace API.Controllers
         {
             //ToDo: Add some logging
             var requestId = this.GetRequestId();
-            
+
+            _authService.EnsureUserNotExist(registerDto.UserName, requestId)
+                .OnSuccess()
+
+
             _authService.
 
            //
