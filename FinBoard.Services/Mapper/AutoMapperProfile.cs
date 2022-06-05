@@ -13,7 +13,8 @@ namespace FinBoard.Services.Mapper
     {
         public AutoMapperProfile()
         {
-            CreateMap<User, UserRegisterDto>().ReverseMap();
+            CreateMap<User, UserAuthDto>().ReverseMap();
+            CreateMap<User, UserDto>().ReverseMap();
         }
     }
 }

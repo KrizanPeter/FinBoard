@@ -21,40 +21,40 @@ namespace FinBoard.Domain.Repositories.Repository
             this.dbSet = db.Set<T>();
         }
 
-        public void Add(T entity)
+        public async Task AddAsync(T entity)
         {
-            this.dbSet.Add(entity);
+            await dbSet.AddAsync(entity);
         }
 
-        public void AddRange(IEnumerable<T> entities)
+        public async Task AddRangeAsync(IEnumerable<T> entities)
         {
-            this.dbSet.AddRange(entities);
+            await dbSet.AddRangeAsync(entities);
         }
 
-        public IEnumerable<T> GetAll()
+        public async Task<IEnumerable<T>> GetAllAsync()
         {
             IQueryable<T> querry = dbSet;
-            return querry.ToList();
+            return await querry.ToListAsync();
         }
 
-        public IEnumerable<T> GetAll(Expression<Func<T, bool>>? filter = null)
+        public async Task<IEnumerable<T>> GetAllAsync(Expression<Func<T, bool>>? filter = null)
         {
             IQueryable<T> querry = dbSet;
             if (filter != null)
             {
                 querry = querry.Where(filter);
             }
-            return querry.ToList();
+            return await querry.ToListAsync();
         }
 
-        public T GetFirstOrDefault(Expression<Func<T, bool>>? filter = null)
+        public async Task<T> GetFirstOrDefaultAsync(Expression<Func<T, bool>>? filter = null)
         {
             IQueryable<T> querry = dbSet;
             if(filter != null)
             {
                 querry = querry.Where(filter);
             }
-            return querry.FirstOrDefault();
+            return await querry.FirstOrDefaultAsync();
         }
 
         public void Remove(T entity)

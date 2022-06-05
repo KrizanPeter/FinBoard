@@ -9,13 +9,12 @@ namespace FinBoard.Domain.Repositories.Repository
 {
     public interface IRepository<T> where T : class
     {
-        void Add(T entity);
-        void Update(T entity);
+        Task AddAsync(T entity);
         void Remove(T entity);
-        void AddRange(IEnumerable<T> entities);
+        Task AddRangeAsync(IEnumerable<T> entities);
         void RemoveRange(IEnumerable<T> entities);
-        IEnumerable<T> GetAll();
-        IEnumerable<T> GetAll(Expression<Func<T, bool>>? filter = null);
-        T GetFirstOrDefault(Expression<Func<T, bool>>? filter = null);
+        Task<IEnumerable<T>> GetAllAsync();
+        Task<IEnumerable<T>> GetAllAsync(Expression<Func<T, bool>>? filter = null);
+        Task<T> GetFirstOrDefaultAsync(Expression<Func<T, bool>>? filter = null);
     }
 }
