@@ -35,6 +35,8 @@ namespace API
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "WebAPIv5", Version = "v1" });
             });
+            services.AddIdendityServices(Configuration);
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -53,7 +55,13 @@ namespace API
 
             app.UseCors(policy => policy.AllowAnyHeader().AllowAnyMethod().WithOrigins("https://localhost:4200"));
 
+            app.UseAuthentication();
+
             app.UseAuthorization();
+
+            app.UseDefaultFiles();
+
+            app.UseStaticFiles();
 
             app.UseEndpoints(endpoints =>
             {

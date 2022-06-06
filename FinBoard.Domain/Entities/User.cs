@@ -9,13 +9,13 @@ using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace FinBoard.Domain.Entities
 {
-    public class User : IdentityUser, IBaseEntity
+    public class User : IdentityUser<Guid>, IBaseEntity
     {
-        public Guid AppUserId { get; set; }
         public string UserName { get; set; }
         public string CreatedBy { get ; set; }
         public string LastModifyBy { get; set; }
         public DateTime DateOfCreation { get; set; }
         public DateTime DateOfLastModification { get; set; }
+        public virtual ICollection<UserRole> UserRoles { get; set; }
     }
 }

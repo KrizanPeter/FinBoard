@@ -79,3 +79,9 @@ C:\Projects\FinBoard\API\bin\Debug\net6.0-windows\FinBoard.Services.dll
 C:\Projects\FinBoard\API\bin\Debug\net6.0-windows\FinBoard.Utils.dll
 C:\Projects\FinBoard\API\bin\Debug\net6.0-windows\FinBoard.Services.pdb
 C:\Projects\FinBoard\API\bin\Debug\net6.0-windows\FinBoard.Utils.pdb
+C:\Projects\FinBoard\API\bin\Debug\net6.0-windows\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Projects\FinBoard\API\bin\Debug\net6.0-windows\Microsoft.AspNetCore.Cryptography.Internal.dll
+C:\Projects\FinBoard\API\bin\Debug\net6.0-windows\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
+C:\Projects\FinBoard\API\bin\Debug\net6.0-windows\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
+C:\Projects\FinBoard\API\bin\Debug\net6.0-windows\Microsoft.Extensions.Identity.Core.dll
+C:\Projects\FinBoard\API\bin\Debug\net6.0-windows\Microsoft.Extensions.Identity.Stores.dll

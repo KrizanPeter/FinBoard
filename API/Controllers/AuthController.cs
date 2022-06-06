@@ -4,6 +4,7 @@ using FinBoard.Services.DTOs.User;
 using FinBoard.Utils.Result;
 using Microsoft.AspNetCore.Mvc;
 using FinBoard.Services.Services.UserService;
+using System.Reflection;
 
 namespace API.Controllers
 {
@@ -14,21 +15,19 @@ namespace API.Controllers
 
         private readonly ILogger<AuthController> _logger;
         private readonly IAuthService _authService;
-        private readonly IUserService _userService;
 
 
-        public AuthController(ILogger<AuthController> logger, IAuthService authService, IUserService userService)
+        public AuthController(ILogger<AuthController> logger, IAuthService authService, IUserService userService) : base(userService)
         {
             _logger = logger;
             _authService = authService;
-            _userService = userService;
         }
 
         [HttpPost("register")]
         public async Task<IActionResult> RegisterUserAsync(UserAuthDto registerDto)
         {
-            //ToDo: Add some logging
             var requestId = this.GetRequestId();
+            _logger.LogInformation(this.LogApiAccess(requestId, MethodBase.GetCurrentMethod()));
 
             var existedUser = await _userService.GetUserByNameAsync(registerDto.UserName, requestId);
             
@@ -47,11 +46,12 @@ namespace API.Controllers
             return BadRequest("Oops something went really wrong");
         }
 
+
         [HttpPost("login")]
         public async Task<IActionResult> LoginUserAsync(UserAuthDto loginUser)
         {
-            //ToDo: Add some logging
             var requestId = this.GetRequestId();
+            _logger.LogInformation(this.LogApiAccess(requestId, MethodBase.GetCurrentMethod()));
 
             var existedUser = await _userService.GetUserByNameAsync(loginUser.UserName, requestId);
 

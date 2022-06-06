@@ -35,5 +35,6 @@ namespace FinBoard.Services.Services.UserService
             }
             return Result.Fail<UserDto>("User not found");
         }
+
     }
 }
