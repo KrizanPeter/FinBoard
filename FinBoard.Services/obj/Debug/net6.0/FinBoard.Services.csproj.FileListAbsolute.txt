@@ -1,3 +1,4 @@
+C:\Projects\FinBoard\FinBoard.Services\obj\Debug\net6.0\FinBoard.Services.csproj.AssemblyReference.cache
 C:\Projects\FinBoard\FinBoard.Services\obj\Debug\net6.0\FinBoard.Services.GeneratedMSBuildEditorConfig.editorconfig
 C:\Projects\FinBoard\FinBoard.Services\obj\Debug\net6.0\FinBoard.Services.AssemblyInfoInputs.cache
 C:\Projects\FinBoard\FinBoard.Services\obj\Debug\net6.0\FinBoard.Services.AssemblyInfo.cs
@@ -5,13 +6,12 @@ C:\Projects\FinBoard\FinBoard.Services\obj\Debug\net6.0\FinBoard.Services.csproj
 C:\Projects\FinBoard\FinBoard.Services\bin\Debug\net6.0\FinBoard.Services.deps.json
 C:\Projects\FinBoard\FinBoard.Services\bin\Debug\net6.0\FinBoard.Services.dll
 C:\Projects\FinBoard\FinBoard.Services\bin\Debug\net6.0\FinBoard.Services.pdb
-C:\Projects\FinBoard\FinBoard.Services\obj\Debug\net6.0\FinBoard.Services.csproj.AssemblyReference.cache
-C:\Projects\FinBoard\FinBoard.Services\obj\Debug\net6.0\FinBoard.Services.dll
-C:\Projects\FinBoard\FinBoard.Services\obj\Debug\net6.0\refint\FinBoard.Services.dll
-C:\Projects\FinBoard\FinBoard.Services\obj\Debug\net6.0\FinBoard.Services.pdb
-C:\Projects\FinBoard\FinBoard.Services\obj\Debug\net6.0\ref\FinBoard.Services.dll
 C:\Projects\FinBoard\FinBoard.Services\bin\Debug\net6.0\FinBoard.Domain.dll
 C:\Projects\FinBoard\FinBoard.Services\bin\Debug\net6.0\FinBoard.Utils.dll
 C:\Projects\FinBoard\FinBoard.Services\bin\Debug\net6.0\FinBoard.Domain.pdb
 C:\Projects\FinBoard\FinBoard.Services\bin\Debug\net6.0\FinBoard.Utils.pdb
 C:\Projects\FinBoard\FinBoard.Services\obj\Debug\net6.0\FinBoard.Services.csproj.CopyComplete
+C:\Projects\FinBoard\FinBoard.Services\obj\Debug\net6.0\FinBoard.Services.dll
+C:\Projects\FinBoard\FinBoard.Services\obj\Debug\net6.0\refint\FinBoard.Services.dll
+C:\Projects\FinBoard\FinBoard.Services\obj\Debug\net6.0\FinBoard.Services.pdb
+C:\Projects\FinBoard\FinBoard.Services\obj\Debug\net6.0\ref\FinBoard.Services.dll

@@ -10,8 +10,8 @@ using System.Threading.Tasks;
 
 namespace FinBoard.Domain.Context
 {
-    public class DataContext : IdentityDbContext<User, Role, Guid, IdentityUserClaim<Guid>,
-        UserRole, IdentityUserLogin<Guid>, IdentityRoleClaim<Guid>, IdentityUserToken<Guid>>
+    public class DataContext : IdentityDbContext<AppUser, AppRole, Guid, IdentityUserClaim<Guid>,
+        AppUserRole, IdentityUserLogin<Guid>, IdentityRoleClaim<Guid>, IdentityUserToken<Guid>>
     {
         public DataContext(DbContextOptions<DataContext> options) : base(options)
         {
@@ -21,15 +21,15 @@ namespace FinBoard.Domain.Context
         {
             base.OnModelCreating(builder);
 
-            builder.Entity<User>()
-                .HasMany(ur => ur.UserRoles)
-                .WithOne(u => u.User)
+            builder.Entity<AppUser>()
+                .HasMany(ur => ur.AppUserRoles)
+                .WithOne(u => u.AppUser)
                 .HasForeignKey(ur => ur.UserId)
                 .IsRequired();
 
-            builder.Entity<Role>()
-                .HasMany(ur => ur.UserRoles)
-                .WithOne(u => u.Role)
+            builder.Entity<AppRole>()
+                .HasMany(ur => ur.AppUserRoles)
+                .WithOne(u => u.AppRole)
                 .HasForeignKey(ur => ur.RoleId)
                 .IsRequired();
         }

@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace FinBoard.Domain.Entities
 {
-    public class UserRole : IdentityUserRole<Guid>
+    public class AppUserRole : IdentityUserRole<Guid>
     {
-        public virtual User User { get; set; }
+        public virtual AppUser AppUser { get; set; }
 
-        public virtual Role Role { get; set; }
+        public virtual AppRole AppRole { get; set; }
 
     }
 }

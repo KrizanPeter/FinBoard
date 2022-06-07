@@ -20,9 +20,9 @@ namespace FinBoard.Services.Services.AuthServices
         private readonly IUserRepository _userRepository;
         private readonly IMapper _mapper;
         private readonly ITokenService _tokenService;
-        private readonly UserManager<User> _userManager;
-        private readonly SignInManager<User> _signInManager;
-        public AuthService(ILogger<AuthService> logger, UserManager<User> userManager, SignInManager<User> signInManager, IUserRepository userRepository, ITokenService tokenService, IMapper mapper)
+        private readonly UserManager<AppUser> _userManager;
+        private readonly SignInManager<AppUser> _signInManager;
+        public AuthService(ILogger<AuthService> logger, UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, IUserRepository userRepository, ITokenService tokenService, IMapper mapper)
         {
             _logger = logger;
             _tokenService = tokenService;
@@ -34,7 +34,7 @@ namespace FinBoard.Services.Services.AuthServices
 
         public async Task<Result<UserDto>> RegisterNewUserAsync(UserAuthDto registerDto)
         {
-            var userEntity = _mapper.Map<User>(registerDto);
+            var userEntity = _mapper.Map<AppUser>(registerDto);
             userEntity.DateOfCreation = DateTime.Now;
             
             var result = await _userManager.CreateAsync(userEntity, registerDto.Password);

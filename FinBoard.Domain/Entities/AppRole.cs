@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace FinBoard.Domain.Entities
 {
-    public class Role : IdentityRole<Guid>
+    public class AppRole : IdentityRole<Guid>
     {
-        public ICollection<UserRole> UserRoles { get; set; }
+        public ICollection<AppUserRole> AppUserRoles { get; set; }
     }
 }

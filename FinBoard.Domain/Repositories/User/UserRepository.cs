@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace FinBoard.Domain.Repositories.User
 {
-    public class UserRepository : Repository<Entities.User>, IUserRepository
+    public class UserRepository : Repository<Entities.AppUser>, IUserRepository
     {
         private readonly DataContext _db;
 
@@ -21,7 +21,7 @@ namespace FinBoard.Domain.Repositories.User
             _db.SaveChanges();
         }
 
-        public void Update(Entities.User user)
+        public void Update(Entities.AppUser user)
         {
             var objFromDb = _db.Users.FirstOrDefault(a => a.Id == user.Id);
         }

@@ -10,6 +10,6 @@ namespace FinBoard.Services.Services.TokenService
 {
     public interface ITokenService
     {
-        Result<string> GetToken(User user);
+        Result<string> GetToken(AppUser user);
     }
 }

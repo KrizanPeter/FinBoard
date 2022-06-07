@@ -19,7 +19,7 @@ namespace FinBoard.Services.Services.TokenService
         {
             _key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config["TokenKey"]));
         }
-        public Result<string> GetToken(User user)
+        public Result<string> GetToken(AppUser user)
         {
             var claims = new List<Claim>
             {

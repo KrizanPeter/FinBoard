@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace FinBoard.Domain.Repositories.User
 {
-    public interface IUserRepository: IRepository<Entities.User>
+    public interface IUserRepository: IRepository<Entities.AppUser>
     {
-        void Update(Entities.User user);
+        void Update(Entities.AppUser user);
         void SaveChanges();
     }
 }
