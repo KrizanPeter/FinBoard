@@ -29,10 +29,10 @@ namespace FinBoard.Domain.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
-                    CreatedBy = table.Column<string>(type: "text", nullable: false),
+                    CreatedBy = table.Column<string>(type: "text", nullable: true),
                     LastModifyBy = table.Column<string>(type: "text", nullable: false),
-                    DateOfCreation = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    DateOfLastModification = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    DateOfCreation = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    DateOfLastModification = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
                     UserName = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),

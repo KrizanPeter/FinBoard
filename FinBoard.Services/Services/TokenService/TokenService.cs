@@ -19,7 +19,7 @@ namespace FinBoard.Services.Services.TokenService
         {
             _key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config["TokenKey"]));
         }
-        public Result<string> GetToken(AppUser user)
+        public string GetToken(AppUser user)
         {
             var claims = new List<Claim>
             {
@@ -38,7 +38,7 @@ namespace FinBoard.Services.Services.TokenService
             var tokenHandler = new JwtSecurityTokenHandler();
 
             var token = tokenHandler.CreateToken(tokenDescriptor);
-            return Result.Ok(tokenHandler.WriteToken(token));
+            return tokenHandler.WriteToken(token);
         }
     }
 }

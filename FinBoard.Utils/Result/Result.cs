@@ -23,7 +23,7 @@ namespace FinBoard.Utils.Result
                 throw new InvalidOperationException();
             }
 
-            isSuccess = isSuccess;
+            IsSuccess = isSuccess;
             Error = error;
         }
 

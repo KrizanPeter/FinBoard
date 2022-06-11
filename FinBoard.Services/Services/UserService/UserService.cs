@@ -27,6 +27,10 @@ namespace FinBoard.Services.Services.UserService
         public async Task<Result<UserDto>> GetUserByNameAsync(string userName, Guid requestId)
         {
             //Add some log
+            if (string.IsNullOrEmpty(userName))
+            {
+                return Result.Fail<UserDto>("Current user not found");
+            }
             var result = await _userRepository.GetFirstOrDefaultAsync(a => a.UserName.ToLower() == userName.ToLower());
             if (result != null)
             {

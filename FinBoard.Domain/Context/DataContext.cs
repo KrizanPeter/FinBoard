@@ -15,6 +15,7 @@ namespace FinBoard.Domain.Context
     {
         public DataContext(DbContextOptions<DataContext> options) : base(options)
         {
+            AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
         }
 
         protected override void OnModelCreating(ModelBuilder builder)
@@ -33,6 +34,8 @@ namespace FinBoard.Domain.Context
                 .HasForeignKey(ur => ur.RoleId)
                 .IsRequired();
         }
+
+        //DbSet<AppUser> Users { get; set; }
 
     }
 }

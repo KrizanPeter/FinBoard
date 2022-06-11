@@ -27,7 +27,7 @@ namespace API.Controllers
         public async Task<IActionResult> RegisterUserAsync(UserAuthDto registerDto)
         {
             var requestId = this.GetRequestId();
-            _logger.LogInformation(this.LogApiAccess(requestId, MethodBase.GetCurrentMethod()));
+            //_logger.LogInformation(this.LogApiAccess(requestId, MethodBase.GetCurrentMethod()));
 
             var existedUser = await _userService.GetUserByNameAsync(registerDto.UserName, requestId);
             
@@ -43,7 +43,7 @@ namespace API.Controllers
                 return Ok(userDto.Value);
             }
 
-            return BadRequest("Oops something went really wrong");
+            return BadRequest(userDto.Error);
         }
 
 
@@ -51,7 +51,7 @@ namespace API.Controllers
         public async Task<IActionResult> LoginUserAsync(UserAuthDto loginUser)
         {
             var requestId = this.GetRequestId();
-            _logger.LogInformation(this.LogApiAccess(requestId, MethodBase.GetCurrentMethod()));
+            //_logger.LogInformation(this.LogApiAccess(requestId, MethodBase.GetCurrentMethod()));
 
             var existedUser = await _userService.GetUserByNameAsync(loginUser.UserName, requestId);
 

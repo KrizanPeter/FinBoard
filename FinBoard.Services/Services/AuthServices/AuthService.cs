@@ -36,14 +36,18 @@ namespace FinBoard.Services.Services.AuthServices
         {
             var userEntity = _mapper.Map<AppUser>(registerDto);
             userEntity.DateOfCreation = DateTime.Now;
+            userEntity.DateOfLastModification = DateTime.Now;
             
             var result = await _userManager.CreateAsync(userEntity, registerDto.Password);
 
             if (!result.Succeeded)
-                return Result.Fail<UserDto>("User was not created");
+            {
+                var msg = string.Join(String.Empty, result.Errors.Select(a => a.Description).ToList());
+                return Result.Fail<UserDto>(msg);
+            }
 
             var registeredUser = _mapper.Map<UserDto>(userEntity);
-            registeredUser.Token = _tokenService.GetToken(userEntity).Value;
+            registeredUser.Token = _tokenService.GetToken(userEntity);
             return Result.Ok(registeredUser);
         }
 
@@ -57,12 +61,9 @@ namespace FinBoard.Services.Services.AuthServices
             }
 
             var loggedUser = _mapper.Map<UserDto>(user);
-            loggedUser.Token = _tokenService.GetToken(user).Value;
+            loggedUser.Token = _tokenService.GetToken(user);
 
             return Result.Ok(loggedUser);   
         }
-
-
-
     }
 }

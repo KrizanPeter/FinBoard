@@ -10,8 +10,8 @@ namespace FinBoard.Domain.Entities
 {
     public class AppUser : IdentityUser<Guid>, IBaseEntity
     {
-        public string CreatedBy { get ; set; }
-        public string LastModifyBy { get; set; }
+        public string? CreatedBy { get ; set; }
+        public string LastModifyBy { get; set; } = "";
         public DateTime DateOfCreation { get; set; }
         public DateTime DateOfLastModification { get; set; }
         public virtual ICollection<AppUserRole> AppUserRoles { get; set; }

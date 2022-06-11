@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace FinBoard.Domain.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20220607224915_InitialMigration")]
+    [Migration("20220611211056_InitialMigration")]
     partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -65,14 +65,13 @@ namespace FinBoard.Domain.Migrations
                         .HasColumnType("text");
 
                     b.Property<string>("CreatedBy")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<DateTime>("DateOfCreation")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp without time zone");
 
                     b.Property<DateTime>("DateOfLastModification")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp without time zone");
 
                     b.Property<string>("Email")
                         .HasMaxLength(256)

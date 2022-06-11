@@ -63,14 +63,13 @@ namespace FinBoard.Domain.Migrations
                         .HasColumnType("text");
 
                     b.Property<string>("CreatedBy")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<DateTime>("DateOfCreation")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp without time zone");
 
                     b.Property<DateTime>("DateOfLastModification")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp without time zone");
 
                     b.Property<string>("Email")
                         .HasMaxLength(256)
