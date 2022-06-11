@@ -12,9 +12,10 @@ namespace FinBoard.Domain.Entities
     {
         public Guid ResourceId { get; set; }
         public Guid AccountId { get; set; } 
-        public string? Name { get; set; }    
+        public string Name { get; set; }    
         public Currency Currency { get; set; }
-        public IEnumerable<Move> Moves { get; set; }
+        public virtual ICollection<Move> Moves { get; set; }
+        public virtual ICollection<ResourceGroup> ResourceGroups { get; set; }
 
     }
 }
