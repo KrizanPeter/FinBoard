@@ -12,5 +12,7 @@ namespace FinBoard.Services.Services.ResourceService
     {
         Task<Result<IEnumerable<ResourceDto>>> GetAllReourceOfAccountAsync(Guid accountId);
         Task<Result> CreateResourceAsync(ResourceDto resourceDto);
+        Task<Result> CheckValidityAsync(Guid resourceId, Guid value);
+        Task<Result> DeleteResourceAsync(Guid resourceId);
     }
 }

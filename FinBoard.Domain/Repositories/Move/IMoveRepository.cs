@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FinBoard.Domain.Repositories.Resource
+namespace FinBoard.Domain.Repositories.Move
 {
-    public interface IResourceRepository : IRepository<Entities.Resource>
+    public interface IMoveRepository : IRepository<Entities.Move>
     {
         void Update(Entities.Resource user);
         void SaveChanges();

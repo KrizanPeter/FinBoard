@@ -7,16 +7,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FinBoard.Domain.Repositories.Resource
+namespace FinBoard.Domain.Repositories.Move
 {
-    public class ResourceRepository : Repository<Entities.Resource>, IResourceRepository
+    public class MoveRepository : Repository<Entities.Move>, IMoveRepository
     {
         private readonly DataContext _db;
 
-        public ResourceRepository(DataContext db, IPersistentService persistenceService) : base(db, persistenceService)
+        public MoveRepository(DataContext db, IPersistentService persistenceService) : base(db, persistenceService)
         {
             _db = db;
         }
+
         public void SaveChanges()
         {
             _db.SaveChanges();
@@ -24,7 +25,7 @@ namespace FinBoard.Domain.Repositories.Resource
 
         public void Update(Entities.Resource user)
         {
-            var objFromDb = _db.Users.FirstOrDefault(a => a.Id == user.ResourceId);
+            throw new NotImplementedException();
         }
     }
 }

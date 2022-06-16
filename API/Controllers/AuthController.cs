@@ -9,8 +9,6 @@ using FinBoard.Utils.PersistenceService;
 
 namespace API.Controllers
 {
-    [ApiController]
-    [Route("api/[controller]")]
     public class AuthController : BaseController
     {
 

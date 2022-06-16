@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using FinBoard.Domain.Entities;
-using FinBoard.Domain.Repositories.User;
+using FinBoard.Domain.Repositories.Resource;
 using FinBoard.Services.DTOs.Resource;
 using FinBoard.Utils.Result;
 using Microsoft.Extensions.Logging;
@@ -25,11 +25,21 @@ namespace FinBoard.Services.Services.ResourceService
             _mapper = mapper;
         }
 
+        public async Task<Result> CheckValidityAsync(Guid resourceId, Guid accountId)
+        {
+            var result = await _resourceRepository.GetAllAsync(a => a.AccountId == accountId && a.ResourceId == resourceId);
+            if (result.Any())
+            {
+                return Result.Ok();
+            }
+            return Result.Fail("Resource does not belong under your account.");
+        }
+
         public async Task<Result> CreateResourceAsync(ResourceDto resourceDto)
         {
             if (resourceDto == null)
             {
-                return Result.Fail<ResourceDto>("Resource Dto cannot be null.");
+                return Result.Fail("Resource Dto cannot be null.");
             }
             var resourceEntity = _mapper.Map<Resource>(resourceDto);
 
@@ -43,6 +53,25 @@ namespace FinBoard.Services.Services.ResourceService
                 return Result.Fail(ex.Message);
             }
 
+            return Result.Ok();
+        }
+
+        public async Task<Result> DeleteResourceAsync(Guid resourceId)
+        {
+            var result = await _resourceRepository.GetFirstOrDefaultAsync(a => a.ResourceId == resourceId);
+            if (result == null)
+            {
+                return Result.Fail("Resource with specified ID not exist.");
+            }
+            try
+            {
+                _resourceRepository.Remove(result);
+                _resourceRepository.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                return Result.Fail(ex.Message);
+            }
             return Result.Ok();
         }
 
