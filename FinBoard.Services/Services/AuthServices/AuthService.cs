@@ -2,6 +2,7 @@
 using FinBoard.Domain.Entities;
 using FinBoard.Domain.Repositories.User;
 using FinBoard.Services.DTOs.User;
+using FinBoard.Services.Services.AccountService;
 using FinBoard.Services.Services.TokenService;
 using FinBoard.Utils.Result;
 using Microsoft.AspNetCore.Identity;
@@ -22,8 +23,11 @@ namespace FinBoard.Services.Services.AuthServices
         private readonly ITokenService _tokenService;
         private readonly UserManager<AppUser> _userManager;
         private readonly SignInManager<AppUser> _signInManager;
-        public AuthService(ILogger<AuthService> logger, UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, IUserRepository userRepository, ITokenService tokenService, IMapper mapper)
+        private readonly IAccountService _accountService;
+        public AuthService(ILogger<AuthService> logger, UserManager<AppUser> userManager, SignInManager<AppUser> signInManager,
+            IUserRepository userRepository, ITokenService tokenService, IAccountService accountService, IMapper mapper)
         {
+            _accountService = accountService;
             _logger = logger;
             _tokenService = tokenService;
             _userRepository = userRepository;
@@ -37,7 +41,7 @@ namespace FinBoard.Services.Services.AuthServices
             var userEntity = _mapper.Map<AppUser>(registerDto);
             userEntity.DateOfCreation = DateTime.Now;
             userEntity.DateOfLastModification = DateTime.Now;
-            
+
             var result = await _userManager.CreateAsync(userEntity, registerDto.Password);
 
             if (!result.Succeeded)
@@ -46,9 +50,22 @@ namespace FinBoard.Services.Services.AuthServices
                 return Result.Fail<UserDto>(msg);
             }
 
-            var registeredUser = _mapper.Map<UserDto>(userEntity);
-            registeredUser.Token = _tokenService.GetToken(userEntity);
-            return Result.Ok(registeredUser);
+            var accountResult = await _accountService.CreateNewAccountForUser(userEntity.Id);
+
+            if (accountResult.IsFailure)
+            {
+                return Result.Fail<UserDto>(accountResult.Error);
+            }
+
+            var updatedUserEntity = _userRepository.UpdateAccountId(userEntity.Id, accountResult.Value.AccountId);
+
+            if (updatedUserEntity.IsSuccess)
+            {
+                var registeredUser = _mapper.Map<UserDto>(updatedUserEntity.Value);
+                registeredUser.Token = _tokenService.GetToken(userEntity);
+                return Result.Ok(registeredUser);
+            }
+            return Result.Fail<UserDto>(updatedUserEntity.Error);
         }
 
         public async Task<Result<UserDto>> CheckPassAndLogIn(UserAuthDto loginUser)
@@ -63,7 +80,7 @@ namespace FinBoard.Services.Services.AuthServices
             var loggedUser = _mapper.Map<UserDto>(user);
             loggedUser.Token = _tokenService.GetToken(user);
 
-            return Result.Ok(loggedUser);   
+            return Result.Ok(loggedUser);
         }
     }
 }

@@ -18,12 +18,41 @@ namespace FinBoard.Utils.Result
             return Result.Ok();
         }
 
+        public static Result<T> OnSuccess<T>(this Result<T> result, Action<T> action)
+        {
+            if (result.IsSuccess)
+            {
+                action(result.Value);
+            }
+
+            return result;
+        }
+
         public static Result OnSuccess(this Result result, Func<Result> func)
         {
             if (result.IsFailure)
                 return result;
 
             return func();
+        }
+
+
+        public static Result<T> OnSuccess<T>(this Result<T> result, Func<Result<T>> func)
+        {
+            if (result.IsFailure)
+                return result;
+
+            return func();
+        }
+
+        public static Result<T> OnFailure<T>(this Result<T> result, Action action)
+        {
+            if (result.IsFailure)
+            {
+                action();
+            }
+
+            return result;
         }
 
         public static Result OnFailure(this Result result, Action action)

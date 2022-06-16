@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FinBoard.Domain.Entities.Base;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace FinBoard.Domain.Repositories.Repository
 {
-    public interface IRepository<T> where T : class
+    public interface IRepository<T> where T : class, IBaseEntity
     {
         Task AddAsync(T entity);
         void Remove(T entity);

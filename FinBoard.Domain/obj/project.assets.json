@@ -720,6 +720,16 @@
             "rid": "win"
           }
         }
+      },
+      "FinBoard.Utils/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "compile": {
+          "bin/placeholder/FinBoard.Utils.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/FinBoard.Utils.dll": {}
+        }
       }
     }
   },
@@ -2067,10 +2077,16 @@
         "useSharedDesignerContext.txt",
         "version.txt"
       ]
+    },
+    "FinBoard.Utils/1.0.0": {
+      "type": "project",
+      "path": "../FinBoard.Utils/FinBoard.Utils.csproj",
+      "msbuildProject": "../FinBoard.Utils/FinBoard.Utils.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net6.0": [
+      "FinBoard.Utils >= 1.0.0",
       "Microsoft.AspNetCore.Identity.EntityFrameworkCore >= 6.0.5",
       "Microsoft.EntityFrameworkCore >= 6.0.5",
       "Microsoft.EntityFrameworkCore.Design >= 6.0.5",
@@ -2110,7 +2126,11 @@
       "frameworks": {
         "net6.0": {
           "targetAlias": "net6.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\Projects\\FinBoard\\FinBoard.Utils\\FinBoard.Utils.csproj": {
+              "projectPath": "C:\\Projects\\FinBoard\\FinBoard.Utils\\FinBoard.Utils.csproj"
+            }
+          }
         }
       },
       "warningProperties": {

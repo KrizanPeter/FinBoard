@@ -73,7 +73,6 @@ C:\Projects\FinBoard\API\bin\Debug\net6.0-windows\FinBoard.Utils.dll
 C:\Projects\FinBoard\API\bin\Debug\net6.0-windows\FinBoard.Domain.pdb
 C:\Projects\FinBoard\API\bin\Debug\net6.0-windows\FinBoard.Services.pdb
 C:\Projects\FinBoard\API\bin\Debug\net6.0-windows\FinBoard.Utils.pdb
-C:\Projects\FinBoard\API\obj\Debug\net6.0-windows\API.MvcApplicationPartsAssemblyInfo.cs
 C:\Projects\FinBoard\API\obj\Debug\net6.0-windows\staticwebassets.build.json
 C:\Projects\FinBoard\API\obj\Debug\net6.0-windows\staticwebassets.development.json
 C:\Projects\FinBoard\API\obj\Debug\net6.0-windows\scopedcss\bundle\API.styles.css
@@ -83,3 +82,4 @@ C:\Projects\FinBoard\API\obj\Debug\net6.0-windows\refint\API.dll
 C:\Projects\FinBoard\API\obj\Debug\net6.0-windows\API.pdb
 C:\Projects\FinBoard\API\obj\Debug\net6.0-windows\API.genruntimeconfig.cache
 C:\Projects\FinBoard\API\obj\Debug\net6.0-windows\ref\API.dll
+C:\Projects\FinBoard\API\obj\Debug\net6.0-windows\API.MvcApplicationPartsAssemblyInfo.cs

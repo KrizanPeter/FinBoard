@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using FinBoard.Domain.Entities;
+using FinBoard.Services.DTOs.Resource;
 using FinBoard.Services.DTOs.User;
 using System;
 using System.Collections.Generic;
@@ -15,6 +16,7 @@ namespace FinBoard.Services.Mapper
         {
             CreateMap<AppUser, UserAuthDto>().ReverseMap();
             CreateMap<AppUser, UserDto>().ReverseMap();
+            CreateMap<Resource, ResourceDto>().ReverseMap();
         }
     }
 }

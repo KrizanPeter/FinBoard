@@ -12,3 +12,6 @@ C:\Projects\FinBoard\FinBoard.Domain\obj\Debug\net6.0\refint\FinBoard.Domain.dll
 C:\Projects\FinBoard\FinBoard.Domain\obj\Debug\net6.0\FinBoard.Domain.pdb
 C:\Projects\FinBoard\FinBoard.Domain\obj\Debug\net6.0\FinBoard.Domain.genruntimeconfig.cache
 C:\Projects\FinBoard\FinBoard.Domain\obj\Debug\net6.0\ref\FinBoard.Domain.dll
+C:\Projects\FinBoard\FinBoard.Domain\bin\Debug\net6.0\FinBoard.Utils.dll
+C:\Projects\FinBoard\FinBoard.Domain\bin\Debug\net6.0\FinBoard.Utils.pdb
+C:\Projects\FinBoard\FinBoard.Domain\obj\Debug\net6.0\FinBoard.Domain.csproj.CopyComplete

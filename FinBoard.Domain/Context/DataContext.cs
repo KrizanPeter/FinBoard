@@ -33,12 +33,22 @@ namespace FinBoard.Domain.Context
                 .WithOne(u => u.AppRole)
                 .HasForeignKey(ur => ur.RoleId)
                 .IsRequired();
+
+            builder.Entity<AppUser>()
+            .HasOne(a => a.Account)
+            .WithOne(a => a.AppUser)
+            .HasForeignKey<Account>(c => c.AppUserId);
+
+            builder.Entity<Account>()
+            .HasOne(a => a.AppUser)
+            .WithOne(a => a.Account)
+            .HasForeignKey<AppUser>(c => c.AccountId);
         }
 
         DbSet<Account> Accounts { get; set; }
         DbSet<Resource> Resources { get; set; }
         DbSet<ResourceGroup> ResourceGroups { get; set; }
-        DbSet<Move> Moves { get; set; } 
+        DbSet<Move> Moves { get; set; }
 
 
     }

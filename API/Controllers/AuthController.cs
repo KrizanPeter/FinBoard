@@ -5,6 +5,7 @@ using FinBoard.Utils.Result;
 using Microsoft.AspNetCore.Mvc;
 using FinBoard.Services.Services.UserService;
 using System.Reflection;
+using FinBoard.Utils.PersistenceService;
 
 namespace API.Controllers
 {
@@ -17,7 +18,8 @@ namespace API.Controllers
         private readonly IAuthService _authService;
 
 
-        public AuthController(ILogger<AuthController> logger, IAuthService authService, IUserService userService) : base(userService)
+        public AuthController(ILogger<AuthController> logger, IAuthService authService,
+            IUserService userService, IPersistentService persistentService) : base(userService)
         {
             _logger = logger;
             _authService = authService;
@@ -30,15 +32,15 @@ namespace API.Controllers
             //_logger.LogInformation(this.LogApiAccess(requestId, MethodBase.GetCurrentMethod()));
 
             var existedUser = await _userService.GetUserByNameAsync(registerDto.UserName, requestId);
-            
-            if(existedUser.IsSuccess)
+
+            if (existedUser.IsSuccess)
             {
                 return BadRequest("User with given name is already existing.");
             }
 
-            var userDto  = await _authService.RegisterNewUserAsync(registerDto);
+            var userDto = await _authService.RegisterNewUserAsync(registerDto);
 
-            if(userDto.IsSuccess)
+            if (userDto.IsSuccess)
             {
                 return Ok(userDto.Value);
             }
@@ -59,7 +61,7 @@ namespace API.Controllers
             {
                 return Unauthorized("User with given name not exist.");
             }
-            
+
             var result = await _authService.CheckPassAndLogIn(loginUser);
 
 

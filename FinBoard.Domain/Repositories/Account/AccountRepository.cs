@@ -7,13 +7,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FinBoard.Domain.Repositories.User
+namespace FinBoard.Domain.Repositories.Account
 {
-    public class ResourceRepository : Repository<Entities.Resource>, IResourceRepository
+    public class AccountRepository : Repository<Entities.Account>, IAccountRepository
     {
         private readonly DataContext _db;
 
-        public ResourceRepository(DataContext db, IPersistentService persistenceService) : base(db, persistenceService)
+        public AccountRepository(DataContext db, IPersistentService persistenceService) : base(db, persistenceService)
         {
             _db = db;
         }
@@ -22,9 +22,9 @@ namespace FinBoard.Domain.Repositories.User
             _db.SaveChanges();
         }
 
-        public void Update(Entities.Resource user)
+        public void Update(Entities.Account account)
         {
-            var objFromDb = _db.Users.FirstOrDefault(a => a.Id == user.ResourceId);
+            var objFromDb = _db.Users.FirstOrDefault(a => a.Id == account.AccountId);
         }
     }
 }

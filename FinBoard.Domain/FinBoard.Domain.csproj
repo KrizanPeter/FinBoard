@@ -26,4 +26,8 @@
     <Folder Include="Migrations\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\FinBoard.Utils\FinBoard.Utils.csproj" />
+  </ItemGroup>
+
 </Project>

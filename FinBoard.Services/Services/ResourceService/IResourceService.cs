@@ -1,4 +1,6 @@
-﻿using System;
+﻿using FinBoard.Services.DTOs.Resource;
+using FinBoard.Utils.Result;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,5 +10,7 @@ namespace FinBoard.Services.Services.ResourceService
 {
     public interface IResourceService
     {
+        Task<Result<IEnumerable<ResourceDto>>> GetAllReourceOfAccountAsync(Guid accountId);
+        Task<Result> CreateResourceAsync(ResourceDto resourceDto);
     }
 }

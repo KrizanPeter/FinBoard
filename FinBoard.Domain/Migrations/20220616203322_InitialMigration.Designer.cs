@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace FinBoard.Domain.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20220611223745_AddedDomainEntities")]
-    partial class AddedDomainEntities
+    [Migration("20220616203322_InitialMigration")]
+    partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -33,9 +33,8 @@ namespace FinBoard.Domain.Migrations
                     b.Property<Guid>("AppUserId")
                         .HasColumnType("uuid");
 
-                    b.Property<string>("CreatedBy")
-                        .IsRequired()
-                        .HasColumnType("text");
+                    b.Property<Guid>("CreatedBy")
+                        .HasColumnType("uuid");
 
                     b.Property<DateTime>("DateOfCreation")
                         .HasColumnType("timestamp without time zone");
@@ -43,13 +42,10 @@ namespace FinBoard.Domain.Migrations
                     b.Property<DateTime>("DateOfLastModification")
                         .HasColumnType("timestamp without time zone");
 
-                    b.Property<string>("LastModifyBy")
-                        .IsRequired()
-                        .HasColumnType("text");
+                    b.Property<Guid>("LastModifyBy")
+                        .HasColumnType("uuid");
 
                     b.HasKey("AccountId");
-
-                    b.HasIndex("AppUserId");
 
                     b.ToTable("Accounts");
                 });
@@ -90,12 +86,15 @@ namespace FinBoard.Domain.Migrations
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("integer");
 
+                    b.Property<Guid?>("AccountId")
+                        .HasColumnType("uuid");
+
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
                         .HasColumnType("text");
 
-                    b.Property<string>("CreatedBy")
-                        .HasColumnType("text");
+                    b.Property<Guid>("CreatedBy")
+                        .HasColumnType("uuid");
 
                     b.Property<DateTime>("DateOfCreation")
                         .HasColumnType("timestamp without time zone");
@@ -110,9 +109,8 @@ namespace FinBoard.Domain.Migrations
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("boolean");
 
-                    b.Property<string>("LastModifyBy")
-                        .IsRequired()
-                        .HasColumnType("text");
+                    b.Property<Guid>("LastModifyBy")
+                        .HasColumnType("uuid");
 
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("boolean");
@@ -149,6 +147,9 @@ namespace FinBoard.Domain.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("AccountId")
+                        .IsUnique();
+
                     b.HasIndex("NormalizedEmail")
                         .HasDatabaseName("EmailIndex");
 
@@ -183,9 +184,8 @@ namespace FinBoard.Domain.Migrations
                     b.Property<float>("Amount")
                         .HasColumnType("real");
 
-                    b.Property<string>("CreatedBy")
-                        .IsRequired()
-                        .HasColumnType("text");
+                    b.Property<Guid>("CreatedBy")
+                        .HasColumnType("uuid");
 
                     b.Property<DateTime>("DateOfChange")
                         .HasColumnType("timestamp without time zone");
@@ -196,9 +196,8 @@ namespace FinBoard.Domain.Migrations
                     b.Property<DateTime>("DateOfLastModification")
                         .HasColumnType("timestamp without time zone");
 
-                    b.Property<string>("LastModifyBy")
-                        .IsRequired()
-                        .HasColumnType("text");
+                    b.Property<Guid>("LastModifyBy")
+                        .HasColumnType("uuid");
 
                     b.Property<Guid>("ResourceId")
                         .HasColumnType("uuid");
@@ -219,9 +218,11 @@ namespace FinBoard.Domain.Migrations
                     b.Property<Guid>("AccountId")
                         .HasColumnType("uuid");
 
-                    b.Property<string>("CreatedBy")
-                        .IsRequired()
-                        .HasColumnType("text");
+                    b.Property<float>("Amount")
+                        .HasColumnType("real");
+
+                    b.Property<Guid>("CreatedBy")
+                        .HasColumnType("uuid");
 
                     b.Property<int>("Currency")
                         .HasColumnType("integer");
@@ -232,9 +233,8 @@ namespace FinBoard.Domain.Migrations
                     b.Property<DateTime>("DateOfLastModification")
                         .HasColumnType("timestamp without time zone");
 
-                    b.Property<string>("LastModifyBy")
-                        .IsRequired()
-                        .HasColumnType("text");
+                    b.Property<Guid>("LastModifyBy")
+                        .HasColumnType("uuid");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -256,9 +256,8 @@ namespace FinBoard.Domain.Migrations
                     b.Property<Guid>("AccountId")
                         .HasColumnType("uuid");
 
-                    b.Property<string>("CreatedBy")
-                        .IsRequired()
-                        .HasColumnType("text");
+                    b.Property<Guid>("CreatedBy")
+                        .HasColumnType("uuid");
 
                     b.Property<DateTime>("DateOfCreation")
                         .HasColumnType("timestamp without time zone");
@@ -266,9 +265,8 @@ namespace FinBoard.Domain.Migrations
                     b.Property<DateTime>("DateOfLastModification")
                         .HasColumnType("timestamp without time zone");
 
-                    b.Property<string>("LastModifyBy")
-                        .IsRequired()
-                        .HasColumnType("text");
+                    b.Property<Guid>("LastModifyBy")
+                        .HasColumnType("uuid");
 
                     b.Property<string>("ResourceGroupName")
                         .IsRequired()
@@ -382,15 +380,13 @@ namespace FinBoard.Domain.Migrations
                     b.ToTable("ResourceResourceGroup");
                 });
 
-            modelBuilder.Entity("FinBoard.Domain.Entities.Account", b =>
+            modelBuilder.Entity("FinBoard.Domain.Entities.AppUser", b =>
                 {
-                    b.HasOne("FinBoard.Domain.Entities.AppUser", "User")
-                        .WithMany()
-                        .HasForeignKey("AppUserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.HasOne("FinBoard.Domain.Entities.Account", "Account")
+                        .WithOne("AppUser")
+                        .HasForeignKey("FinBoard.Domain.Entities.AppUser", "AccountId");
 
-                    b.Navigation("User");
+                    b.Navigation("Account");
                 });
 
             modelBuilder.Entity("FinBoard.Domain.Entities.AppUserRole", b =>
@@ -483,6 +479,9 @@ namespace FinBoard.Domain.Migrations
 
             modelBuilder.Entity("FinBoard.Domain.Entities.Account", b =>
                 {
+                    b.Navigation("AppUser")
+                        .IsRequired();
+
                     b.Navigation("Resources");
                 });
 

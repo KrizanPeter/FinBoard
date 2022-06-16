@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace FinBoard.Domain.Entities.Base
 {
-    public class BaseEntity: IBaseEntity
+    public class BaseEntity : IBaseEntity
     {
-        public string CreatedBy { get; set; }
-        public string LastModifyBy { get; set; }
-        public DateTime DateOfCreation { get; set; }  
-        public DateTime DateOfLastModification { get; set;} 
+        public Guid CreatedBy { get; set; }
+        public Guid LastModifyBy { get; set; }
+        public DateTime DateOfCreation { get; set; }
+        public DateTime DateOfLastModification { get; set; }
     }
 }
