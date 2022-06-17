@@ -35,7 +35,7 @@ namespace FinBoard.Services.Services.ResourceService
             return Result.Fail("Resource does not belong under your account.");
         }
 
-        public async Task<Result> CreateResourceAsync(ResourceDto resourceDto)
+        public async Task<Result> CreateResourceAsync(CreateResourceDto resourceDto)
         {
             if (resourceDto == null)
             {

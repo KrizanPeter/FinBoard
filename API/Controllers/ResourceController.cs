@@ -55,7 +55,7 @@ namespace API.Controllers
 
         [Authorize]
         [HttpPost("create")]
-        public async Task<IActionResult> Create(ResourceDto resourceDto)
+        public async Task<IActionResult> Create(CreateResourceDto resourceDto)
         {
             var requestId = this.GetRequestId();
             var accountId = GetCurrentUserAccountId();

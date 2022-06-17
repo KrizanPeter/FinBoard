@@ -24,7 +24,7 @@ namespace API.Controllers
         }
 
         [HttpPost("register")]
-        public async Task<IActionResult> RegisterUserAsync(UserAuthDto registerDto)
+        public async Task<IActionResult> RegisterUserAsync(CreateUserDto registerDto)
         {
             var requestId = this.GetRequestId();
             //_logger.LogInformation(this.LogApiAccess(requestId, MethodBase.GetCurrentMethod()));
@@ -48,7 +48,7 @@ namespace API.Controllers
 
 
         [HttpPost("login")]
-        public async Task<IActionResult> LoginUserAsync(UserAuthDto loginUser)
+        public async Task<IActionResult> LoginUserAsync(CreateUserDto loginUser)
         {
             var requestId = this.GetRequestId();
             //_logger.LogInformation(this.LogApiAccess(requestId, MethodBase.GetCurrentMethod()));

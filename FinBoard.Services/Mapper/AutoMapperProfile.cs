@@ -15,10 +15,15 @@ namespace FinBoard.Services.Mapper
     {
         public AutoMapperProfile()
         {
-            CreateMap<AppUser, UserAuthDto>().ReverseMap();
+
+            CreateMap<AppUser, CreateUserDto>().ReverseMap();
             CreateMap<AppUser, UserDto>().ReverseMap();
+
             CreateMap<Resource, ResourceDto>().ReverseMap();
+            CreateMap<Resource, CreateResourceDto>().ReverseMap();
+
             CreateMap<Move, MoveDto>().ReverseMap();
+            CreateMap<Move, CreateMoveDto>().ReverseMap();
         }
     }
 }

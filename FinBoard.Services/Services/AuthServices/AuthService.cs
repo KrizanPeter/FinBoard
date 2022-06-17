@@ -36,7 +36,7 @@ namespace FinBoard.Services.Services.AuthServices
             _signInManager = signInManager;
         }
 
-        public async Task<Result<UserDto>> RegisterNewUserAsync(UserAuthDto registerDto)
+        public async Task<Result<UserDto>> RegisterNewUserAsync(CreateUserDto registerDto)
         {
             var userEntity = _mapper.Map<AppUser>(registerDto);
             userEntity.DateOfCreation = DateTime.Now;
@@ -68,7 +68,7 @@ namespace FinBoard.Services.Services.AuthServices
             return Result.Fail<UserDto>(updatedUserEntity.Error);
         }
 
-        public async Task<Result<UserDto>> CheckPassAndLogIn(UserAuthDto loginUser)
+        public async Task<Result<UserDto>> CheckPassAndLogIn(CreateUserDto loginUser)
         {
             var user = _userManager.Users.FirstOrDefault(a => a.UserName.ToUpper() == loginUser.UserName.ToUpper());
             var result = await _signInManager.CheckPasswordSignInAsync(user, loginUser.Password, false);

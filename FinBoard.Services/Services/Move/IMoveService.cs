@@ -11,7 +11,7 @@ namespace FinBoard.Services.Services.Move
     public interface IMoveService
     {
         Task<Result<IEnumerable<MoveDto>>> GetAllMovesOfResourceAsync(Guid resourceId);
-        Task<Result> CreateMoveForResourceAsync(MoveDto moveDto);
+        Task<Result> CreateMoveForResourceAsync(CreateMoveDto moveDto);
         Task<Result> CheckValidityAsync(Guid moveId, Guid accountId);
         Task<Result> DeleteMoveAsync(Guid moveId);
     }

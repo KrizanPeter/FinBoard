@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FinBoard.Services.DTOs.User
 {
-    public class UserAuthDto
+    public class CreateUserDto
     {
         public string UserName { get; set; }
         public string Password { get; set; }

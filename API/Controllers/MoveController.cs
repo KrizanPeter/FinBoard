@@ -61,7 +61,7 @@ namespace API.Controllers
 
         [HttpPost("create")]
         [Authorize]
-        public async Task<IActionResult> Create(MoveDto moveDto)
+        public async Task<IActionResult> Create(CreateMoveDto moveDto)
         {
             var requestId = this.GetRequestId();
             var accountId = GetCurrentUserAccountId();

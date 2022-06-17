@@ -10,7 +10,7 @@ namespace FinBoard.Services.Services.AuthServices
 {
     public interface IAuthService
     {
-        Task<Result<UserDto>> RegisterNewUserAsync(UserAuthDto registerDto);
-        Task<Result<UserDto>> CheckPassAndLogIn(UserAuthDto loginUser);
+        Task<Result<UserDto>> RegisterNewUserAsync(CreateUserDto registerDto);
+        Task<Result<UserDto>> CheckPassAndLogIn(CreateUserDto loginUser);
     }
 }

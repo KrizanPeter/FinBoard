@@ -41,7 +41,7 @@ namespace FinBoard.Services.Services.Move
             return Result.Ok();
         }
 
-        public async Task<Result> CreateMoveForResourceAsync(MoveDto moveDto)
+        public async Task<Result> CreateMoveForResourceAsync(CreateMoveDto moveDto)
         {
             if (moveDto == null)
             {
