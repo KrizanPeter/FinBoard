@@ -1,13 +1,23 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http'
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http'
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { HeaderComponent } from './components/header/header.component';
-
+import { FooterComponent } from './components/footer/footer.component';
+import { LayoutService } from './nbutils/layout.service';
+import { AccountTemplateComponent } from './pages/account/account-template/account-template.component';
+import { AccountTabComponent } from './pages/account/account-tab/account-tab.component';
+import { AccountFormComponent } from './pages/account/account-form/account-form.component';
+import { AuthTemplateComponent } from './pages/auth/auth-template/auth-template.component';
+import { LoginFormComponent } from './pages/auth/login-form/login-form.component';
+import { RegisterFormComponent } from './pages/auth/register-form/register-form.component';
+import { ResourceFormComponent } from './pages/resources/resource-form/resource-form.component';
+import { ResourceListComponent } from './pages/resources/resource-list/resource-list.component';
+import { ResourceTemplateComponent } from './pages/resources/resource-template/resource-template.component';
 import {
   NbActionsModule,
   NbLayoutModule,
@@ -27,15 +37,9 @@ import {
   NbInputModule,
   NbTreeGridModule,
 } from '@nebular/theme';
-import { FooterComponent } from './components/footer/footer.component';
-import { LayoutService } from './nbutils/layout.service';
-import { AccountTemplateComponent } from './pages/account/account-template/account-template.component';
-import { AccountTabComponent } from './pages/account/account-tab/account-tab.component';
-import { AccountMovesTemplateComponent } from './pages/accountMoves/account-moves-template/account-moves-template.component';
-import { AccountMovesFormComponent } from './pages/accountMoves/account-moves-form/account-moves-form.component';
-import { AccountMovesTabComponent } from './pages/accountMoves/account-moves-tab/account-moves-tab.component';
-import { AccountFormComponent } from './pages/account/account-form/account-form.component';
-
+import { HeaderInterceptor } from './Interceptors/header.interceptor';
+import { FormsModule } from '@angular/forms';
+import { LoadingSpinnerComponent } from './components/loading/loading-spinner/loading-spinner.component';
 
 @NgModule({
   declarations: [
@@ -45,15 +49,20 @@ import { AccountFormComponent } from './pages/account/account-form/account-form.
     AccountFormComponent,
     AccountTemplateComponent,
     AccountTabComponent,
-    AccountMovesTemplateComponent,
-    AccountMovesFormComponent,
-    AccountMovesTabComponent,
+    ResourceFormComponent,
+    ResourceListComponent,
+    ResourceTemplateComponent,
+    AuthTemplateComponent,
+    LoginFormComponent,
+    RegisterFormComponent,
+    LoadingSpinnerComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,
+    FormsModule, 
     NbThemeModule.forRoot({ name: 'dark' }),
     NbLayoutModule,
     NbEvaIconsModule,
@@ -73,7 +82,13 @@ import { AccountFormComponent } from './pages/account/account-form/account-form.
     NbWindowModule.forRoot(),
     NbToastrModule.forRoot(),
   ],
-  providers: [LayoutService],
+  providers: [
+    LayoutService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HeaderInterceptor,
+      multi: true,
+    }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AccountMovesTabComponent } from './account-moves-tab.component';
+import { ResourceFormComponent } from './resource-form.component';
 
-describe('AccountMovesTabComponent', () => {
-  let component: AccountMovesTabComponent;
-  let fixture: ComponentFixture<AccountMovesTabComponent>;
+describe('ResourceFormComponent', () => {
+  let component: ResourceFormComponent;
+  let fixture: ComponentFixture<ResourceFormComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AccountMovesTabComponent ]
+      declarations: [ ResourceFormComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AccountMovesTabComponent);
+    fixture = TestBed.createComponent(ResourceFormComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
