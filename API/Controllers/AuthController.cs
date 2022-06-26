@@ -63,7 +63,8 @@ namespace API.Controllers
             var result = await _authService.CheckPassAndLogIn(loginUser);
 
 
-            if (!result.IsSuccess) { return Unauthorized(); }
+            if (!result.IsSuccess) 
+            { return Unauthorized(); }
 
 
             return Ok(result.Value);

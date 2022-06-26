@@ -33,6 +33,7 @@ export class AuthService{
 
     login(userName:string, password: string){
         return this.http.post<RegisterUserDto>(this.baseUrl+'Auth/login', {
+            nick: "",
             userName: userName,
             password: password
         }).pipe(

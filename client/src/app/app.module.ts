@@ -40,6 +40,8 @@ import {
 import { HeaderInterceptor } from './Interceptors/header.interceptor';
 import { FormsModule } from '@angular/forms';
 import { LoadingSpinnerComponent } from './components/loading/loading-spinner/loading-spinner.component';
+import { ErrorInterceptor } from './Interceptors/error.interceptor';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -81,12 +83,20 @@ import { LoadingSpinnerComponent } from './components/loading/loading-spinner/lo
     NbDialogModule.forRoot(),
     NbWindowModule.forRoot(),
     NbToastrModule.forRoot(),
+    ToastrModule.forRoot({
+      positionClass :'toast-top-right'
+    })
   ],
   providers: [
     LayoutService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: HeaderInterceptor,
+      multi: true,
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ErrorInterceptor,
       multi: true,
     }],
   bootstrap: [AppComponent]
