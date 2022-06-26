@@ -63,7 +63,7 @@ namespace FinBoard.Services.Services.AuthServices
             {
                 var registeredUser = _mapper.Map<UserDto>(updatedUserEntity.Value);
                 registeredUser.Token = _tokenService.GetToken(userEntity);
-                return Result.Ok(registeredUser);
+                return await CheckPassAndLogIn(registerDto);
             }
             return Result.Fail<UserDto>(updatedUserEntity.Error);
         }

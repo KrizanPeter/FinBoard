@@ -7,6 +7,7 @@ import { ResourceTemplateComponent } from './pages/resources/resource-template/r
 
 const routes: Routes = [
   { path:'', component: AuthTemplateComponent},
+  { path:'login', component: AuthTemplateComponent},
   { path:'account', component: ResourceTemplateComponent},
 ];
 

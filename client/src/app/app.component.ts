@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { MENU_ITEMS } from './nbutils/pages-menu';
+import { AuthService } from './services/auth/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -11,12 +12,13 @@ export class AppComponent implements OnInit {
   title = 'client';
   users: any;
   menu: any;
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private authService: AuthService) {
     this.menu = MENU_ITEMS;
   }
 
   ngOnInit(): void {
     this.getUsers();
+    this.authService.autologin();
   }
 
   private getUsers() {

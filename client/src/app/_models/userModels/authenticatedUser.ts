@@ -1,4 +1,4 @@
 export class AuthenticatedUser {
-    constructor(nick: string, userName: string, token: string, id: string, accountId: string) {
+    constructor(public nick: string, public userName: string, public token: string, public id: string, public accountId: string) {
     }
 }

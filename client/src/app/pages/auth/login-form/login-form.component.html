@@ -1,6 +1,9 @@
 <nb-card class="auth-card">
     <nb-card-header class="auth-header">Login</nb-card-header>
     <nb-card-body>
+      <div style="text-align: center; margin-top:40px;"  *ngIf="isLoading">
+        <app-loading-spinner></app-loading-spinner>
+      </div>
       <form class="auth-form">
         <div class="form-group">
           <label for="exampleInputEmail1" class="label">Email address</label>
