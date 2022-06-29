@@ -13,15 +13,15 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace API.Controllers
 {
-    public class MoveController : BaseController
+    public class SnapshotController : BaseController
     {
-        private readonly ILogger<MoveController> _logger;
-        private readonly IMoveService _moveService;
+        private readonly ILogger<SnapshotController> _logger;
+        private readonly ISnapshotService _moveService;
         private readonly IResourceService _resourceService;
         private readonly IPersistentService _persistentService;
 
 
-        public MoveController(ILogger<MoveController> logger, IUserService userService, IMoveService moveService,
+        public SnapshotController(ILogger<SnapshotController> logger, IUserService userService, ISnapshotService moveService,
             IPersistentService persistentService, IResourceService resourceService) : base(userService)
         {
             _resourceService = resourceService;
@@ -61,7 +61,7 @@ namespace API.Controllers
 
         [HttpPost("create")]
         [Authorize]
-        public async Task<IActionResult> Create(CreateMoveDto moveDto)
+        public async Task<IActionResult> Create(CreateSnapshotDto moveDto)
         {
             var requestId = this.GetRequestId();
             var accountId = GetCurrentUserAccountId();

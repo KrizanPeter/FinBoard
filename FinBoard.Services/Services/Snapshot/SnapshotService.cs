@@ -12,14 +12,14 @@ using System.Threading.Tasks;
 
 namespace FinBoard.Services.Services.Move
 {
-    public class MoveService : IMoveService
+    public class SnapshotService : ISnapshotService
     {
-        private readonly ILogger<MoveService> _logger;
-        private readonly IMoveRepository _moveRepository;
+        private readonly ILogger<SnapshotService> _logger;
+        private readonly ISnapshotRepository _moveRepository;
         private readonly IResourceRepository _resourceRepository;
         private readonly IMapper _mapper;
 
-        public MoveService(ILogger<MoveService> logger, IMoveRepository moveRepository, IMapper mapper, IResourceRepository resourceRepository)
+        public SnapshotService(ILogger<SnapshotService> logger, ISnapshotRepository moveRepository, IMapper mapper, IResourceRepository resourceRepository)
         {
             _resourceRepository = resourceRepository;
             _logger = logger;
@@ -29,7 +29,7 @@ namespace FinBoard.Services.Services.Move
 
         public async Task<Result> CheckValidityAsync(Guid moveId, Guid accountId)
         {
-            var move = await _moveRepository.GetFirstOrDefaultAsync(a => a.MoveId == moveId);
+            var move = await _moveRepository.GetFirstOrDefaultAsync(a => a.SnapshotId == moveId);
 
             if (move == null) return Result.Fail("Move with specified ID not exist");
 
@@ -41,13 +41,13 @@ namespace FinBoard.Services.Services.Move
             return Result.Ok();
         }
 
-        public async Task<Result> CreateMoveForResourceAsync(CreateMoveDto moveDto)
+        public async Task<Result> CreateMoveForResourceAsync(CreateSnapshotDto moveDto)
         {
             if (moveDto == null)
             {
                 return Result.Fail("MoveDto cannot be null.");
             }
-            var moveEntity = _mapper.Map<Domain.Entities.Move>(moveDto);
+            var moveEntity = _mapper.Map<Domain.Entities.Snapshot>(moveDto);
             try
             {
                 await _moveRepository.AddAsync(moveEntity);
@@ -64,7 +64,7 @@ namespace FinBoard.Services.Services.Move
 
         public async Task<Result> DeleteMoveAsync(Guid moveId)
         {
-            var moveEntity = await _moveRepository.GetFirstOrDefaultAsync(a => a.MoveId == moveId);
+            var moveEntity = await _moveRepository.GetFirstOrDefaultAsync(a => a.SnapshotId == moveId);
             if (moveEntity == null)
             {
                 return Result.Fail("Move with specified ID not exist.");
@@ -81,10 +81,10 @@ namespace FinBoard.Services.Services.Move
             return Result.Ok();
         }
 
-        public async Task<Result<IEnumerable<MoveDto>>> GetAllMovesOfResourceAsync(Guid resourceId)
+        public async Task<Result<IEnumerable<SnapshotDto>>> GetAllMovesOfResourceAsync(Guid resourceId)
         {
             var result = await _moveRepository.GetAllAsync(a => a.ResourceId == resourceId);
-            var movesDtoList = _mapper.Map<IEnumerable<MoveDto>>(result);
+            var movesDtoList = _mapper.Map<IEnumerable<SnapshotDto>>(result);
             return Result.Ok(movesDtoList);
         }
     }

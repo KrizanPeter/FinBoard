@@ -15,30 +15,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
   isAuthenticated :boolean;
   userName : string;
 
-  themes = [
-    {
-      value: 'default',
-      name: 'Light',
-    },
-    {
-      value: 'dark',
-      name: 'Dark',
-    },
-    {
-      value: 'cosmic',
-      name: 'Cosmic',
-    },
-    {
-      value: 'corporate',
-      name: 'Corporate',
-    },
-  ];
-
-  currentTheme = 'default';
-
-  userMenu = [{ title: 'Profile' }, { title: 'Log out' }];
-
-
   constructor(
     private sidebarService: NbSidebarService,
     private layoutService: LayoutService,
@@ -56,16 +32,13 @@ export class HeaderComponent implements OnInit, OnDestroy {
       else{
         this.isAuthenticated = false;
       }
-      //this.userName = user.nickName;
+      this.userName = user.userName;
     });
   }
 
   ngOnDestroy(): void {
     this.userSub.unsubscribe();
     this.isAuthenticated = false
-  }
-
-  changeTheme(themeName: string) {
   }
 
   toggleSidebar(): boolean {

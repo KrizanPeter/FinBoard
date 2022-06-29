@@ -22,8 +22,8 @@ namespace FinBoard.Services.Mapper
             CreateMap<Resource, ResourceDto>().ReverseMap();
             CreateMap<Resource, CreateResourceDto>().ReverseMap();
 
-            CreateMap<Move, MoveDto>().ReverseMap();
-            CreateMap<Move, CreateMoveDto>().ReverseMap();
+            CreateMap<Snapshot, SnapshotDto>().ReverseMap();
+            CreateMap<Snapshot, CreateSnapshotDto>().ReverseMap();
         }
     }
 }

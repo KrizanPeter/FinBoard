@@ -10,6 +10,8 @@ namespace FinBoard.Services.Services.UserService
 {
     public interface IUserService
     {
+        Task<Result<UserDto>> GetUserByEmailAsync(string Email, Guid requestId);
         Task<Result<UserDto>> GetUserByNameAsync(string userName, Guid requestId);
+
     }
 }

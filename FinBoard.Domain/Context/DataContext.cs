@@ -48,7 +48,7 @@ namespace FinBoard.Domain.Context
         DbSet<Account> Accounts { get; set; }
         DbSet<Resource> Resources { get; set; }
         DbSet<ResourceGroup> ResourceGroups { get; set; }
-        DbSet<Move> Moves { get; set; }
+        DbSet<Snapshot> Snapshots { get; set; }
 
 
     }

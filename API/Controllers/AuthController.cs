@@ -29,11 +29,11 @@ namespace API.Controllers
             var requestId = this.GetRequestId();
             //_logger.LogInformation(this.LogApiAccess(requestId, MethodBase.GetCurrentMethod()));
 
-            var existedUser = await _userService.GetUserByNameAsync(registerDto.UserName, requestId);
+            var existedUser = await _userService.GetUserByEmailAsync(registerDto.Email, requestId);
 
             if (existedUser.IsSuccess)
             {
-                return BadRequest("User with given name is already existing.");
+                return BadRequest("User with given email is already existing.");
             }
 
             var userDto = await _authService.RegisterNewUserAsync(registerDto);
@@ -53,7 +53,7 @@ namespace API.Controllers
             var requestId = this.GetRequestId();
             //_logger.LogInformation(this.LogApiAccess(requestId, MethodBase.GetCurrentMethod()));
 
-            var existedUser = await _userService.GetUserByNameAsync(loginUser.UserName, requestId);
+            var existedUser = await _userService.GetUserByEmailAsync(loginUser.Email, requestId);
 
             if (existedUser.IsFailure)
             {
@@ -63,7 +63,7 @@ namespace API.Controllers
             var result = await _authService.CheckPassAndLogIn(loginUser);
 
 
-            if (!result.IsSuccess) 
+            if (!result.IsSuccess)
             { return Unauthorized(); }
 
 

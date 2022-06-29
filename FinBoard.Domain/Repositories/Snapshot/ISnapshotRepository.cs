@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace FinBoard.Domain.Repositories.Move
 {
-    public interface IMoveRepository : IRepository<Entities.Move>
+    public interface ISnapshotRepository : IRepository<Entities.Snapshot>
     {
         void Update(Entities.Resource user);
         void SaveChanges();

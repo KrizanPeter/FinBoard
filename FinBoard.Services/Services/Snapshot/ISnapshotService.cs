@@ -8,10 +8,10 @@ using System.Threading.Tasks;
 
 namespace FinBoard.Services.Services.Move
 {
-    public interface IMoveService
+    public interface ISnapshotService
     {
-        Task<Result<IEnumerable<MoveDto>>> GetAllMovesOfResourceAsync(Guid resourceId);
-        Task<Result> CreateMoveForResourceAsync(CreateMoveDto moveDto);
+        Task<Result<IEnumerable<SnapshotDto>>> GetAllMovesOfResourceAsync(Guid resourceId);
+        Task<Result> CreateMoveForResourceAsync(CreateSnapshotDto moveDto);
         Task<Result> CheckValidityAsync(Guid moveId, Guid accountId);
         Task<Result> DeleteMoveAsync(Guid moveId);
     }

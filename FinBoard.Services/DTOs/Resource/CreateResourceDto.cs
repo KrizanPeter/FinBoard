@@ -9,9 +9,7 @@ namespace FinBoard.Services.DTOs.Resource
 {
     public class CreateResourceDto
     {
-        public Guid AccountId { get; set; }
         public string Name { get; set; }
         public Currency Currency { get; set; }
-        public float Amount { get; set; }
     }
 }

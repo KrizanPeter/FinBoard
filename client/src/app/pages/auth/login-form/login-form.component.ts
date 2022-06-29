@@ -18,18 +18,17 @@ export class LoginFormComponent implements OnInit {
 
   onSubmit(form: NgForm){
     this.isLoading = true;
-    this.authService.login(form.value.email, form.value.password).subscribe(
+    this.authService.login(form.value.loginEmail, form.value.loginPassword).subscribe(
       resData => {
         this.isLoading = false;
-        this.router.navigate(['/account']);
+        this.router.navigate(['/resource']);
       }, 
       error => {
         this.isLoading = false;
         console.log(error);
       }
     );
-
-    form.reset();
+    //form.reset();
   }
 
 }

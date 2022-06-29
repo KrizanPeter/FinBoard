@@ -17,17 +17,16 @@ export class RegisterFormComponent implements OnInit {
 
   onSubmit(form: NgForm){
     this.isLoading = true;
-    this.authService.register(form.value.nickName, form.value.email, form.value.password).subscribe(
+    this.authService.register(form.value.registerUserName, form.value.registerEmail, form.value.registerPassword).subscribe(
       resData => {
         this.isLoading = false;
-        this.router.navigate(['/account']);
+        this.router.navigate(['/resource']);
       }, 
       error => {
         this.isLoading = false;
         console.log(error);
       }
     );
-
     form.reset();
   }
 

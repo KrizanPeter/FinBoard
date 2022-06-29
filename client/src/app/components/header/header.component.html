@@ -5,9 +5,9 @@
     </a>
     <a class="logo" href="#" routerLink="/account" (click)="navigateHome()">Fin<span>Board</span></a>
   </div>
-  <nb-select [selected]="currentTheme" (selectedChange)="changeTheme($event)" status="primary">
+  <!-- <nb-select [selected]="currentTheme" (selectedChange)="changeTheme($event)" status="primary">
     <nb-option *ngFor="let theme of themes" [value]="theme.value"> {{ theme.name }}</nb-option>
-  </nb-select>
+  </nb-select> -->
 </div>
 
 <div class="header-container">
@@ -19,7 +19,7 @@
     <nb-action class="control-item" icon="bell-outline"></nb-action>
   </nb-actions>
   <div class="row auth-actions">
-    <p class="col-6 user-name">Hi Pefter! </p>
+    <p class="col-6 user-name">Hi {{userName}}! </p>
     <button *ngIf="isAuthenticated" class="col-6 login-logout-btn" (click)="logout()" nbButton status="info" >Logout</button>
     <button *ngIf="!isAuthenticated"class="col-6 login-logout-btn" (click)="login()" nbButton status="info" >Login</button>
   </div>

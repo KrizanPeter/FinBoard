@@ -65,12 +65,7 @@ namespace API.Controllers
 
             if (accountId.IsFailure) { return BadRequest(accountId.Error); }
 
-            if (accountId.Value != resourceDto.AccountId)
-            {
-                return BadRequest("U are not able to create resource for another account");
-            }
-
-            var result = await _resourceService.CreateResourceAsync(resourceDto);
+            var result = await _resourceService.CreateResourceAsync(resourceDto, accountId.Value);
 
             if (result.IsSuccess)
             {

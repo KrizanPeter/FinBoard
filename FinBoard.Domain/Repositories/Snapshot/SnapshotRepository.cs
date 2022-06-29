@@ -9,11 +9,11 @@ using System.Threading.Tasks;
 
 namespace FinBoard.Domain.Repositories.Move
 {
-    public class MoveRepository : Repository<Entities.Move>, IMoveRepository
+    public class SnapshotRepository : Repository<Entities.Snapshot>, ISnapshotRepository
     {
         private readonly DataContext _db;
 
-        public MoveRepository(DataContext db, IPersistentService persistenceService) : base(db, persistenceService)
+        public SnapshotRepository(DataContext db, IPersistentService persistenceService) : base(db, persistenceService)
         {
             _db = db;
         }

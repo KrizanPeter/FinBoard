@@ -22,9 +22,9 @@ namespace API.Extensions
             services.AddScoped<IResourceService, ResourceService>();
             services.AddScoped<IAccountService, AccountService>();
             services.AddScoped<IPersistentService, PersistentService>();
-            services.AddScoped<IMoveService, MoveService>();
+            services.AddScoped<ISnapshotService, SnapshotService>();
 
-            services.AddScoped<IMoveRepository, MoveRepository>();
+            services.AddScoped<ISnapshotRepository, SnapshotRepository>();
             services.AddScoped<IAccountRepository, AccountRepository>();
             services.AddScoped<IResourceRepository, ResourceRepository>();
             services.AddScoped<IUserRepository, UserRepository>();

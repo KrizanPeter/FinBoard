@@ -18,6 +18,7 @@ import { RegisterFormComponent } from './pages/auth/register-form/register-form.
 import { ResourceFormComponent } from './pages/resources/resource-form/resource-form.component';
 import { ResourceListComponent } from './pages/resources/resource-list/resource-list.component';
 import { ResourceTemplateComponent } from './pages/resources/resource-template/resource-template.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import {
   NbActionsModule,
   NbLayoutModule,
@@ -60,6 +61,7 @@ import { ToastrModule } from 'ngx-toastr';
     LoadingSpinnerComponent,
   ],
   imports: [
+    FontAwesomeModule,
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,

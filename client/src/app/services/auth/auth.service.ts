@@ -15,14 +15,14 @@ export class AuthService{
 
     }
 
-    register(nick: string, userName:string, password: string){
+    register(userName: string, email:string, password: string){
         return this.http.post<RegisterUserDto>(this.baseUrl+'Auth/register', {
-            nick: nick,
             userName: userName,
+            email: email,
             password: password
         }).pipe(
             tap( resData =>{
-                const currentUser = new AuthenticatedUser("", resData.userName, resData.token, resData.id, resData.accountId);
+                const currentUser = new AuthenticatedUser(resData.userName, resData.email, resData.token, resData.id, resData.accountId);
                 this.user.next(currentUser);
                 console.log("storujem user data");
                 console.log(currentUser);
@@ -31,10 +31,10 @@ export class AuthService{
         )
     }
 
-    login(userName:string, password: string){
+    login(email:string, password: string){
         return this.http.post<RegisterUserDto>(this.baseUrl+'Auth/login', {
-            nick: "",
-            userName: userName,
+            userName: "",
+            email: email,
             password: password
         }).pipe(
             tap( resData =>{
@@ -47,8 +47,8 @@ export class AuthService{
 
     autologin(){
         const userData :{
-            nick:string,
             userName:string,
+            email:string,
             token:string,
             id:string,
             accountId:string
@@ -58,7 +58,7 @@ export class AuthService{
         }
         console.log("vytahujem usera");
         console.log(userData);
-        const authUser = new AuthenticatedUser(userData.nick, userData.userName, userData.token, userData.id, userData.accountId);
+        const authUser = new AuthenticatedUser(userData.userName, userData.email, userData.token, userData.id, userData.accountId);
         this.user.next(authUser);
     }
 

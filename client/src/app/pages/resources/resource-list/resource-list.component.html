@@ -1,1 +1,23 @@
-<p>resource-list works!</p>
+<nb-card>
+    <nb-card-header>Resource</nb-card-header>
+    <nb-card-body>
+        <table mat-table class="col col-12" >
+            <thead class="col col-12">
+                <tr  class="col col-12">
+                    <th  class="col col-9">Name</th>
+                    <th  class="col col-3">Options</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let resource of resoucesList">
+                    <td>{{resource.name}}</td>
+                    <td>
+                        <a class="options-icon" href=""><fa-icon [icon]="faPencil" (click)="editClick(resource.resourceId)"></fa-icon></a>
+                        <a class="options-icon"><fa-icon [icon]="faTrashCan" (click)="deleteClick(resource.resourceId)"></fa-icon></a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+    </nb-card-body>
+</nb-card>

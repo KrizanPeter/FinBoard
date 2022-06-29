@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace FinBoard.Domain.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20220616203322_InitialMigration")]
+    [Migration("20220629161422_InitialMigration")]
     partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -175,40 +175,6 @@ namespace FinBoard.Domain.Migrations
                     b.ToTable("AspNetUserRoles", (string)null);
                 });
 
-            modelBuilder.Entity("FinBoard.Domain.Entities.Move", b =>
-                {
-                    b.Property<Guid>("MoveId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
-
-                    b.Property<float>("Amount")
-                        .HasColumnType("real");
-
-                    b.Property<Guid>("CreatedBy")
-                        .HasColumnType("uuid");
-
-                    b.Property<DateTime>("DateOfChange")
-                        .HasColumnType("timestamp without time zone");
-
-                    b.Property<DateTime>("DateOfCreation")
-                        .HasColumnType("timestamp without time zone");
-
-                    b.Property<DateTime>("DateOfLastModification")
-                        .HasColumnType("timestamp without time zone");
-
-                    b.Property<Guid>("LastModifyBy")
-                        .HasColumnType("uuid");
-
-                    b.Property<Guid>("ResourceId")
-                        .HasColumnType("uuid");
-
-                    b.HasKey("MoveId");
-
-                    b.HasIndex("ResourceId");
-
-                    b.ToTable("Moves");
-                });
-
             modelBuilder.Entity("FinBoard.Domain.Entities.Resource", b =>
                 {
                     b.Property<Guid>("ResourceId")
@@ -275,6 +241,40 @@ namespace FinBoard.Domain.Migrations
                     b.HasKey("ResourceGroupId");
 
                     b.ToTable("ResourceGroups");
+                });
+
+            modelBuilder.Entity("FinBoard.Domain.Entities.Snapshot", b =>
+                {
+                    b.Property<Guid>("SnapshotId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<float>("Amount")
+                        .HasColumnType("real");
+
+                    b.Property<Guid>("CreatedBy")
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime>("DateOfChange")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<DateTime>("DateOfCreation")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<DateTime>("DateOfLastModification")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<Guid>("LastModifyBy")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("ResourceId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("SnapshotId");
+
+                    b.HasIndex("ResourceId");
+
+                    b.ToTable("Snapshots");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>
@@ -408,20 +408,20 @@ namespace FinBoard.Domain.Migrations
                     b.Navigation("AppUser");
                 });
 
-            modelBuilder.Entity("FinBoard.Domain.Entities.Move", b =>
-                {
-                    b.HasOne("FinBoard.Domain.Entities.Resource", null)
-                        .WithMany("Moves")
-                        .HasForeignKey("ResourceId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("FinBoard.Domain.Entities.Resource", b =>
                 {
                     b.HasOne("FinBoard.Domain.Entities.Account", null)
                         .WithMany("Resources")
                         .HasForeignKey("AccountId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("FinBoard.Domain.Entities.Snapshot", b =>
+                {
+                    b.HasOne("FinBoard.Domain.Entities.Resource", null)
+                        .WithMany("Snapshots")
+                        .HasForeignKey("ResourceId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -497,7 +497,7 @@ namespace FinBoard.Domain.Migrations
 
             modelBuilder.Entity("FinBoard.Domain.Entities.Resource", b =>
                 {
-                    b.Navigation("Moves");
+                    b.Navigation("Snapshots");
                 });
 #pragma warning restore 612, 618
         }

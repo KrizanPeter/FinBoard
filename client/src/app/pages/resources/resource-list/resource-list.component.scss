@@ -1,0 +1,17 @@
+th{
+    font-weight: 800;
+}
+tr, th, td{
+    border: 1px black solid;
+    padding: 15px;
+}
+
+.options-icon{
+    color: white;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.options-icon:hover{
+    color: red;
+}

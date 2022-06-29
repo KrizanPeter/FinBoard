@@ -70,7 +70,9 @@ namespace FinBoard.Services.Services.AuthServices
 
         public async Task<Result<UserDto>> CheckPassAndLogIn(CreateUserDto loginUser)
         {
-            var user = _userManager.Users.FirstOrDefault(a => a.UserName.ToUpper() == loginUser.UserName.ToUpper());
+            var user = _userManager.Users.FirstOrDefault(a => a.Email.ToUpper() == loginUser.Email.ToUpper());
+            if (user == null) return Result.Fail<UserDto>("User does not exist.");
+
             var result = await _signInManager.CheckPasswordSignInAsync(user, loginUser.Password, false);
             if (!result.Succeeded)
             {

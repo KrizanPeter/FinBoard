@@ -1,0 +1,42 @@
+nb-card-body {
+    overflow: visible;
+    padding-top: 0;
+  
+    > * {
+      margin-top: 1rem;
+    }
+  }
+  
+  .form-group{
+    margin-bottom: 1rem;
+  }
+
+  .label{
+    padding-bottom: 0.5rem;
+  }
+
+  .auth-form{
+    height: 100%;
+  }
+
+  .auth-card{
+    height: 45rem;
+  }
+
+  .auth-header{
+    padding-top: 10rem;
+    font-size: 3rem;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .auth-button{
+    width: 15rem;
+    height: 3rem;
+  }
+
+  .btn-container{
+    
+    margin-top: 2rem;
+    text-align: right;
+  }

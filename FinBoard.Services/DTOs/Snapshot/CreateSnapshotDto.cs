@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 
 namespace FinBoard.Services.DTOs.Move
 {
-    public class MoveDto
+    public class CreateSnapshotDto
     {
-        public Guid MoveId { get; set; }
         public Guid ResourceId { get; set; }
         public float Amount { get; set; }
         public DateTime DateOfChange { get; set; }

@@ -1,17 +1,16 @@
-﻿using FinBoard.Domain.Entities.Base;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FinBoard.Domain.Entities
+namespace FinBoard.Services.DTOs.Move
 {
-    public class Move : BaseEntity
+    public class SnapshotDto
     {
-        public Guid MoveId { get; set; }
+        public Guid SnapshotId { get; set; }
         public Guid ResourceId { get; set; }
-        public float Amount { get; set; }  
+        public float Amount { get; set; }
         public DateTime DateOfChange { get; set; }
     }
 }

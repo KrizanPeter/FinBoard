@@ -1,13 +1,22 @@
 import { NbMenuItem } from '@nebular/theme';
 
-export const MENU_ITEMS: NbMenuItem[] = [
+export const USER_MENU_ITEMS: NbMenuItem[] = [
   {
-    title: 'FinBoard',
-    icon: 'home-outline',
+    title: 'Dashboard',
+    icon: 'browser-outline',
     link: '/pages/_dashboard',
   },
   {
-    title: 'RESOURCES',
+    title: 'Management',
+    group: true,
+  },
+  {
+    title: 'Resources',
+    icon: 'corner-down-right-outline',
+    link: 'resource',
+  },
+  {
+    title: 'My resources',
     group: true,
   },
   {
@@ -15,26 +24,58 @@ export const MENU_ITEMS: NbMenuItem[] = [
     icon: 'book-outline',
     children: [
       {
-        title: 'Account management',
+        title: ' Example1',
         link: '/account',
       },
       {
-        title: 'Moves',
-        link: '/account/moves',
+        title: ' Example1',
+        link: '/account',
+      },
+      {
+        title: ' Example1',
+        link: '/account',
+      },
+      {
+        title: ' Example1',
+        link: '/account',
+      },
+      {
+        title: ' Example1',
+        link: '/account',
+      },
+      {
+        title: ' Example1',
+        link: '/account',
       },
     ],
   },
   {
-    title: 'Moves',
+    title: 'Groups',
     icon: 'trending-up-outline',
     children: [
       {
-        title: 'Moves management',
-        link: '/pages/forms/inputs',
+        title: ' Example1',
+        link: '/account',
       },
       {
-        title: 'Moves',
-        link: '/pages/forms/layouts',
+        title: ' Example1',
+        link: '/account',
+      },
+      {
+        title: ' Example1',
+        link: '/account',
+      },
+      {
+        title: ' Example1',
+        link: '/account',
+      },
+      {
+        title: ' Example1',
+        link: '/account',
+      },
+      {
+        title: ' Example1',
+        link: '/account',
       },
     ],
   },
@@ -55,5 +96,29 @@ export const MENU_ITEMS: NbMenuItem[] = [
         link: '/auth/register',
       },
     ],
+  },
+];
+
+export const MENU_ITEMS: NbMenuItem[] = [
+  {
+    title: 'What is Finboard?',
+    icon: 'home-outline',
+    link: '/pages/_dashboard',
+  },
+  {
+    title: 'How to use Finboard?',
+    icon: 'book-outline',
+  },
+  {
+    title: 'About me',
+    icon: 'trending-up-outline',
+  },
+  {
+    title: 'PROFILE',
+    group: true,
+  },
+  {
+    title: 'Login',
+    icon: 'person-outline',
   },
 ];

@@ -224,30 +224,6 @@ namespace FinBoard.Domain.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Moves",
-                columns: table => new
-                {
-                    MoveId = table.Column<Guid>(type: "uuid", nullable: false),
-                    ResourceId = table.Column<Guid>(type: "uuid", nullable: false),
-                    Amount = table.Column<float>(type: "real", nullable: false),
-                    DateOfChange = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
-                    CreatedBy = table.Column<Guid>(type: "uuid", nullable: false),
-                    LastModifyBy = table.Column<Guid>(type: "uuid", nullable: false),
-                    DateOfCreation = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
-                    DateOfLastModification = table.Column<DateTime>(type: "timestamp without time zone", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Moves", x => x.MoveId);
-                    table.ForeignKey(
-                        name: "FK_Moves_Resources_ResourceId",
-                        column: x => x.ResourceId,
-                        principalTable: "Resources",
-                        principalColumn: "ResourceId",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "ResourceResourceGroup",
                 columns: table => new
                 {
@@ -266,6 +242,30 @@ namespace FinBoard.Domain.Migrations
                     table.ForeignKey(
                         name: "FK_ResourceResourceGroup_Resources_ResourcesResourceId",
                         column: x => x.ResourcesResourceId,
+                        principalTable: "Resources",
+                        principalColumn: "ResourceId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Snapshots",
+                columns: table => new
+                {
+                    SnapshotId = table.Column<Guid>(type: "uuid", nullable: false),
+                    ResourceId = table.Column<Guid>(type: "uuid", nullable: false),
+                    Amount = table.Column<float>(type: "real", nullable: false),
+                    DateOfChange = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    CreatedBy = table.Column<Guid>(type: "uuid", nullable: false),
+                    LastModifyBy = table.Column<Guid>(type: "uuid", nullable: false),
+                    DateOfCreation = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    DateOfLastModification = table.Column<DateTime>(type: "timestamp without time zone", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Snapshots", x => x.SnapshotId);
+                    table.ForeignKey(
+                        name: "FK_Snapshots_Resources_ResourceId",
+                        column: x => x.ResourceId,
                         principalTable: "Resources",
                         principalColumn: "ResourceId",
                         onDelete: ReferentialAction.Cascade);
@@ -315,11 +315,6 @@ namespace FinBoard.Domain.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_Moves_ResourceId",
-                table: "Moves",
-                column: "ResourceId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_ResourceResourceGroup_ResourcesResourceId",
                 table: "ResourceResourceGroup",
                 column: "ResourcesResourceId");
@@ -328,6 +323,11 @@ namespace FinBoard.Domain.Migrations
                 name: "IX_Resources_AccountId",
                 table: "Resources",
                 column: "AccountId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Snapshots_ResourceId",
+                table: "Snapshots",
+                column: "ResourceId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -348,10 +348,10 @@ namespace FinBoard.Domain.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "Moves");
+                name: "ResourceResourceGroup");
 
             migrationBuilder.DropTable(
-                name: "ResourceResourceGroup");
+                name: "Snapshots");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
