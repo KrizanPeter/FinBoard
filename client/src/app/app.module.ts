@@ -37,12 +37,18 @@ import {
   NbCardModule,
   NbInputModule,
   NbTreeGridModule,
+  NbTabsetModule,
+  NbDatepicker,
+  NbDatepickerModule,
 } from '@nebular/theme';
 import { HeaderInterceptor } from './Interceptors/header.interceptor';
 import { FormsModule } from '@angular/forms';
 import { LoadingSpinnerComponent } from './components/loading/loading-spinner/loading-spinner.component';
 import { ErrorInterceptor } from './Interceptors/error.interceptor';
 import { ToastrModule } from 'ngx-toastr';
+import { SnapshotTemplateComponent } from './pages/snapshots/snapshot-template/snapshot-template.component';
+import { SnapshotFormComponent } from './pages/snapshots/snapshot-form/snapshot-form.component';
+import { SnapshotListComponent } from './pages/snapshots/snapshot-list/snapshot-list.component';
 
 @NgModule({
   declarations: [
@@ -59,8 +65,13 @@ import { ToastrModule } from 'ngx-toastr';
     LoginFormComponent,
     RegisterFormComponent,
     LoadingSpinnerComponent,
+    SnapshotTemplateComponent,
+    SnapshotFormComponent,
+    SnapshotListComponent,
   ],
   imports: [
+    NbDatepickerModule.forRoot(),
+    NbTabsetModule,
     FontAwesomeModule,
     BrowserModule,
     AppRoutingModule,

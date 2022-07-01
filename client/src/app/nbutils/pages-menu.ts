@@ -12,8 +12,13 @@ export const USER_MENU_ITEMS: NbMenuItem[] = [
   },
   {
     title: 'Resources',
-    icon: 'corner-down-right-outline',
+    icon: 'layers-outline',
     link: 'resource',
+  },
+  {
+    title: 'Snapshots',
+    icon: 'done-all-outline',
+    link: 'snapshot',
   },
   {
     title: 'My resources',

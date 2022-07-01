@@ -38,7 +38,7 @@ export class AuthService{
             password: password
         }).pipe(
             tap( resData =>{
-                const currentUser = new AuthenticatedUser("", resData.userName, resData.token, resData.id, resData.accountId);
+                const currentUser = new AuthenticatedUser(resData.userName, resData.email, resData.token, resData.id, resData.accountId);
                 this.user.next(currentUser);
                 localStorage.setItem('userData', JSON.stringify(currentUser))
             })

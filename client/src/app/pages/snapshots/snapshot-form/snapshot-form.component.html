@@ -1,0 +1,32 @@
+<nb-card>
+    <nb-card-header>Create snapshot</nb-card-header>
+    <nb-card-body>
+        <form class="auth-form" #createSnapshotForm="ngForm" (ngSubmit)="onSubmit(createSnapshotForm)">
+            <div class="form-group">
+                <label for="resourceOptionInput" class="label">Resource</label>
+                <nb-select name="inputResourceId" selected={{selectedOption}} id="resourceOptionInput" fullWidth ngModel required (ngModelChange)="onSelectChange(createSnapshotForm)">
+                    <nb-option *ngFor="let resource of resourceOptions" value={{resource.resourceId}}> {{ resource.name }}</nb-option>
+                </nb-select>
+            </div>
+
+            <div class="row form-group">
+                <div class="col col-6">
+                    <label for="datepickerInput" class="label">Date of snapshot</label>
+                    <div id="datepickerInput">
+                        <input name="inputDateOfSnapshot" fullWidth required ngModel nbInput placeholder="Form Picker" [nbDatepicker]="formpicker" autocomplete="off">
+                        <nb-datepicker  #formpicker></nb-datepicker>
+                    </div>
+                </div>
+                <div class="col col-6">
+                    <label for="amountIntput" class="label">Amount</label>
+                    <input name="inputAmount" type="text" ngModel id="amountIntput" nbInput required
+                        fullWidth placeholder="Personal investment" autocomplete="off">
+                </div>
+            </div>
+            <div class="btn-container">
+                <button type="submit" nbButton status="info" class="auth-button"
+                    [disabled]="!createSnapshotForm.valid">Add Snapshot</button>
+            </div>
+        </form>
+    </nb-card-body>
+</nb-card>

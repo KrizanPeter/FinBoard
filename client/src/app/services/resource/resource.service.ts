@@ -1,8 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { BehaviorSubject } from "rxjs";
-import { ResourceDto } from "src/app/_models/userModels/resourceDto";
-import { RegisterUserDto } from "src/app/_models/userModels/userRegisterResponse";
+import { ResourceDto } from "src/app/_models/resourceModels/resourceDto";
 import { environment } from "src/environments/environment";
 
 

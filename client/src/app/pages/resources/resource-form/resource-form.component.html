@@ -1,7 +1,10 @@
 <nb-card>
-    <nb-card-header>Resource</nb-card-header>
+    <nb-card-header>Create resource</nb-card-header>
     <nb-card-body>
-      <form class="auth-form" #createResourceForm="ngForm" (ngSubmit)="onSubmit(createResourceForm)">
+      <div style="text-align: center; margin-top:40px;"  *ngIf="isLoading">
+        <app-loading-spinner></app-loading-spinner>
+      </div>
+      <form class="auth-form" #createResourceForm="ngForm" (ngSubmit)="onSubmit(createResourceForm)" *ngIf="!isLoading">
         <div class="form-group">
           <label for="userNameId" class="label">Name of resource</label>
           <input type="text" ngModel id="userNameId" name="inputResourceName" nbInput required minlength="3" fullWidth placeholder="Personal investment" >

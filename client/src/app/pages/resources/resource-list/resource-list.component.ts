@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { ResourceService } from 'src/app/services/resource/resource.service';
-import { ResourceDto } from 'src/app/_models/userModels/resourceDto';
+import { ResourceDto } from 'src/app/_models/resourceModels/resourceDto';
 import { faPencil, faTrashCan } from '@fortawesome/free-solid-svg-icons';
 
 @Component({

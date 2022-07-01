@@ -89,7 +89,7 @@ namespace API.Controllers
 
         [Authorize]
         [HttpDelete("delete")]
-        public async Task<IActionResult> Delete(Guid moveId)
+        public async Task<IActionResult> Delete(Guid snapshotId)
         {
             var requestId = this.GetRequestId();
             var accountId = GetCurrentUserAccountId();
@@ -98,14 +98,14 @@ namespace API.Controllers
 
             if (accountId.IsFailure) { return BadRequest(accountId.Error); }
 
-            var validity = await _moveService.CheckValidityAsync(moveId, accountId.Value);
+            var validity = await _moveService.CheckValidityAsync(snapshotId, accountId.Value);
 
             if (validity.IsFailure)
             {
                 return BadRequest(validity.Error);
             }
 
-            var result = await _moveService.DeleteMoveAsync(moveId);
+            var result = await _moveService.DeleteMoveAsync(snapshotId);
 
             if (result.IsSuccess)
             {
