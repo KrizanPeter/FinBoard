@@ -78,7 +78,7 @@ namespace FinBoard.Services.Services.ResourceService
 
         public async Task<Result<IEnumerable<ResourceDto>>> GetAllReourceOfAccountAsync(Guid accountId)
         {
-            var result = await _resourceRepository.GetAllAsync(a => a.AccountId == accountId);
+            var result = await _resourceRepository.GetAllWithSnapshotAsync(accountId);
             var resultDto = _mapper.Map<IEnumerable<ResourceDto>>(result);
 
             if (result != null)

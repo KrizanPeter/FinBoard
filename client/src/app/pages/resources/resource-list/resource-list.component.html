@@ -3,7 +3,7 @@
         <div style="text-align: center; margin-top:40px;" *ngIf="isLoading">
             <app-loading-spinner></app-loading-spinner>
         </div>
-        <nb-tabset  *ngIf="!isLoading">
+        <nb-tabset *ngIf="!isLoading">
             <nb-card-header>Resource</nb-card-header>
             <nb-tab tabTitle="List of resources">
                 <table mat-table class="col col-12">
@@ -17,7 +17,7 @@
                     <tbody>
                         <tr *ngFor="let resource of resoucesList">
                             <td>{{resource.name}}</td>
-                            <td>10.000,-</td>
+                            <td>{{resource.amount}}</td>
                             <td>
                                 <a class="options-icon" href="">
                                     <fa-icon [icon]="faPencil" (click)="editClick(resource.resourceId)"></fa-icon>
@@ -31,7 +31,9 @@
                 </table>
             </nb-tab>
             <nb-tab tabTitle="Resources distribution">
-                <span>GRAPHEN</span>
+                <nb-card-body>
+                    <ngx-echarts-pie [chartData]="pieChartData"></ngx-echarts-pie>
+                </nb-card-body>
             </nb-tab>
         </nb-tabset>
     </nb-card>

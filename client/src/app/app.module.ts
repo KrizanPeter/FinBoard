@@ -19,6 +19,8 @@ import { ResourceFormComponent } from './pages/resources/resource-form/resource-
 import { ResourceListComponent } from './pages/resources/resource-list/resource-list.component';
 import { ResourceTemplateComponent } from './pages/resources/resource-template/resource-template.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { DARK_THEME } from './styles/theme.dark';
+
 import {
   NbActionsModule,
   NbLayoutModule,
@@ -49,6 +51,10 @@ import { ToastrModule } from 'ngx-toastr';
 import { SnapshotTemplateComponent } from './pages/snapshots/snapshot-template/snapshot-template.component';
 import { SnapshotFormComponent } from './pages/snapshots/snapshot-form/snapshot-form.component';
 import { SnapshotListComponent } from './pages/snapshots/snapshot-list/snapshot-list.component';
+import { NgxEchartsModule } from 'ngx-echarts';
+import { EchartsPieComponent } from './components/charts/pie-chart/echarts-pie.component';
+import { EchartsLineComponent } from './components/charts/line-chart/echarts-line.component';
+
 
 @NgModule({
   declarations: [
@@ -68,8 +74,12 @@ import { SnapshotListComponent } from './pages/snapshots/snapshot-list/snapshot-
     SnapshotTemplateComponent,
     SnapshotFormComponent,
     SnapshotListComponent,
+    EchartsPieComponent,
+    EchartsLineComponent,
   ],
   imports: [
+    NgxEchartsModule.forRoot({
+      echarts: () => import('echarts')}),
     NbDatepickerModule.forRoot(),
     NbTabsetModule,
     FontAwesomeModule,
@@ -78,7 +88,12 @@ import { SnapshotListComponent } from './pages/snapshots/snapshot-list/snapshot-
     HttpClientModule,
     BrowserAnimationsModule,
     FormsModule, 
-    NbThemeModule.forRoot({ name: 'dark' }),
+    NbThemeModule.forRoot(
+      {
+        name: 'dark',
+      },
+      [ DARK_THEME ],
+    ),
     NbLayoutModule,
     NbEvaIconsModule,
     NbUserModule,

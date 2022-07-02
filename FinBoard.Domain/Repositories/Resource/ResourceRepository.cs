@@ -1,6 +1,7 @@
 ﻿using FinBoard.Domain.Context;
 using FinBoard.Domain.Repositories.Repository;
 using FinBoard.Utils.PersistenceService;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,6 +18,16 @@ namespace FinBoard.Domain.Repositories.Resource
         {
             _db = db;
         }
+
+        public async Task<IEnumerable<Entities.Resource>> GetAllWithSnapshotAsync(Guid accountId)
+        {
+            var result = await _db.Resources
+                .Where(a => a.AccountId == accountId)
+                .Include(a => a.Snapshots)
+                .ToListAsync();
+            return result;
+        }
+
         public void SaveChanges()
         {
             _db.SaveChanges();

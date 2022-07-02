@@ -15,7 +15,11 @@ namespace FinBoard.Domain.Repositories.Repository
         Task AddRangeAsync(IEnumerable<T> entities);
         void RemoveRange(IEnumerable<T> entities);
         Task<IEnumerable<T>> GetAllAsync();
-        Task<IEnumerable<T>> GetAllAsync(Expression<Func<T, bool>>? filter = null);
+        Task<IEnumerable<T>> GetAllAsync(
+            Expression<Func<T, bool>> filter = null,
+            Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null,
+            string includeProperties = null
+        );
         Task<T> GetFirstOrDefaultAsync(Expression<Func<T, bool>>? filter = null);
     }
 }

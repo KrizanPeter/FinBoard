@@ -83,7 +83,7 @@ namespace FinBoard.Services.Services.Move
 
         public async Task<Result<IEnumerable<SnapshotDto>>> GetAllMovesOfResourceAsync(Guid resourceId)
         {
-            var result = await _moveRepository.GetAllAsync(a => a.ResourceId == resourceId);
+            var result = await _moveRepository.GetAllAsync(a => a.ResourceId == resourceId, a => a.OrderByDescending(a => a.DateOfChange));
             var movesDtoList = _mapper.Map<IEnumerable<SnapshotDto>>(result);
             return Result.Ok(movesDtoList);
         }

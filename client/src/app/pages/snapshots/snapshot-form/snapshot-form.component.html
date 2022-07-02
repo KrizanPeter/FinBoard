@@ -1,7 +1,10 @@
 <nb-card>
     <nb-card-header>Create snapshot</nb-card-header>
     <nb-card-body>
-        <form class="auth-form" #createSnapshotForm="ngForm" (ngSubmit)="onSubmit(createSnapshotForm)">
+        <div style="text-align: center; margin-top:40px;" *ngIf="isLoading">
+            <app-loading-spinner></app-loading-spinner>
+        </div>
+        <form class="auth-form" #createSnapshotForm="ngForm" (ngSubmit)="onSubmit(createSnapshotForm)" *ngIf="!isLoading">
             <div class="form-group">
                 <label for="resourceOptionInput" class="label">Resource</label>
                 <nb-select name="inputResourceId" selected={{selectedOption}} id="resourceOptionInput" fullWidth ngModel required (ngModelChange)="onSelectChange(createSnapshotForm)">

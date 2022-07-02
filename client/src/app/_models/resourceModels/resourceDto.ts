@@ -3,4 +3,5 @@ export interface ResourceDto{
     currency: number;
     resourceId: string;
     accountId: string;
+    amount: number;
 }

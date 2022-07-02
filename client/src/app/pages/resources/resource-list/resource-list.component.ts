@@ -4,6 +4,7 @@ import { Subscription } from 'rxjs/internal/Subscription';
 import { ResourceService } from 'src/app/services/resource/resource.service';
 import { ResourceDto } from 'src/app/_models/resourceModels/resourceDto';
 import { faPencil, faTrashCan } from '@fortawesome/free-solid-svg-icons';
+import { PieChartData, PieRawData } from 'src/app/_models/chartData/pieChartData';
 
 @Component({
   selector: 'app-resource-list',
@@ -16,6 +17,7 @@ export class ResourceListComponent implements OnInit, OnDestroy {
   private resourceListSub : Subscription;
   resoucesList: ResourceDto[];
   isLoading = false;
+  pieChartData: PieChartData;
   constructor(private resourceService: ResourceService, private router: Router) { }
 
   ngOnInit(): void {
@@ -35,6 +37,7 @@ export class ResourceListComponent implements OnInit, OnDestroy {
         this.isLoading = false;
         console.log(resData);
         this.resoucesList = resData;
+        this.pieChartData = this.constructChartData(resData);
       }, 
       error => {
         this.isLoading = false;
@@ -42,6 +45,16 @@ export class ResourceListComponent implements OnInit, OnDestroy {
       }
     );
   }
+  
+
+  constructChartData(data : ResourceDto[]){
+    let chartData = new PieChartData();
+    chartData.legend = data.map(a=>a.name);
+    data.forEach(element => {
+      chartData.data.push(new PieRawData(element.name, element.amount))
+    });
+    return chartData;
+  } 
 
   ngOnDestroy(): void {
     this.resourceListSub.unsubscribe();

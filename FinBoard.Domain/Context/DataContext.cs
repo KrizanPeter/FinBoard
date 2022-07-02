@@ -45,10 +45,10 @@ namespace FinBoard.Domain.Context
             .HasForeignKey<AppUser>(c => c.AccountId);
         }
 
-        DbSet<Account> Accounts { get; set; }
-        DbSet<Resource> Resources { get; set; }
-        DbSet<ResourceGroup> ResourceGroups { get; set; }
-        DbSet<Snapshot> Snapshots { get; set; }
+        public DbSet<Account> Accounts { get; set; }
+        public DbSet<Resource> Resources { get; set; }
+        public DbSet<ResourceGroup> ResourceGroups { get; set; }
+        public DbSet<Snapshot> Snapshots { get; set; }
 
 
     }

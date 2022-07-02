@@ -11,5 +11,6 @@ namespace FinBoard.Domain.Repositories.Resource
     {
         void Update(Entities.Resource user);
         void SaveChanges();
+        Task<IEnumerable<Entities.Resource>> GetAllWithSnapshotAsync(Guid accountId);
     }
 }

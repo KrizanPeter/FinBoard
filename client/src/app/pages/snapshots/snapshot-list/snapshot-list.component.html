@@ -31,7 +31,9 @@
                 </table>
             </nb-tab>
             <nb-tab tabTitle="Investicne sporenie movement">
-                <span>GRAPHEN</span>
+                <nb-card-body>
+                    <ngx-echarts-line [chartData]="lineChartData"></ngx-echarts-line>
+          </nb-card-body>
             </nb-tab>
         </nb-tabset>
     </nb-card>
