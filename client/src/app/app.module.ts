@@ -54,6 +54,7 @@ import { SnapshotListComponent } from './pages/snapshots/snapshot-list/snapshot-
 import { NgxEchartsModule } from 'ngx-echarts';
 import { EchartsPieComponent } from './components/charts/pie-chart/echarts-pie.component';
 import { EchartsLineComponent } from './components/charts/line-chart/echarts-line.component';
+import { DashboardTemplateComponent } from './pages/_dashboard/dashboard-template/dashboard-template.component';
 
 
 @NgModule({
@@ -76,6 +77,7 @@ import { EchartsLineComponent } from './components/charts/line-chart/echarts-lin
     SnapshotListComponent,
     EchartsPieComponent,
     EchartsLineComponent,
+    DashboardTemplateComponent,
   ],
   imports: [
     NgxEchartsModule.forRoot({

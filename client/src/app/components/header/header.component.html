@@ -20,7 +20,7 @@
   </nb-actions>
   <div class="row auth-actions">
     <p class="col-6 user-name">Hi {{userName}}! </p>
-    <button *ngIf="isAuthenticated" class="col-6 login-logout-btn" (click)="logout()" nbButton status="info" >Logout</button>
-    <button *ngIf="!isAuthenticated"class="col-6 login-logout-btn" (click)="login()" nbButton status="info" >Login</button>
+    <button *ngIf="isAuthenticated" class="col-6 login-logout-btn" (click)="logout()" nbButton status="danger" >Logout</button>
+    <button *ngIf="!isAuthenticated"class="col-6 login-logout-btn" (click)="login()" nbButton status="danger" >Login</button>
   </div>
 </div>

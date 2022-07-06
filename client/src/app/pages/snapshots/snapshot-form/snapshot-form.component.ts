@@ -20,6 +20,7 @@ export class SnapshotFormComponent implements OnInit {
   }
 
   onSubmit(form: NgForm) {
+    console.log(form.value.inputResourceId);
     this.isLoading = true;
     this.selectedOption = form.value.inputResourceId;
     this.snapshotService.createSnapsthot(form.value.inputResourceId, form.value.inputDateOfSnapshot, form.value.inputAmount).subscribe(
@@ -32,7 +33,7 @@ export class SnapshotFormComponent implements OnInit {
         console.log(error);
       }
     );
-    form.reset();
+    //form.reset();
   }
 
   loadResources() {

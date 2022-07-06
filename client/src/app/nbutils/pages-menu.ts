@@ -4,7 +4,7 @@ export const USER_MENU_ITEMS: NbMenuItem[] = [
   {
     title: 'Dashboard',
     icon: 'browser-outline',
-    link: '/pages/_dashboard',
+    link: 'dashboard',
   },
   {
     title: 'Management',
