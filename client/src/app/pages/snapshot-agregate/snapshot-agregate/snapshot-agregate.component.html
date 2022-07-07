@@ -1,0 +1,38 @@
+<nb-card class="card-padding col offset-1 col-10">
+    <nb-card-header>Create aggregated snapshot</nb-card-header>
+    <nb-card-body >
+        <!-- <div style="text-align: center; margin-top:40px;" *ngIf="isLoading">
+            <app-loading-spinner></app-loading-spinner>
+        </div> -->
+        <form  class="auth-form" #createAggregatedSnapshotForm="ngForm" (ngSubmit)="onSubmit(createAggregatedSnapshotForm)">
+            <div class="row form-group">
+                <div class="col col-12">
+                    <label for="datepickerInput" class="label">Date of snapshot</label>
+                    <div id="datepickerInput">
+                        <input name="inputDateOfSnapshot" fullWidth required ngModel nbInput placeholder="Form Picker" [nbDatepicker]="formpicker" autocomplete="off">
+                        <nb-datepicker  #formpicker></nb-datepicker>
+                    </div>
+                </div>
+            </div>
+            <div class="row form-group" *ngFor="let resource of resoucesList; let i = index">
+                <div class="col col-6">
+                    <label for="" class="label">Resource Name</label>
+                    <input name="{{'name-'+resource.resourceId}}" type="text" ngModel  nbInput
+                        fullWidth autocomplete="off" [(ngModel)]="resource.name" disabled>
+
+                </div>
+                <div class="col offset-1 col-5">
+                    <label for="" class="label">Amount</label>
+                    <input name="{{'amount-'+resource.resourceId}}" type="text" ngModel nbInput required
+                        fullWidth placeholder="0" autocomplete="off" [(ngModel)]="inputAgregateSnapshot[i].amount">
+                </div>
+            </div>
+
+
+            <div class="btn-container">
+                <button type="submit" nbButton status="info" class="auth-button"
+                  >Add aggregated Snapshot</button>
+            </div>
+        </form>
+    </nb-card-body>
+</nb-card>

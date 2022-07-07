@@ -87,6 +87,35 @@ namespace API.Controllers
             return BadRequest(result.Error);
         }
 
+        [HttpPost("createAggregate")]
+        [Authorize]
+        public async Task<IActionResult> CreateAggregate(CreateSnapshotDto[] movesDto)
+        {
+            var requestId = this.GetRequestId();
+            var accountId = GetCurrentUserAccountId();
+            _logger.LogInformation(this.LogApiAccess(requestId, MethodBase.GetCurrentMethod()));
+            _persistentService.SetupRequestProperties(GetCurrentUserId().Value, GetCurrentUserAccountId().Value);
+
+            if (accountId.IsFailure) { return BadRequest(accountId.Error); }
+
+            foreach (var item in movesDto)
+            {
+                var validity = await _resourceService.CheckValidityAsync(item.ResourceId, accountId.Value);
+                if (validity.IsFailure)
+                {
+                    return BadRequest(validity.Error);
+                }
+            }
+
+            foreach (var item in movesDto)
+            {
+                var result = await _moveService.CreateMoveForResourceAsync(item);
+                if (result.IsFailure) return BadRequest(result.Error);
+            }
+            return Ok();
+        }
+
+
         [Authorize]
         [HttpDelete("delete")]
         public async Task<IActionResult> Delete(Guid snapshotId)

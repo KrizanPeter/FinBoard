@@ -12,77 +12,23 @@ export const USER_MENU_ITEMS: NbMenuItem[] = [
   },
   {
     title: 'Resources',
-    icon: 'layers-outline',
+    icon: 'keypad-outline',
     link: 'resource',
   },
   {
-    title: 'Snapshots',
-    icon: 'done-all-outline',
+    title: 'Resource groups',
+    icon: 'grid-outline',
     link: 'snapshot',
   },
   {
-    title: 'My resources',
-    group: true,
+    title: 'Snapshots',
+    icon: 'checkmark-outline',
+    link: 'snapshot',
   },
   {
-    title: 'Resources',
-    icon: 'book-outline',
-    children: [
-      {
-        title: ' Example1',
-        link: '/account',
-      },
-      {
-        title: ' Example1',
-        link: '/account',
-      },
-      {
-        title: ' Example1',
-        link: '/account',
-      },
-      {
-        title: ' Example1',
-        link: '/account',
-      },
-      {
-        title: ' Example1',
-        link: '/account',
-      },
-      {
-        title: ' Example1',
-        link: '/account',
-      },
-    ],
-  },
-  {
-    title: 'Groups',
-    icon: 'trending-up-outline',
-    children: [
-      {
-        title: ' Example1',
-        link: '/account',
-      },
-      {
-        title: ' Example1',
-        link: '/account',
-      },
-      {
-        title: ' Example1',
-        link: '/account',
-      },
-      {
-        title: ' Example1',
-        link: '/account',
-      },
-      {
-        title: ' Example1',
-        link: '/account',
-      },
-      {
-        title: ' Example1',
-        link: '/account',
-      },
-    ],
+    title: 'Agregate snapshot',
+    icon: 'done-all-outline',
+    link: 'agregate-snapshot',
   },
   {
     title: 'PROFILE',

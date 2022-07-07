@@ -29,4 +29,11 @@ export class SnapshotService{
             amount: amount
         });
     }
+
+    createAggregateSnapsthot(data: SnapshotDto[]){
+        data.forEach(element => {
+            element.dateOfChange.setHours( element.dateOfChange.getHours() + 2 );
+        }); 
+        return this.http.post(this.baseUrl+'Snapshot/createAggregate', data);
+    }
 }
