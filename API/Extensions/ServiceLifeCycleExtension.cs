@@ -9,6 +9,8 @@ using FinBoard.Services.Services.UserService;
 using FinBoard.Services.Services.Move;
 using FinBoard.Domain.Repositories.Move;
 using FinBoard.Domain.Repositories.User;
+using FinBoard.Domain.Repositories.ResourceGroup;
+using FinBoard.Services.Services.ResourceGroupService;
 
 namespace API.Extensions
 {
@@ -20,6 +22,7 @@ namespace API.Extensions
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<ITokenService, TokenService>();
             services.AddScoped<IResourceService, ResourceService>();
+            services.AddScoped<IResourceGroupService, ResourceGroupService>();
             services.AddScoped<IAccountService, AccountService>();
             services.AddScoped<IPersistentService, PersistentService>();
             services.AddScoped<ISnapshotService, SnapshotService>();
@@ -27,6 +30,8 @@ namespace API.Extensions
             services.AddScoped<ISnapshotRepository, SnapshotRepository>();
             services.AddScoped<IAccountRepository, AccountRepository>();
             services.AddScoped<IResourceRepository, ResourceRepository>();
+            services.AddScoped<IResourceGroupRepository, ResourceGroupRepository>();
+
             services.AddScoped<IUserRepository, UserRepository>();
             return services;
         }

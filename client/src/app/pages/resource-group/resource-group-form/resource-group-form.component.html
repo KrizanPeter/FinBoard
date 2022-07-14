@@ -1,0 +1,15 @@
+<nb-card>
+    <nb-card-header>Create resource group</nb-card-header>
+    <nb-card-body>
+      <form class="auth-form" #createResourceForm="ngForm" (ngSubmit)="onSubmit(createResourceForm)">
+        <div class="form-group">
+          <label for="userNameId" class="label">Name of resource group</label>
+          <input type="text" ngModel id="userNameId" name="inputResourceGroupName" nbInput required minlength="3" fullWidth placeholder="Personal investment" >
+        </div>
+        <div class="btn-container">
+          <button type="submit" nbButton status="danger" class="auth-button"
+            [disabled]="!createResourceForm.valid">Add resource group</button>
+        </div>
+      </form>
+    </nb-card-body>
+  </nb-card>

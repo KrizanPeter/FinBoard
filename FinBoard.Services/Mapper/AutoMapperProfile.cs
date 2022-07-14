@@ -2,6 +2,7 @@
 using FinBoard.Domain.Entities;
 using FinBoard.Services.DTOs.Move;
 using FinBoard.Services.DTOs.Resource;
+using FinBoard.Services.DTOs.ResourceGroup;
 using FinBoard.Services.DTOs.User;
 using System;
 using System.Collections.Generic;
@@ -24,6 +25,9 @@ namespace FinBoard.Services.Mapper
 
             CreateMap<Snapshot, SnapshotDto>().ReverseMap();
             CreateMap<Snapshot, CreateSnapshotDto>().ReverseMap();
+
+            CreateMap<ResourceGroup, CreateResourceGroupDto>().ReverseMap();
+            CreateMap<ResourceGroup, ResourceGroupDto>().ReverseMap();
         }
     }
 }

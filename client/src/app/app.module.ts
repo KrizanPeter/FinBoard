@@ -56,6 +56,10 @@ import { EchartsPieComponent } from './components/charts/pie-chart/echarts-pie.c
 import { EchartsLineComponent } from './components/charts/line-chart/echarts-line.component';
 import { DashboardTemplateComponent } from './pages/_dashboard/dashboard-template/dashboard-template.component';
 import { SnapshotAgregateComponent } from './pages/snapshot-agregate/snapshot-agregate/snapshot-agregate.component';
+import { ResourceGroupTemplateComponent } from './pages/resource-group/resource-group-template/resource-group-template.component';
+import { ResourceGroupListComponent } from './pages/resource-group/resource-group-list/resource-group-list.component';
+import { ResourceGroupFormComponent } from './pages/resource-group/resource-group-form/resource-group-form.component';
+import { ResourceGroupMapComponent } from './pages/resource-group/resource-group-map/resource-group-map.component';
 
 
 @NgModule({
@@ -80,6 +84,10 @@ import { SnapshotAgregateComponent } from './pages/snapshot-agregate/snapshot-ag
     EchartsLineComponent,
     DashboardTemplateComponent,
     SnapshotAgregateComponent,
+    ResourceGroupTemplateComponent,
+    ResourceGroupListComponent,
+    ResourceGroupFormComponent,
+    ResourceGroupMapComponent,
   ],
   imports: [
     NgxEchartsModule.forRoot({

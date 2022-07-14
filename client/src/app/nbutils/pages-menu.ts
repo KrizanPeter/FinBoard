@@ -18,7 +18,7 @@ export const USER_MENU_ITEMS: NbMenuItem[] = [
   {
     title: 'Resource groups',
     icon: 'grid-outline',
-    link: 'snapshot',
+    link: 'resource-group',
   },
   {
     title: 'Snapshots',
