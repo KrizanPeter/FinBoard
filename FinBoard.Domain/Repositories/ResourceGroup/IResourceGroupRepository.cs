@@ -9,6 +9,7 @@ namespace FinBoard.Domain.Repositories.ResourceGroup
 {
     public interface IResourceGroupRepository : IRepository<Entities.ResourceGroup>
     {
+        Task<IEnumerable<Entities.ResourceGroup>> GetAllWithResourceAsync(Guid accountId);
         void Update(Entities.ResourceGroup user);
         void SaveChanges();
     }

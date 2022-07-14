@@ -2,6 +2,7 @@
 using FinBoard.Domain.Repositories.Repository;
 using FinBoard.Domain.Repositories.Resource;
 using FinBoard.Utils.PersistenceService;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,9 +20,18 @@ namespace FinBoard.Domain.Repositories.ResourceGroup
             _db = db;
         }
 
+        public async Task<IEnumerable<Entities.ResourceGroup>> GetAllWithResourceAsync(Guid accountId)
+        {
+            var result = await _db.ResourceGroups
+                .Where(r => r.AccountId == accountId)
+                .Include(a => a.Resources)
+                .ToListAsync();
+            return result;
+        }
+
         public void SaveChanges()
         {
-            throw new NotImplementedException();
+            _db.SaveChanges();
         }
 
         public void Update(Entities.ResourceGroup user)

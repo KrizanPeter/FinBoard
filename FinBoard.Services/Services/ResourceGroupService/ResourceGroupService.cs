@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using FinBoard.Domain.Entities;
 using FinBoard.Domain.Repositories.ResourceGroup;
 using FinBoard.Services.DTOs.ResourceGroup;
 using FinBoard.Utils.Result;
@@ -24,14 +25,38 @@ namespace FinBoard.Services.Services.ResourceGroupService
             _mapper = mapper;
         }
 
-        public Task<Result> CreateResourceGroupAsync(CreateResourceGroupDto resourceDto, Guid accountId)
+        public async Task<Result> CreateResourceGroupAsync(CreateResourceGroupDto resourceGroupDto, Guid accountId)
         {
-            throw new NotImplementedException();
+            if (resourceGroupDto == null)
+            {
+                return Result.Fail("ResourceGroup Dto cannot be null.");
+            }
+            var resourceEntity = _mapper.Map<ResourceGroup>(resourceGroupDto);
+            resourceEntity.AccountId = accountId;
+
+            try
+            {
+                await _resourceGroupRepository.AddAsync(resourceEntity);
+                _resourceGroupRepository.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                return Result.Fail(ex.Message);
+            }
+
+            return Result.Ok();
         }
 
-        public Task<Result<IEnumerable<ResourceGroupDto>>> GetAllReourceGroupsOfAccountAsync(Guid accountId)
+        public async Task<Result<IEnumerable<ResourceGroupDto>>> GetAllReourceGroupsOfAccountAsync(Guid accountId)
         {
-            throw new NotImplementedException();
+            var result = await _resourceGroupRepository.GetAllWithResourceAsync(accountId);
+            var resultDto = _mapper.Map<IEnumerable<ResourceGroupDto>>(result);
+
+            if (result != null)
+            {
+                return Result.Ok(resultDto);
+            }
+            return Result.Fail<IEnumerable<ResourceGroupDto>>("Any Data for specific account.");
         }
     }
 }
