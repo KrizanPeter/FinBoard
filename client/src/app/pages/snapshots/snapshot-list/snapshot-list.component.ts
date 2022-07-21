@@ -25,7 +25,9 @@ export class SnapshotListComponent implements OnInit {
   }
 
   ngOnDestroy(): void {
+    if(this.snapshotListSub){
     this.snapshotListSub.unsubscribe();
+    }
   }
 
   subscribeTableData(){

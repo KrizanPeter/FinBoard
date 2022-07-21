@@ -67,6 +67,23 @@ namespace FinBoard.Domain.Repositories.Repository
             return await query.ToListAsync();
         }
 
+        public async Task<T> GetFirstOrDefaultAsync(Expression<Func<T, bool>>? filter = null, string includeProperties = null)
+        {
+            IQueryable<T> querry = dbSet;
+            if (filter != null)
+            {
+                querry = querry.Where(filter);
+            }
+            if (includeProperties != null)
+            {
+                foreach (var prop in includeProperties.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
+                {
+                    querry = querry.Include(prop);
+                }
+            }
+            return await querry.FirstOrDefaultAsync();
+        }
+
         public async Task<T> GetFirstOrDefaultAsync(Expression<Func<T, bool>>? filter = null)
         {
             IQueryable<T> querry = dbSet;

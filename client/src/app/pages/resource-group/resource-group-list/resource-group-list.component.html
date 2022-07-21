@@ -20,21 +20,17 @@
                             <td>{{0}}</td>
                             <td>
                                 <a class="options-icon" href="">
-                                    <fa-icon [icon]="faPencil" (click)="editClick(resource.resourceId)"></fa-icon>
+                                    <fa-icon [icon]="faPencil" (click)="editClick(resource.resourceGroupId)"></fa-icon>
                                 </a>
                                 <a class="options-icon">
-                                    <fa-icon [icon]="faTrashCan" (click)="deleteClick(resource.resourceId)"></fa-icon>
+                                    <fa-icon [icon]="faTrashCan" (click)="deleteClick(resource.resourceGroupId)"></fa-icon>
                                 </a>
                             </td>
                         </tr>
                     </tbody>
                 </table>
             </nb-tab>
-            <nb-tab tabTitle="Resources distribution">
-                <nb-card-body>
-                    <ngx-echarts-pie [chartData]="pieChartData"></ngx-echarts-pie>
-                </nb-card-body>
-            </nb-tab>
+      
         </nb-tabset>
     </nb-card>
 </div>

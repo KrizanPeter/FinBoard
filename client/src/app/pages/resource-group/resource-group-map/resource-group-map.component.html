@@ -1,15 +1,25 @@
 <nb-card>
-    <nb-card-header>Add resource to group</nb-card-header>
-    <nb-card-body>
-      <form class="auth-form" #createResourceForm="ngForm" (ngSubmit)="onSubmit(createResourceForm)">
-        <div class="form-group">
-          <label for="userNameId" class="label">Name of resource group</label>
-          <input type="text" ngModel id="userNameId" name="inputResourceGroupName" nbInput required minlength="3" fullWidth placeholder="Personal investment" >
+  <nb-card-header>Add resource to group</nb-card-header>
+  <nb-card-body>
+    <form class="auth-form" #mapResourceToGroupForm="ngForm" (ngSubmit)="onSubmit(mapResourceToGroupForm)">
+      <div class="form-group">
+        <label for="resourceOptionInput" class="label">Resourc groups</label>
+        <nb-select name="inputResourceId" [(selected)]="preselectOption" [(ngModel)]="selectedOption"  id="resourceOptionInput" fullWidth ngModel
+          required (ngModelChange)="onSelectChange(mapResourceToGroupForm)">
+          <nb-option *ngFor="let resourceGroup of resouceGroupsList" value={{resourceGroup.resourceGroupId}}> {{
+            resourceGroup.resourceGroupName }}</nb-option>
+        </nb-select>
+      </div>
+      <div class="row col col-12 mt-5">
+
+        <div class="form-group col col-6" *ngFor="let resource of (resourceGroupMapList.resources || [] )">
+          <nb-checkbox [(checked)]="resource.isInGroup">{{resource.name}}</nb-checkbox>
         </div>
-        <div class="btn-container">
-          <button type="submit" nbButton status="danger" class="auth-button"
-            [disabled]="!createResourceForm.valid">Add resource group</button>
-        </div>
-      </form>
-    </nb-card-body>
-  </nb-card>
+      </div>
+      <div class="btn-container">
+        <button type="submit" nbButton status="danger" class="auth-button" [disabled]="!mapResourceToGroupForm.valid">Add
+          resource group</button>
+      </div>
+    </form>
+  </nb-card-body>
+</nb-card>

@@ -44,9 +44,22 @@ export class ResourceGroupListComponent implements OnInit {
       }
     );
   }
+
+  deleteClick(resourceGroupId: string){
+    this.resourceGroupService.deleteResourceGroup(resourceGroupId).subscribe(
+      resData => {
+        this.loadResources();
+      }, 
+      error => {
+        console.log(error);
+      }
+    )
+  }
   
   ngOnDestroy(): void {
+    if (this.resourceListSub){
     this.resourceListSub.unsubscribe();
+    }
   }
 
 }

@@ -21,5 +21,6 @@ namespace FinBoard.Domain.Repositories.Repository
             string includeProperties = null
         );
         Task<T> GetFirstOrDefaultAsync(Expression<Func<T, bool>>? filter = null);
+        Task<T> GetFirstOrDefaultAsync(Expression<Func<T, bool>>? filter = null, string includeProperties = null);
     }
 }

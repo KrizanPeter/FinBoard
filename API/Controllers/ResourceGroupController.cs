@@ -70,5 +70,85 @@ namespace API.Controllers
 
             return BadRequest(result.Error);
         }
+
+
+        [Authorize]
+        [HttpDelete("delete")]
+        public async Task<IActionResult> Delete(Guid resourceGroupId)
+        {
+            var requestId = this.GetRequestId();
+            var accountId = GetCurrentUserAccountId();
+            _logger.LogInformation(this.LogApiAccess(requestId, MethodBase.GetCurrentMethod()));
+            _persistentService.SetupRequestProperties(GetCurrentUserId().Value, GetCurrentUserAccountId().Value);
+
+            if (accountId.IsFailure) { return BadRequest(accountId.Error); }
+
+            var validity = await _resourceGroupService.CheckValidityAsync(resourceGroupId, accountId.Value);
+
+            if (validity.IsFailure)
+            {
+                return BadRequest(validity.Error);
+            }
+
+            var result = await _resourceGroupService.DeleteResourceGroupAsync(resourceGroupId);
+
+            if (result.IsSuccess)
+            {
+                return Ok();
+            }
+
+            return BadRequest(result.Error);
+        }
+
+        [Authorize]
+        [HttpPut("addResource")]
+        public async Task<IActionResult> AddResourceToGroupAsync(GroupResourcesDto addResourceToGroupDto)
+        {
+            var requestId = this.GetRequestId();
+            var accountId = GetCurrentUserAccountId();
+            _logger.LogInformation(this.LogApiAccess(requestId, MethodBase.GetCurrentMethod()));
+            _persistentService.SetupRequestProperties(GetCurrentUserId().Value, GetCurrentUserAccountId().Value);
+
+            if (accountId.IsFailure) { return BadRequest(accountId.Error); }
+
+            var validity = await _resourceGroupService.CheckValidityAsync(addResourceToGroupDto.ResourceGroupId, accountId.Value);
+
+            if (validity.IsFailure)
+            {
+                return BadRequest(validity.Error);
+            }
+
+            var result = await _resourceGroupService.AddResourcesToGroup(addResourceToGroupDto);
+
+            if (result.IsSuccess)
+            {
+                return Ok();
+            }
+
+            return BadRequest(result.Error);
+        }
+
+        [Authorize]
+        [HttpGet("getGroupsResources")]
+        public async Task<IActionResult> GetGroupsResources(Guid resourceGroupId)
+        {
+            var requestId = this.GetRequestId();
+            var accountId = GetCurrentUserAccountId();
+            _logger.LogInformation(this.LogApiAccess(requestId, MethodBase.GetCurrentMethod()));
+            _persistentService.SetupRequestProperties(GetCurrentUserId().Value, GetCurrentUserAccountId().Value);
+
+            if (accountId.IsFailure) { return BadRequest(accountId.Error); }
+
+            var result = await _resourceGroupService.GetGroupsResourcesAsync(resourceGroupId, accountId.Value);
+
+            if (result.IsSuccess)
+            {
+                return Ok(result.Value);
+            }
+
+            return BadRequest(result.Error);
+        }
+
+
     }
 }

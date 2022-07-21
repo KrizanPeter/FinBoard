@@ -42,6 +42,7 @@ import {
   NbTabsetModule,
   NbDatepicker,
   NbDatepickerModule,
+  NbCheckboxModule,
 } from '@nebular/theme';
 import { HeaderInterceptor } from './Interceptors/header.interceptor';
 import { FormsModule } from '@angular/forms';
@@ -115,6 +116,7 @@ import { ResourceGroupMapComponent } from './pages/resource-group/resource-group
     NbContextMenuModule,
     NbButtonModule,
     NbSelectModule,
+    NbCheckboxModule,
     NbIconModule,
     NbInputModule,
     NbTreeGridModule,

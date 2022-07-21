@@ -57,7 +57,9 @@ export class ResourceListComponent implements OnInit, OnDestroy {
   } 
 
   ngOnDestroy(): void {
+    if(this.resourceListSub){
     this.resourceListSub.unsubscribe();
+    }
   }
 
   deleteClick(resourceId: string){

@@ -12,7 +12,9 @@ namespace FinBoard.Services.Services.ResourceGroupService
     {
         Task<Result<IEnumerable<ResourceGroupDto>>> GetAllReourceGroupsOfAccountAsync(Guid accountId);
         Task<Result> CreateResourceGroupAsync(CreateResourceGroupDto resourceDto, Guid accountId);
-
-
+        Task<Result> CheckValidityAsync(Guid resourceGroupId, Guid value);
+        Task<Result> DeleteResourceGroupAsync(Guid resourceGroupId);
+        Task<Result> AddResourcesToGroup(GroupResourcesDto addResourceToGroupDto);
+        Task<Result<GroupResourcesDto>> GetGroupsResourcesAsync(Guid resourceGroupId, Guid accountId);
     }
 }

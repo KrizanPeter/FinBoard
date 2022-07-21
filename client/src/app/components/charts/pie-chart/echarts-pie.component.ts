@@ -11,7 +11,7 @@ import { PieChartData } from 'src/app/_models/chartData/pieChartData';
 
 })
 export class EchartsPieComponent implements AfterViewInit, OnDestroy {
-  @Input() chartData : PieChartData;
+  @Input() chartData: PieChartData;
   options: any = {};
   themeSubscription: any;
 
@@ -80,6 +80,8 @@ export class EchartsPieComponent implements AfterViewInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.themeSubscription.unsubscribe();
+    if (this.themeSubscription) {
+      this.themeSubscription.unsubscribe();
+    }
   }
 }
