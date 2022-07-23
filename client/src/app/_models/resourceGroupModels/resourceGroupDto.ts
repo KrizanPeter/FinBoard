@@ -1,5 +1,8 @@
+import { ResourceDto } from "../resourceModels/resourceDto";
+
 export interface ResourceGroupDto{
     resourceGroupId: string;
     accountId: string;
-    ResourceGroupName: string;
+    resourceGroupName: string;
+    resources: ResourceDto[];
 }

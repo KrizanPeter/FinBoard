@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FinBoard.Services.DTOs.Resource;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,6 +12,6 @@ namespace FinBoard.Services.DTOs.ResourceGroup
         public Guid ResourceGroupId { get; set; }
         public Guid AccountId { get; set; }
         public string ResourceGroupName { get; set; }
-        //public virtual ICollection<Resource> Resources { get; set; }
+        public virtual List<ResourceDto> Resources { get; set; }
     }
 }

@@ -4,7 +4,7 @@
     <form class="auth-form" #mapResourceToGroupForm="ngForm" (ngSubmit)="onSubmit(mapResourceToGroupForm)">
       <div class="form-group">
         <label for="resourceOptionInput" class="label">Resourc groups</label>
-        <nb-select name="inputResourceId" [(selected)]="preselectOption" [(ngModel)]="selectedOption"  id="resourceOptionInput" fullWidth ngModel
+        <nb-select name="inputResourceId" [(selected)]="preselectOption" [(ngModel)]="selectedOption" [selected]="preselectOption"  id="resourceOptionInput" fullWidth ngModel
           required (ngModelChange)="onSelectChange(mapResourceToGroupForm)">
           <nb-option *ngFor="let resourceGroup of resouceGroupsList" value={{resourceGroup.resourceGroupId}}> {{
             resourceGroup.resourceGroupName }}</nb-option>

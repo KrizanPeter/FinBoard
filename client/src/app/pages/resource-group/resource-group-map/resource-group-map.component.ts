@@ -12,7 +12,7 @@ import { ResourceDto } from 'src/app/_models/resourceModels/resourceDto';
   templateUrl: './resource-group-map.component.html',
   styleUrls: ['./resource-group-map.component.scss']
 })
-export class ResourceGroupMapComponent implements OnInit, AfterViewInit {
+export class ResourceGroupMapComponent implements OnInit {
   isLoading = false;
   resouceGroupsList: ResourceGroupDto[];
   resouceList: ResourceDto[];
@@ -24,12 +24,15 @@ export class ResourceGroupMapComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     this.loadResourceGroups();
+    this.resourcesForGroupSub = this.resourceGroupService.reloadTrigger.subscribe(
+      trigger=>{
+        if(trigger === true){
+          console.log("Trigger reload resourcelist.")
+          this.loadResourceGroups();
+        }
+      }
+    )
   }
-
-  ngAfterViewInit():void{
-    //this.subscribeTableData();    
-  }
-
 
   onSubmit(form : NgForm){
     console.log("form");
@@ -38,6 +41,7 @@ export class ResourceGroupMapComponent implements OnInit, AfterViewInit {
       resData => {
         this.isLoading = false;
         this.resourceGroupService.reloadForResourceGroupMapperTrigger.next(true);
+        this.resourceGroupService.reloadTrigger.next(true);
       }, 
       error => {
         this.isLoading = false;
@@ -50,14 +54,6 @@ export class ResourceGroupMapComponent implements OnInit, AfterViewInit {
     if(this.resourcesForGroupSub){
     this.resourcesForGroupSub.unsubscribe();
     }
-  }
-
-  subscribeTableData(){
-    this.resourcesForGroupSub = this.resourceGroupService.reloadForResourceGroupMapperTrigger.subscribe(
-      resourceId=>{
-        //this.loadResources();
-      }
-    )
   }
 
   loadResourceGroups(){

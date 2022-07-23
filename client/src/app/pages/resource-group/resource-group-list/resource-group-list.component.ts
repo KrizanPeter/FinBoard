@@ -15,7 +15,7 @@ export class ResourceGroupListComponent implements OnInit {
   faPencil = faPencil;
   faTrashCan = faTrashCan;
   private resourceListSub : Subscription;
-  resoucesList: ResourceGroupDto[];
+  resouceGroupsList: ResourceGroupDto[];
   isLoading = false;
 
   constructor(private resourceGroupService: ResourceGroupService, private router: Router) { }
@@ -36,7 +36,7 @@ export class ResourceGroupListComponent implements OnInit {
       resData => {
         this.isLoading = false;
         console.log(resData);
-        this.resoucesList = resData;
+        this.resouceGroupsList = resData;
       }, 
       error => {
         this.isLoading = false;
@@ -61,5 +61,4 @@ export class ResourceGroupListComponent implements OnInit {
     this.resourceListSub.unsubscribe();
     }
   }
-
 }
