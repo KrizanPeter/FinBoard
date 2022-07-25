@@ -1,0 +1,22 @@
+.dashboard-window{
+    min-height: 23rem;
+    padding: 20px;
+
+}
+
+.dashboard-window:hover{
+    cursor: pointer;
+    padding: 25px;
+
+}
+
+.dashboard-body{
+    p{
+        font-size: 2rem;
+        font-weight: 600;
+    }
+    text-align: center;
+    padding-top: 8rem;
+    border: gray dashed 1px;
+    border-radius: 5px;
+}

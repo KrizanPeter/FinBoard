@@ -1,0 +1,45 @@
+<nb-card class="dashboard-dialog">
+    <nb-card-header>Add new dashboard view</nb-card-header>
+    <nb-card-body class="">
+        <div class="form-group mt-4">
+
+            <label for="resourceTypeOption" class="label">Source Type</label>
+            <nb-radio-group name="resourceType" [(ngModel)]="radioGroupValue" id="resourceTypeOption" >
+                <nb-radio  [value]="'Resource'" (valueChange)="sourceTypeReloadResources('Resource')">
+                    Resource
+                </nb-radio>
+                <nb-radio [value]="'ResourceGroup'" (valueChange)="sourceTypeReloadGroups('ResourceGroup')">
+                    Resource group
+                </nb-radio>
+            </nb-radio-group>
+        </div>
+
+        <div class="form-group mt-4">
+            <label for="resourceOptionInput" class="label">Source</label>
+            <nb-select  name="inputResourceId" id="resourceOptionInput"  [(ngModel)]="selectedOption" fullWidth ngModel required>
+                <nb-option *ngFor="let resource of finalOptions ; let i = index" [selected]="i == 0" value={{resource.id}}> {{ resource.name }}</nb-option>
+            </nb-select>
+        </div>
+
+        <div class="form-group mt-4">
+            <label for="chartTypeOption" class="label">Source Type</label>
+
+            <nb-radio-group name="chartType" [(value)]="radioGroupChartType" id="chartTypeOption">
+                <nb-radio  [value]="'Bar'" (valueChange)="chartTypeRadioValue('Bar')">
+                    Bar chart
+                </nb-radio>
+                <nb-radio [value]="'Line'" (valueChange)="chartTypeRadioValue('Line')">
+                    Line chart
+                </nb-radio>
+                <nb-radio  [value]="'Pie'" (valueChange)="chartTypeRadioValue('Pie')">
+                    Pie chart
+                </nb-radio>
+            </nb-radio-group>
+        </div>
+
+    </nb-card-body>
+    <nb-card-footer>
+        <button class="cancel" nbButton status="danger" (click)="cancel()">Cancel</button>
+        <button nbButton status="success" class="btn-float-right" (click)="OnSubmit()" >Submit</button>
+    </nb-card-footer>
+</nb-card>

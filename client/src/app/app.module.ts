@@ -43,6 +43,7 @@ import {
   NbDatepicker,
   NbDatepickerModule,
   NbCheckboxModule,
+  NbRadioModule,
 } from '@nebular/theme';
 import { HeaderInterceptor } from './Interceptors/header.interceptor';
 import { FormsModule } from '@angular/forms';
@@ -61,6 +62,8 @@ import { ResourceGroupTemplateComponent } from './pages/resource-group/resource-
 import { ResourceGroupListComponent } from './pages/resource-group/resource-group-list/resource-group-list.component';
 import { ResourceGroupFormComponent } from './pages/resource-group/resource-group-form/resource-group-form.component';
 import { ResourceGroupMapComponent } from './pages/resource-group/resource-group-map/resource-group-map.component';
+import { DashboardViewComponent } from './pages/_dashboard/dashboard-view/dashboard-view.component';
+import { DashboardDialogComponent } from './pages/_dashboard/dashboard-dialog/dashboard-dialog.component';
 
 
 @NgModule({
@@ -89,6 +92,8 @@ import { ResourceGroupMapComponent } from './pages/resource-group/resource-group
     ResourceGroupListComponent,
     ResourceGroupFormComponent,
     ResourceGroupMapComponent,
+    DashboardViewComponent,
+    DashboardDialogComponent,
   ],
   imports: [
     NgxEchartsModule.forRoot({
@@ -115,6 +120,7 @@ import { ResourceGroupMapComponent } from './pages/resource-group/resource-group
     NbSidebarModule.forRoot(),
     NbContextMenuModule,
     NbButtonModule,
+    NbRadioModule,
     NbSelectModule,
     NbCheckboxModule,
     NbIconModule,
