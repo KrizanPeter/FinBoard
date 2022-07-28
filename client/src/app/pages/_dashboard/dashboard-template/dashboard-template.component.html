@@ -1,3 +1,6 @@
 <div class="row">
-<app-dashboard-view></app-dashboard-view>
+<app-dashboard-chart class="col-6 col-md-6" *ngFor="let chart of dashboardChartInfo" [chartInfo] = "chart" ></app-dashboard-chart>
+<app-dashboard-view class="col-6 col-md-6"></app-dashboard-view>
 </div>
+
+

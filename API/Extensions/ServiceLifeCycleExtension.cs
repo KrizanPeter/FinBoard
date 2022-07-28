@@ -11,6 +11,8 @@ using FinBoard.Domain.Repositories.Move;
 using FinBoard.Domain.Repositories.User;
 using FinBoard.Domain.Repositories.ResourceGroup;
 using FinBoard.Services.Services.ResourceGroupService;
+using FinBoard.Services.Services.DashboardService;
+using FinBoard.Domain.Repositories.Dashboard;
 
 namespace API.Extensions
 {
@@ -26,11 +28,14 @@ namespace API.Extensions
             services.AddScoped<IAccountService, AccountService>();
             services.AddScoped<IPersistentService, PersistentService>();
             services.AddScoped<ISnapshotService, SnapshotService>();
+            services.AddScoped<IDashboardService, DashboardService>();
 
             services.AddScoped<ISnapshotRepository, SnapshotRepository>();
             services.AddScoped<IAccountRepository, AccountRepository>();
             services.AddScoped<IResourceRepository, ResourceRepository>();
             services.AddScoped<IResourceGroupRepository, ResourceGroupRepository>();
+            services.AddScoped<IDashboardRepository, DashboardRepository>();
+
 
             services.AddScoped<IUserRepository, UserRepository>();
             return services;

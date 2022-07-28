@@ -4,6 +4,8 @@ import { ViewEncapsulation } from '@angular/core';
 import { ResourceService } from 'src/app/services/resource/resource.service';
 import { ResourceGroupService } from 'src/app/services/resourceGroup/resourceGroup.service';
 import { SelectItem } from 'src/app/_models/resourceModels/resourceDto';
+import { DashboardService } from 'src/app/services/dashboard/dashboard.service';
+import { ChartType, DashboardDto, SourceType } from 'src/app/_models/dashboard/dashboardDto';
 
 @Component({
   selector: 'ngx-dialog-name-prompt',
@@ -23,7 +25,8 @@ export class DashboardDialogComponent implements OnInit  {
   finalOptions : SelectItem[] = [];
 
   
-  constructor(protected ref: NbDialogRef<DashboardDialogComponent>, private resourceService: ResourceService, private resourceGroupService: ResourceGroupService) {}
+  constructor(protected ref: NbDialogRef<DashboardDialogComponent>, private resourceService: ResourceService,
+     private resourceGroupService: ResourceGroupService, private dashboardService: DashboardService) {}
   
   
   ngOnInit(): void {
@@ -93,8 +96,45 @@ export class DashboardDialogComponent implements OnInit  {
   }
 
   OnSubmit(){
+    let dashboardDto : DashboardDto;
+    dashboardDto = this.fillDtoWithData(dashboardDto);
+    this.dashboardService.createDashboardChart(dashboardDto).subscribe(
+      resData => {
+        ///this.isLoading = false;
+        //this.resourceGroupService.reloadTrigger.next(true);
+        this.cancel();
+      }, 
+      error => {
+        //this.isLoading = false;
+        console.log(error);
+      }
+    );
     console.log(this.selectedOption)
     console.log(this.radioGroupValue)
     console.log(this.radioGroupChartType)
+  }
+
+  fillDtoWithData(dashboardDto: DashboardDto){
+    dashboardDto = new DashboardDto();
+    if (this.radioGroupValue == "Resource"){
+      dashboardDto.sourceType = SourceType.Resource;
+    }
+    else if (this.radioGroupValue == "ResourceGroup"){
+      dashboardDto.sourceType = SourceType.ResourceGroup;
+    }
+
+
+    if (this.radioGroupChartType == "Pie"){
+      dashboardDto.chartType = ChartType.Pie;
+    }
+    else if (this.radioGroupChartType == "Bar"){
+      dashboardDto.chartType = ChartType.Bar;
+    }
+    else if (this.radioGroupChartType == "Line"){
+      dashboardDto.chartType = ChartType.Line;
+    }
+
+    dashboardDto.sourceId = this.selectedOption;
+    return dashboardDto;
   }
 }

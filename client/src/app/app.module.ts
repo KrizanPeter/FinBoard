@@ -64,6 +64,7 @@ import { ResourceGroupFormComponent } from './pages/resource-group/resource-grou
 import { ResourceGroupMapComponent } from './pages/resource-group/resource-group-map/resource-group-map.component';
 import { DashboardViewComponent } from './pages/_dashboard/dashboard-view/dashboard-view.component';
 import { DashboardDialogComponent } from './pages/_dashboard/dashboard-dialog/dashboard-dialog.component';
+import { DashboardChartComponent } from './pages/_dashboard/dashboard-chart/dashboard-chart.component';
 
 
 @NgModule({
@@ -94,6 +95,7 @@ import { DashboardDialogComponent } from './pages/_dashboard/dashboard-dialog/da
     ResourceGroupMapComponent,
     DashboardViewComponent,
     DashboardDialogComponent,
+    DashboardChartComponent,
   ],
   imports: [
     NgxEchartsModule.forRoot({

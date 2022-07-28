@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using FinBoard.Domain.Entities;
+using FinBoard.Services.DTOs.DashBoardChart;
 using FinBoard.Services.DTOs.Move;
 using FinBoard.Services.DTOs.Resource;
 using FinBoard.Services.DTOs.ResourceGroup;
@@ -28,6 +29,9 @@ namespace FinBoard.Services.Mapper
 
             CreateMap<ResourceGroup, CreateResourceGroupDto>().ReverseMap();
             CreateMap<ResourceGroup, ResourceGroupDto>().ReverseMap();
+
+            CreateMap<DashboardChart, CreateDashboardChartDto>().ReverseMap();
+            CreateMap<DashboardChart, DashboardChartDto>().ReverseMap();
         }
     }
 }

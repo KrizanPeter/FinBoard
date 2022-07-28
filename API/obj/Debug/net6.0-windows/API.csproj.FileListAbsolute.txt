@@ -82,4 +82,3 @@ C:\Projects\FinBoard\API\obj\Debug\net6.0-windows\refint\API.dll
 C:\Projects\FinBoard\API\obj\Debug\net6.0-windows\API.pdb
 C:\Projects\FinBoard\API\obj\Debug\net6.0-windows\API.genruntimeconfig.cache
 C:\Projects\FinBoard\API\obj\Debug\net6.0-windows\ref\API.dll
-C:\Projects\FinBoard\API\obj\Debug\net6.0-windows\API.MvcApplicationPartsAssemblyInfo.cs

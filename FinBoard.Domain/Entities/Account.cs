@@ -13,6 +13,7 @@ namespace FinBoard.Domain.Entities
         public Guid AppUserId { get; set; }
 
         public IEnumerable<Resource>? Resources { get; set; }
+        public IEnumerable<DashboardChart> DashboardCharts { get; set; }
         public virtual AppUser AppUser { get; set; }
     }
 }
