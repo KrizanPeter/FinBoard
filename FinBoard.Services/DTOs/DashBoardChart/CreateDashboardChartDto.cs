@@ -11,6 +11,8 @@ namespace FinBoard.Services.DTOs.DashBoardChart
     {
         public Guid DashboardChartId { get; set; }
         public Guid SourceId { get; set; }
+        public string ChartName { get; set; }
+
         public SourceType SourceType { get; set; }
         public ChartType ChartType { get; set; }
     }

@@ -16,3 +16,13 @@ tr, th, td{
 .options-icon:hover{
     color: red;
 }
+
+nb-tab{
+    min-height: 400px;
+}
+
+:host ::ng-deep .echart {
+    height: 100%;
+    min-height: 600px;
+    width: 100%;
+  }

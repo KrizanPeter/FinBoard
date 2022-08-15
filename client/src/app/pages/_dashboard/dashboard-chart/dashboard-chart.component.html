@@ -1,9 +1,16 @@
-<nb-card class="col-12 col-md-12 dashboard-window">
+
+<nb-card class="col-12 col-md-12 dashboard-window chart-window">
+    <nb-card-header class="close-btn text-center"><b>{{chartInfo.chartName}}</b></nb-card-header>
     <nb-card-body class="dashboard-body">
-        <p>{{chartInfo.dashboardChartId}}</p>
+        <div style="text-align: center; margin-top:40px;"  *ngIf="isLoading">
+            <app-loading-spinner></app-loading-spinner>
+        </div>
+        <ngx-echarts-pie [chartData]="pieChartData"  *ngIf="!isLoading"></ngx-echarts-pie>
+
+        <!-- <p>{{chartInfo.dashboardChartId}}</p>
         <p>{{chartInfo.sourceId}}</p>
         <p>{{chartInfo.accountId}}</p>
         <p>{{chartInfo.chartType}}</p>
-        <p>{{chartInfo.sourceType}}</p>      
+        <p>{{chartInfo.sourceType}}</p>       -->
     </nb-card-body>
 </nb-card>

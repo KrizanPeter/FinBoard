@@ -23,6 +23,7 @@ export class DashboardDialogComponent implements OnInit  {
   resourceOptions : SelectItem[] = [];
   resourceGroupOptions : SelectItem[] = [];
   finalOptions : SelectItem[] = [];
+  chartName:string="";
 
   
   constructor(protected ref: NbDialogRef<DashboardDialogComponent>, private resourceService: ResourceService,
@@ -116,6 +117,7 @@ export class DashboardDialogComponent implements OnInit  {
 
   fillDtoWithData(dashboardDto: DashboardDto){
     dashboardDto = new DashboardDto();
+    dashboardDto.chartName = this.chartName;
     if (this.radioGroupValue == "Resource"){
       dashboardDto.sourceType = SourceType.Resource;
     }

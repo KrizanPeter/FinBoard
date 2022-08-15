@@ -9,7 +9,7 @@ import { ViewEncapsulation } from '@angular/core';
   selector: 'app-dashboard-view',
   templateUrl: './dashboard-view.component.html',
   styleUrls: ['./dashboard-view.component.scss'],
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.Emulated
 })
 export class DashboardViewComponent implements OnInit {
 

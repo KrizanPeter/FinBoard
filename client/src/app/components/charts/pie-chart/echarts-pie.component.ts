@@ -18,7 +18,13 @@ export class EchartsPieComponent implements AfterViewInit, OnDestroy {
   constructor(private theme: NbThemeService) {
   }
 
+  stateChange() {
+    setTimeout(function () {
+    }, 5000);
+  }
+
   ngAfterViewInit() {
+    this.stateChange();
     this.themeSubscription = this.theme.getJsTheme().subscribe(config => {
       const colors = config.variables;
       const echarts: any = config.variables.echarts;

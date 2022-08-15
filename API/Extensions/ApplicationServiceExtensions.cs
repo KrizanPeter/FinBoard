@@ -29,7 +29,8 @@ namespace API.Extensions
                 {
                     if (env == "Development")
                     {
-                        connStr = "Server=localhost;Port=5432;User Id=appuser;Password=admin;Database=Finboard";
+                        //postgres:postgrespw
+                        connStr = "Server=localhost;Port=49153;User Id=postgres;Password=postgrespw;Database=Finboard";
                     }
                     else
                     {
