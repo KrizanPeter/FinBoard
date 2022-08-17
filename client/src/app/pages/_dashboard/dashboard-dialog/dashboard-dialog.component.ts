@@ -104,6 +104,7 @@ export class DashboardDialogComponent implements OnInit  {
         ///this.isLoading = false;
         //this.resourceGroupService.reloadTrigger.next(true);
         this.cancel();
+        location.reload();
       }, 
       error => {
         //this.isLoading = false;

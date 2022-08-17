@@ -1,14 +1,18 @@
-.dashboard-window{
-    //max-height: 23rem;
-    //padding: 20px;
+
+.dashboard-header{
+    border-bottom: none;
+    text-align: center;
 }
 
-.dashboard-body{
-    p{
-        font-size: 2rem;
-        font-weight: 600;
-    }
-    text-align: center;
-    //padding-top: 8rem;
-    //border-radius: 5px;
+.close-btn{
+    cursor: pointer;
+    float:right !important;
+
+
+}
+
+.close-btn:hover{
+    float:right !important;
+    font-size: 20px;
+    color: white;
 }

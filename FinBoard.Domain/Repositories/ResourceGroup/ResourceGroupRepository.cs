@@ -29,6 +29,15 @@ namespace FinBoard.Domain.Repositories.ResourceGroup
             return result;
         }
 
+        public async Task<Entities.ResourceGroup?> GetDataForChartForGroup(Guid dashboardChartId)
+        {
+            var result = await _db.ResourceGroups.Where(a => a.ResourceGroupId == dashboardChartId)
+                .Include(a => a.Resources)
+                .ThenInclude(a => a.Snapshots)
+                .SingleOrDefaultAsync();
+            return result;
+        }
+
         public void SaveChanges()
         {
             _db.SaveChanges();

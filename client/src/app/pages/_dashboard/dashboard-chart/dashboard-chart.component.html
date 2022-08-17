@@ -1,6 +1,9 @@
 
 <nb-card class="col-12 col-md-12 dashboard-window chart-window">
-    <nb-card-header class="close-btn text-center"><b>{{chartInfo.chartName}}</b></nb-card-header>
+    <nb-card-header class="dashboard-header">
+        <b>{{chartInfo.chartName}}</b>
+        <b class="close-btn" (click)="deleteChart()">X</b>
+    </nb-card-header>
     <nb-card-body class="dashboard-body">
         <div style="text-align: center; margin-top:40px;"  *ngIf="isLoading">
             <app-loading-spinner></app-loading-spinner>

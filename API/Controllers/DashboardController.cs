@@ -75,5 +75,63 @@ namespace API.Controllers
 
             return BadRequest(result.Error);
         }
+
+        [Authorize]
+        [HttpDelete("delete")]
+        public async Task<IActionResult> Delete(Guid dashboardChartId)
+        {
+            var requestId = this.GetRequestId();
+            var accountId = GetCurrentUserAccountId();
+            _logger.LogInformation(this.LogApiAccess(requestId, MethodBase.GetCurrentMethod()));
+            _persistentService.SetupRequestProperties(GetCurrentUserId().Value, GetCurrentUserAccountId().Value);
+
+            if (accountId.IsFailure) { return BadRequest(accountId.Error); }
+
+            var validity = await _dashboardService.CheckValidityAsync(dashboardChartId, accountId.Value);
+
+            if (validity.IsFailure)
+            {
+                return BadRequest(validity.Error);
+            }
+
+            var result = await _dashboardService.DeleteDashboardChartAsync(dashboardChartId);
+
+            if (result.IsSuccess)
+            {
+                return Ok();
+            }
+
+            return BadRequest(result.Error);
+        }
+
+        [Authorize]
+        [HttpGet("getData")]
+        public async Task<IActionResult> GetDataOfChart(Guid dashboardChartId)
+        {
+            var requestId = this.GetRequestId();
+            var accountId = GetCurrentUserAccountId();
+            _logger.LogInformation(this.LogApiAccess(requestId, MethodBase.GetCurrentMethod()));
+            _persistentService.SetupRequestProperties(GetCurrentUserId().Value, GetCurrentUserAccountId().Value);
+
+            if (accountId.IsFailure) { return BadRequest(accountId.Error); }
+
+            var validity = await _dashboardService.CheckValidityAsync(dashboardChartId, accountId.Value);
+
+            if (validity.IsFailure)
+            {
+                return BadRequest(validity.Error);
+            }
+
+            var result = await _dashboardService.GetDataOfChart(dashboardChartId);
+
+            if (result.IsSuccess)
+            {
+                return Ok(result.Value);
+            }
+
+            return BadRequest(result.Error);
+
+        }
+
     }
 }

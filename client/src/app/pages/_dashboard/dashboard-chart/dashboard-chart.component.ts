@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { DashboardService } from 'src/app/services/dashboard/dashboard.service';
 import { ResourceService } from 'src/app/services/resource/resource.service';
 import { PieChartData, PieRawData } from 'src/app/_models/chartData/pieChartData';
 import { DashboardDto } from 'src/app/_models/dashboard/dashboardDto';
@@ -14,7 +15,7 @@ export class DashboardChartComponent implements OnInit {
   resoucesList: ResourceDto[];
   isLoading = true;
   pieChartData: PieChartData;
-  constructor(private resourceService: ResourceService) { }
+  constructor(private resourceService: ResourceService, private dashboardService: DashboardService) { }
 
   ngOnInit(): void {
     this.loadResources();
@@ -22,12 +23,12 @@ export class DashboardChartComponent implements OnInit {
 
   loadResources(){
     this.isLoading = true;
-    this.resourceService.getResources().subscribe(
+    this.dashboardService.getChartData(this.chartInfo.dashboardChartId).subscribe(
       resData => {
-        this.isLoading = false;
         console.log(resData);
         this.resoucesList = resData;
         this.pieChartData = this.constructChartData(resData);
+        this.isLoading = false;
       }, 
       error => {
         this.isLoading = false;
@@ -47,5 +48,17 @@ export class DashboardChartComponent implements OnInit {
     console.log(chartData);
     return chartData;
   } 
+
+  deleteChart(){
+    console.log("I am HITEEEEED")
+    this.dashboardService.deleteDashboardChart(this.chartInfo.dashboardChartId).subscribe(
+      resData => {
+        location.reload();
+      }, 
+      error => {
+        console.log(error);
+      }
+    )
+  }
 
 }

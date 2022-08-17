@@ -1,7 +1,9 @@
 ﻿using AutoMapper;
 using FinBoard.Domain.Entities;
 using FinBoard.Domain.Repositories.Dashboard;
+using FinBoard.Domain.Repositories.ResourceGroup;
 using FinBoard.Services.DTOs.DashBoardChart;
+using FinBoard.Services.DTOs.Resource;
 using FinBoard.Utils.Result;
 using Microsoft.Extensions.Logging;
 using System;
@@ -16,10 +18,12 @@ namespace FinBoard.Services.Services.DashboardService
     {
         private readonly ILogger<DashboardService> _logger;
         private readonly IDashboardRepository _dashboardRepository;
+        private readonly IResourceGroupRepository _resourceGroupRepository;
         private readonly IMapper _mapper;
 
-        public DashboardService(ILogger<DashboardService> logger, IDashboardRepository dashboardRepository, IMapper mapper)
+        public DashboardService(ILogger<DashboardService> logger, IDashboardRepository dashboardRepository, IMapper mapper, IResourceGroupRepository resourceGroupRepository)
         {
+            _resourceGroupRepository = resourceGroupRepository;
             _logger = logger;
             _dashboardRepository = dashboardRepository;
             _mapper = mapper;
@@ -58,5 +62,58 @@ namespace FinBoard.Services.Services.DashboardService
             }
             return Result.Fail<IEnumerable<DashboardChartDto>>("Any Data for specific account.");
         }
+
+        public async Task<Result> CheckValidityAsync(Guid dashboardId, Guid accountId)
+        {
+            var result = await _dashboardRepository.GetAllAsync(a => a.AccountId == accountId && a.DashboardChartId == dashboardId);
+            if (result.Any())
+            {
+                return Result.Ok();
+            }
+            return Result.Fail("Resource does not belong under your account.");
+        }
+
+        public async Task<Result> DeleteDashboardChartAsync(Guid dashboardId)
+        {
+            var result = await _dashboardRepository.GetFirstOrDefaultAsync(a => a.DashboardChartId == dashboardId);
+            if (result == null)
+            {
+                return Result.Fail("Resource with specified ID not exist.");
+            }
+            try
+            {
+                _dashboardRepository.Remove(result);
+                _dashboardRepository.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                return Result.Fail(ex.Message);
+            }
+            return Result.Ok();
+        }
+
+        public async Task<Result<IEnumerable<ResourceDto>>> GetDataOfChart(Guid dashboardChartId)
+        {
+            ResourceGroup result = null;
+            List<ResourceDto> resultDtos = new List<ResourceDto>();
+            var chart = await _dashboardRepository.GetFirstOrDefaultAsync(a => a.DashboardChartId == dashboardChartId);
+
+            if (chart.SourceType == Domain.Enums.SourceType.ResourceGroup)
+            {
+                result = await _resourceGroupRepository.GetDataForChartForGroup(chart.SourceId);
+                //result = await _resourceGroupRepository.GetFirstOrDefaultAsync(a => a.ResourceGroupId == chart.SourceId, "Resources");
+            }
+            else if (chart.SourceType == Domain.Enums.SourceType.Resource)
+            {
+
+            }
+            if (result == null) return Result.Fail<IEnumerable<ResourceDto>>("ta neco se dojebalo");
+            foreach (var resource in result.Resources)
+            {
+                resultDtos.Add(_mapper.Map<ResourceDto>(resource));
+            }
+            return Result.Ok(resultDtos.AsEnumerable());
+        }
     }
 }
+
