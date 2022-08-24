@@ -4,6 +4,7 @@ using FinBoard.Domain.Repositories.Dashboard;
 using FinBoard.Domain.Repositories.ResourceGroup;
 using FinBoard.Services.DTOs.DashBoardChart;
 using FinBoard.Services.DTOs.Resource;
+using FinBoard.Services.Services.Move;
 using FinBoard.Utils.Result;
 using Microsoft.Extensions.Logging;
 using System;
@@ -19,14 +20,20 @@ namespace FinBoard.Services.Services.DashboardService
         private readonly ILogger<DashboardService> _logger;
         private readonly IDashboardRepository _dashboardRepository;
         private readonly IResourceGroupRepository _resourceGroupRepository;
+        private readonly ISnapshotService _snapshotService;
         private readonly IMapper _mapper;
 
-        public DashboardService(ILogger<DashboardService> logger, IDashboardRepository dashboardRepository, IMapper mapper, IResourceGroupRepository resourceGroupRepository)
+        public DashboardService(ILogger<DashboardService> logger,
+            IDashboardRepository dashboardRepository,
+            IMapper mapper,
+            IResourceGroupRepository resourceGroupRepository,
+            ISnapshotService snapshotService)
         {
             _resourceGroupRepository = resourceGroupRepository;
             _logger = logger;
             _dashboardRepository = dashboardRepository;
             _mapper = mapper;
+            _snapshotService = snapshotService;
         }
 
         public async Task<Result> CreateDashboardChartAsync(CreateDashboardChartDto dashboardChartDto, Guid accountId)
@@ -92,27 +99,35 @@ namespace FinBoard.Services.Services.DashboardService
             return Result.Ok();
         }
 
-        public async Task<Result<IEnumerable<ResourceDto>>> GetDataOfChart(Guid dashboardChartId)
+        //TODO : U know... there is special place in hell for people who wrote code like this
+        public async Task<Result<DataForDaschboardChartsDto>> GetDataOfChart(Guid dashboardChartId)
         {
-            ResourceGroup result = null;
-            List<ResourceDto> resultDtos = new List<ResourceDto>();
+            ResourceGroup resultResourceGroup = null;
+
+            DataForDaschboardChartsDto dataForChart = new();
             var chart = await _dashboardRepository.GetFirstOrDefaultAsync(a => a.DashboardChartId == dashboardChartId);
 
             if (chart.SourceType == Domain.Enums.SourceType.ResourceGroup)
             {
-                result = await _resourceGroupRepository.GetDataForChartForGroup(chart.SourceId);
-                //result = await _resourceGroupRepository.GetFirstOrDefaultAsync(a => a.ResourceGroupId == chart.SourceId, "Resources");
+                resultResourceGroup = await _resourceGroupRepository.GetDataForChartForGroup(chart.SourceId);
+
+                if (resultResourceGroup == null && dataForChart.SnapshotsDto.Count() == 0) return Result.Fail<DataForDaschboardChartsDto>("ta neco se dojebalo");
+
+                foreach (var resource in resultResourceGroup.Resources)
+                {
+                    dataForChart.ResourcesDto.Add(_mapper.Map<ResourceDto>(resource));
+                }
             }
+
+
+
             else if (chart.SourceType == Domain.Enums.SourceType.Resource)
             {
+                var result = await _snapshotService.GetAllMovesOfResourceAsync(chart.SourceId);
+                if (result.IsSuccess) dataForChart.SnapshotsDto = result.Value.ToList();
+            }
 
-            }
-            if (result == null) return Result.Fail<IEnumerable<ResourceDto>>("ta neco se dojebalo");
-            foreach (var resource in result.Resources)
-            {
-                resultDtos.Add(_mapper.Map<ResourceDto>(resource));
-            }
-            return Result.Ok(resultDtos.AsEnumerable());
+            return Result.Ok(dataForChart);
         }
     }
 }

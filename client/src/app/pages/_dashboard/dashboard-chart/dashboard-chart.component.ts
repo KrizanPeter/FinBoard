@@ -1,9 +1,11 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { DashboardService } from 'src/app/services/dashboard/dashboard.service';
 import { ResourceService } from 'src/app/services/resource/resource.service';
+import { LineChartData, LineRawData } from 'src/app/_models/chartData/lineChartData';
 import { PieChartData, PieRawData } from 'src/app/_models/chartData/pieChartData';
-import { DashboardDto } from 'src/app/_models/dashboard/dashboardDto';
+import { ChartType, DashboardDto } from 'src/app/_models/dashboard/dashboardDto';
 import { ResourceDto } from 'src/app/_models/resourceModels/resourceDto';
+import { SnapshotDto } from 'src/app/_models/snapshotModels/snapshotDto';
 
 @Component({
   selector: 'app-dashboard-chart',
@@ -12,9 +14,11 @@ import { ResourceDto } from 'src/app/_models/resourceModels/resourceDto';
 })
 export class DashboardChartComponent implements OnInit {
   @Input() chartInfo : DashboardDto;
-  resoucesList: ResourceDto[];
+  chartTypePie =  ChartType.Pie;
+  chartTypeLine = ChartType.Line;
   isLoading = true;
   pieChartData: PieChartData;
+  lineChartData: LineChartData;
   constructor(private resourceService: ResourceService, private dashboardService: DashboardService) { }
 
   ngOnInit(): void {
@@ -25,9 +29,17 @@ export class DashboardChartComponent implements OnInit {
     this.isLoading = true;
     this.dashboardService.getChartData(this.chartInfo.dashboardChartId).subscribe(
       resData => {
+        console.log("chartoseeee")
+        console.log(this.chartInfo.chartType === this.chartTypePie )
         console.log(resData);
-        this.resoucesList = resData;
-        this.pieChartData = this.constructChartData(resData);
+        if(resData.resourcesDto.length>0)
+        {
+          this.pieChartData = this.constructPieChartData(resData.resourcesDto);
+        }
+        else if(resData.snapshotsDto.length>0)
+        {
+          this.lineChartData = this.constructLineChartData(resData.snapshotsDto);
+        }
         this.isLoading = false;
       }, 
       error => {
@@ -37,8 +49,24 @@ export class DashboardChartComponent implements OnInit {
     );
   }
   
+  constructLineChartData(data : SnapshotDto[]){
+    let chartData = new LineChartData();
+    chartData.legend.push('Resource movement');
+    let numberData = [];
+    let dateLabels = []
+    data.forEach(element => {
+      numberData.push(element.amount);
+      dateLabels.push(element.dateOfChange.toString().split('T')[0]);   
+    });
+    dateLabels.reverse();
+    numberData.reverse();
+    chartData.xAxisLabels = dateLabels;
+    chartData.data.push(new LineRawData("Resource movement", numberData));
+    console.log(chartData);
+    return chartData;
+  } 
 
-  constructChartData(data : ResourceDto[]){
+  constructPieChartData(data : ResourceDto[]){
     let chartData = new PieChartData();
     chartData.legend = data.map(a=>a.name);
     data.forEach(element => {

@@ -16,6 +16,6 @@ namespace FinBoard.Services.Services.DashboardService
         Task<Result> CheckValidityAsync(Guid dashboardId, Guid accountId);
         Task<Result> DeleteDashboardChartAsync(Guid dashboardId);
 
-        Task<Result<IEnumerable<ResourceDto>>> GetDataOfChart(Guid dashboardChartId);
+        Task<Result<DataForDaschboardChartsDto>> GetDataOfChart(Guid dashboardChartId);
     }
 }

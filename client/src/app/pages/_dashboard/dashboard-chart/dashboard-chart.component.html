@@ -1,19 +1,17 @@
-
 <nb-card class="col-12 col-md-12 dashboard-window chart-window">
     <nb-card-header class="dashboard-header">
         <b>{{chartInfo.chartName}}</b>
         <b class="close-btn" (click)="deleteChart()">X</b>
     </nb-card-header>
     <nb-card-body class="dashboard-body">
-        <div style="text-align: center; margin-top:40px;"  *ngIf="isLoading">
+        <div style="text-align: center; margin-top:40px;" *ngIf="isLoading">
             <app-loading-spinner></app-loading-spinner>
         </div>
-        <ngx-echarts-pie [chartData]="pieChartData"  *ngIf="!isLoading"></ngx-echarts-pie>
-
-        <!-- <p>{{chartInfo.dashboardChartId}}</p>
-        <p>{{chartInfo.sourceId}}</p>
-        <p>{{chartInfo.accountId}}</p>
-        <p>{{chartInfo.chartType}}</p>
-        <p>{{chartInfo.sourceType}}</p>       -->
+        <div *ngIf="!isLoading && chartInfo.chartType === chartTypePie">
+            <ngx-echarts-pie [chartData]="pieChartData"></ngx-echarts-pie>
+        </div>
+        <div *ngIf="!isLoading && chartInfo.chartType === chartTypeLine">
+            <ngx-echarts-line [chartData]="lineChartData"></ngx-echarts-line>
+        </div>
     </nb-card-body>
 </nb-card>

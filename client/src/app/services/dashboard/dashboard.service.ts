@@ -1,6 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { BehaviorSubject } from "rxjs";
+import { DataForDaschboardChartsDto } from "src/app/_models/dashboard/dashboardChartsDataDto";
 import { DashboardDto } from "src/app/_models/dashboard/dashboardDto";
 import { ResourceDto } from "src/app/_models/resourceModels/resourceDto";
 import { environment } from "src/environments/environment";
@@ -16,7 +17,7 @@ export class DashboardService{
     }
 
     getChartData(dashboardChartId: string) {
-        return this.http.get<ResourceDto[]>(this.baseUrl+'Dashboard/getData?dashboardChartId='+dashboardChartId);
+        return this.http.get<DataForDaschboardChartsDto>(this.baseUrl+'Dashboard/getData?dashboardChartId='+dashboardChartId);
     }
 
 

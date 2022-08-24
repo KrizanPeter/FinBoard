@@ -21,7 +21,7 @@ export class LoginFormComponent implements OnInit {
     this.authService.login(form.value.loginEmail, form.value.loginPassword).subscribe(
       resData => {
         this.isLoading = false;
-        this.router.navigate(['/resource']);
+        this.router.navigate(['/dashboard']);
       }, 
       error => {
         this.isLoading = false;
