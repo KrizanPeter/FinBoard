@@ -3,6 +3,7 @@ using FinBoard.Domain.Entities;
 using FinBoard.Domain.Repositories.Dashboard;
 using FinBoard.Domain.Repositories.ResourceGroup;
 using FinBoard.Services.DTOs.DashBoardChart;
+using FinBoard.Services.DTOs.Move;
 using FinBoard.Services.DTOs.Resource;
 using FinBoard.Services.Services.Move;
 using FinBoard.Utils.Result;
@@ -109,17 +110,22 @@ namespace FinBoard.Services.Services.DashboardService
 
             if (chart.SourceType == Domain.Enums.SourceType.ResourceGroup)
             {
-                resultResourceGroup = await _resourceGroupRepository.GetDataForChartForGroup(chart.SourceId);
+                resultResourceGroup = await _resourceGroupRepository.GetDataForGroupChart(chart.SourceId);
 
                 if (resultResourceGroup == null && dataForChart.SnapshotsDto.Count() == 0) return Result.Fail<DataForDaschboardChartsDto>("ta neco se dojebalo");
 
-                foreach (var resource in resultResourceGroup.Resources)
+                if (chart.ChartType == Domain.Enums.ChartType.Pie)
                 {
-                    dataForChart.ResourcesDto.Add(_mapper.Map<ResourceDto>(resource));
+                    foreach (var resource in resultResourceGroup.Resources)
+                    {
+                        dataForChart.ResourcesDto.Add(_mapper.Map<ResourceDto>(resource));
+                    }
+                }
+                if (chart.ChartType == Domain.Enums.ChartType.Line)
+                {
+                    dataForChart.SnapshotsDto = AggregateSnapshots(resultResourceGroup);
                 }
             }
-
-
 
             else if (chart.SourceType == Domain.Enums.SourceType.Resource)
             {
@@ -128,6 +134,30 @@ namespace FinBoard.Services.Services.DashboardService
             }
 
             return Result.Ok(dataForChart);
+        }
+
+        private List<SnapshotDto> AggregateSnapshots(ResourceGroup resultResourceGroup)
+        {
+            List<SnapshotDto> snapshots = new List<SnapshotDto>();
+            var resouceCount = 0;
+            foreach (var resource in resultResourceGroup.Resources)
+            {
+                resource.Snapshots = resource.Snapshots.OrderByDescending(a => a.DateOfChange).ToList();
+                for (int snapshotIndex = 0; snapshotIndex < resource.Snapshots.Count(); snapshotIndex++)
+                {
+                    if (resouceCount == 0)
+                    {
+                        snapshots.Add(_mapper.Map<SnapshotDto>(resource.Snapshots.ElementAt(snapshotIndex)));
+                    }
+                    else
+                    {
+                        snapshots.ElementAt(snapshotIndex).Amount += resource.Snapshots.ElementAt(snapshotIndex).Amount;
+                    }
+
+                }
+                resouceCount++;
+            }
+            return snapshots;
         }
     }
 }

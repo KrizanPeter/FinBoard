@@ -12,6 +12,6 @@ namespace FinBoard.Domain.Repositories.ResourceGroup
         Task<IEnumerable<Entities.ResourceGroup>> GetAllWithResourceAsync(Guid accountId);
         void Update(Entities.ResourceGroup user);
         void SaveChanges();
-        Task<Entities.ResourceGroup?> GetDataForChartForGroup(Guid dashboardChartId);
+        Task<Entities.ResourceGroup?> GetDataForGroupChart(Guid dashboardChartId);
     }
 }
