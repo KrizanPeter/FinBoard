@@ -1,7 +1,9 @@
 <nb-card class="col-12 col-md-12 dashboard-window chart-window">
     <nb-card-header class="dashboard-header">
         <b>{{chartInfo.chartName}}</b>
-        <b class="close-btn" (click)="deleteChart()">X</b>
+        <a class="options-icon">
+            <fa-icon [icon]="faTrashCan" (click)="deleteChart()"></fa-icon>
+        </a>
     </nb-card-header>
     <nb-card-body class="dashboard-body">
         <div style="text-align: center; margin-top:40px;" *ngIf="isLoading">

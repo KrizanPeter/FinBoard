@@ -62,6 +62,7 @@ export class EchartsLineComponent implements AfterViewInit, OnDestroy {
         yAxis: [
           {
             type: 'value',
+            boundaryGap: false,
             axisLine: {
               lineStyle: {
                 color: echarts.axisLineColor,
@@ -80,9 +81,9 @@ export class EchartsLineComponent implements AfterViewInit, OnDestroy {
           },
         ],
         grid: {
-          left: '1%',
-          right: '1%',
-          bottom: '1%',
+          left: '5%',
+          right: '5%',
+          bottom: '5%',
           containLabel: true,
         },
         series: this.chartData.data,

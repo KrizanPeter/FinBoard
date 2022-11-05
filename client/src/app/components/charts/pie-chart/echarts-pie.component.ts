@@ -46,12 +46,12 @@ export class EchartsPieComponent implements AfterViewInit, OnDestroy {
         // },
         series: [
           {
-            name: 'Countries',
+            //name: 'Countries',
             type: 'pie',
-            radius: '80%',
             center: ['50%', '50%'],
-            avoidLabelOverlap: false,
-
+            avoidLabelOverlap: true,
+            radius: [45, 155],
+            roseType: 'area',
             data: this.chartData.data
              /*[
               { value: 335, name: 'Germany' },
@@ -61,6 +61,7 @@ export class EchartsPieComponent implements AfterViewInit, OnDestroy {
               { value: 1548, name: 'USA' },
             ]*/,
             itemStyle: {
+              borderRadius: 8,
               emphasis: {
                 shadowBlur: 10,
                 shadowOffsetX: 0,

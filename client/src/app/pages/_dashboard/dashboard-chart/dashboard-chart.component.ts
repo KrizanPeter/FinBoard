@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { faTrashCan } from '@fortawesome/free-solid-svg-icons';
 import { DashboardService } from 'src/app/services/dashboard/dashboard.service';
 import { ResourceService } from 'src/app/services/resource/resource.service';
 import { LineChartData, LineRawData } from 'src/app/_models/chartData/lineChartData';
@@ -14,6 +15,7 @@ import { SnapshotDto } from 'src/app/_models/snapshotModels/snapshotDto';
 })
 export class DashboardChartComponent implements OnInit {
   @Input() chartInfo : DashboardDto;
+  faTrashCan = faTrashCan;
   chartTypePie =  ChartType.Pie;
   chartTypeLine = ChartType.Line;
   isLoading = true;
