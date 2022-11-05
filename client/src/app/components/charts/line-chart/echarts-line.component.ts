@@ -22,7 +22,7 @@ export class EchartsLineComponent implements AfterViewInit, OnDestroy {
 
       const colors: any = config.variables;
       const echarts: any = config.variables.echarts;
-
+      console.log(this.chartData);
       this.options = {
         backgroundColor: echarts.bg,
         color: [colors.danger, colors.primary, colors.info],

@@ -36,20 +36,22 @@ export class EchartsPieComponent implements AfterViewInit, OnDestroy {
           trigger: 'item',
           formatter: '{a} <br/>{b} : {c} ({d}%)',
         },
-        legend: {
-          orient: 'vertical',
-          left: 'left',
-          data: this.chartData.legend,//['USA', 'Germany', 'France', 'Canada', 'Russia'],
-          textStyle: {
-            color: echarts.textColor,
-          },
-        },
+        // legend: {
+        //   orient: 'vertical',
+        //   left: 'left',
+        //   data: this.chartData.legend,//['USA', 'Germany', 'France', 'Canada', 'Russia'],
+        //   textStyle: {
+        //     color: echarts.textColor,
+        //   },
+        // },
         series: [
           {
             name: 'Countries',
             type: 'pie',
             radius: '80%',
             center: ['50%', '50%'],
+            avoidLabelOverlap: false,
+
             data: this.chartData.data
              /*[
               { value: 335, name: 'Germany' },
@@ -69,6 +71,10 @@ export class EchartsPieComponent implements AfterViewInit, OnDestroy {
               normal: {
                 textStyle: {
                   color: echarts.textColor,
+                },
+                show: true, position: 'outer',
+                formatter : function (params){
+                  return  params.name+" "+params.value + ',-\n'
                 },
               },
             },
