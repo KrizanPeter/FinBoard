@@ -1,6 +1,6 @@
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build-env
 WORKDIR /app
-EXPOSE 4040
+EXPOSE 80
 
 # Copy csproj and restore as distinct layers
 COPY ./FinBoard.sln .
