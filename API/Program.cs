@@ -23,13 +23,13 @@ namespace API
                     webBuilder.UseStartup<Startup>();
                     // For running in Railway
                     var portVar = Environment.GetEnvironmentVariable("PORT");
-                    //if (portVar is { Length: > 0 } && int.TryParse(portVar, out int port))
-                    //{
-                    //    webBuilder.ConfigureKestrel(options =>
-                    //    {
-                    //        options.ListenAnyIP(port);
-                    //    });
-                    //}
+                    if (portVar is { Length: > 0 } && int.TryParse(portVar, out int port))
+                    {
+                        webBuilder.ConfigureKestrel(options =>
+                        {
+                            options.ListenAnyIP(port);
+                        });
+                    }
                 });
     }
 }
