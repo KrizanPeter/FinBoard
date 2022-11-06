@@ -27,7 +27,8 @@ namespace API
                     {
                         webBuilder.ConfigureKestrel(options =>
                         {
-                            options.ListenAnyIP(4569);
+                            Console.WriteLine("Tak toto je sleha" + port);
+                            options.ListenAnyIP(4040);
                         });
                     }
                 });
