@@ -27,7 +27,7 @@ namespace API
                     {
                         webBuilder.ConfigureKestrel(options =>
                         {
-                            options.ListenAnyIP(port);
+                            options.ListenAnyIP(4569);
                         });
                     }
                 });
