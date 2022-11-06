@@ -1,6 +1,7 @@
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build-env
 WORKDIR /app
 EXPOSE 4040
+ENV ASPNETCORE_URLS=http://+:4040
 
 # Copy csproj and restore as distinct layers
 COPY ./FinBoard.sln .
