@@ -17,4 +17,4 @@ RUN dotnet publish --no-restore -c Release -o out ./API
 FROM mcr.microsoft.com/dotnet/aspnet:6.0
 WORKDIR /app
 COPY --from=build-env /app/out .
-ENTRYPOINT ["./API"]
+ENTRYPOINT ["dotnet",".API.dll"]
