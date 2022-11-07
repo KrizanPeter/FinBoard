@@ -44,7 +44,7 @@ namespace API.Extensions
                         var pgPort = pgHostPort.Split(":")[1];
 
                         connStr = $"Server={pgHost};Port={pgPort};User Id={pgUser};Password={pgPass};Database={pgDb};SSL Mode=Require;TrustServerCertificate=True";
-
+                        Console.WriteLine(connStr);
                     }
                     else
                     {
