@@ -40,11 +40,11 @@ export const USER_MENU_ITEMS: NbMenuItem[] = [
     children: [
       {
         title: 'Profile management',
-        link: '/auth/login',
+        link: 'login',
       },
       {
         title: 'Register',
-        link: '/auth/register',
+        link: 'login',
       },
     ],
   },
@@ -52,24 +52,35 @@ export const USER_MENU_ITEMS: NbMenuItem[] = [
 
 export const MENU_ITEMS: NbMenuItem[] = [
   {
+    title: 'Home',
+    group: true,
+  },
+  {
     title: 'What is Finboard?',
     icon: 'home-outline',
-    link: '/pages/_dashboard',
+    link: 'landing-page',
   },
   {
     title: 'How to use Finboard?',
     icon: 'book-outline',
+    link: 'how-to-use',
   },
   {
-    title: 'About me',
+    title: 'Release notes',
+    group: true,
+  },
+  {
+    title: 'What is new?',
     icon: 'trending-up-outline',
+    link: 'release-notes',
   },
   {
-    title: 'PROFILE',
+    title: 'Profile',
     group: true,
   },
   {
     title: 'Login',
     icon: 'person-outline',
+    link: 'login',
   },
 ];

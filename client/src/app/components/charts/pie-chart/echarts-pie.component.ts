@@ -50,7 +50,7 @@ export class EchartsPieComponent implements AfterViewInit, OnDestroy {
             type: 'pie',
             center: ['50%', '50%'],
             avoidLabelOverlap: true,
-            radius: [45, 155],
+            radius: [35, 115],
             roseType: 'area',
             data: this.chartData.data
              /*[

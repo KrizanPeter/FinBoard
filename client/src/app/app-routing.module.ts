@@ -7,11 +7,17 @@ import { ResourceTemplateComponent } from './pages/resources/resource-template/r
 import { SnapshotAgregateComponent } from './pages/snapshot-agregate/snapshot-agregate/snapshot-agregate.component';
 import { SnapshotTemplateComponent } from './pages/snapshots/snapshot-template/snapshot-template.component';
 import { DashboardTemplateComponent } from './pages/_dashboard/dashboard-template/dashboard-template.component';
+import { HowToUseComponent } from './publicPages/how-to-use/how-to-use.component';
+import { LandingPageComponent } from './publicPages/landing-page/landing-page.component';
+import { ReleaseNotesComponent } from './publicPages/release-notes/release-notes.component';
 
 
 const routes: Routes = [
   { path:'', component: AuthTemplateComponent},
   { path:'login', component: AuthTemplateComponent},
+  { path:'landing-page', component: LandingPageComponent},
+  { path:'how-to-use', component: HowToUseComponent},
+  { path:'release-notes', component: ReleaseNotesComponent},
   { path:'resource', component: ResourceTemplateComponent, canActivate: [AuthGuard]},
   { path:'snapshot', component: SnapshotTemplateComponent, canActivate: [AuthGuard]},
   { path:'dashboard', component: DashboardTemplateComponent, canActivate: [AuthGuard]},
