@@ -15,7 +15,7 @@ export class OutsideClickDirective {
     console.log("targetos")
     //console.log(target.outerHTML)
 
-    if (!clickedInside && !String(target.outerHTML).includes("<rect")) {
+    if (!clickedInside && !String(target.outerHTML).includes("<rect") && window.innerWidth < 576) {
       this.outsideClick.emit();
     }
   }
