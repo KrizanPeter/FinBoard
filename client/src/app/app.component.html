@@ -3,8 +3,8 @@
     <ngx-header></ngx-header>
   </nb-layout-header>
 
-  <nb-sidebar class="menu-sidebar" tag="menu-sidebar" responsive>
-    <nb-menu [items]="menu" autoCollapse="true"></nb-menu>
+  <nb-sidebar (outsideClick)="hideSidebar()" class="menu-sidebar" tag="menu-sidebar" responsive>
+    <nb-menu  [items]="menu" autoCollapse="true" ></nb-menu>
   </nb-sidebar>
 
   <nb-layout-column>

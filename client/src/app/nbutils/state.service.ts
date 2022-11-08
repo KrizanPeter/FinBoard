@@ -4,7 +4,7 @@ import { takeWhile } from 'rxjs/operators';
 
 import { NbLayoutDirectionService, NbLayoutDirection } from '@nebular/theme';
 
-@Injectable()
+@Injectable({providedIn:'root'})
 export class StateService implements OnDestroy {
 
   protected layouts: any = [
@@ -83,10 +83,12 @@ export class StateService implements OnDestroy {
   }
 
   getSidebarStates(): Observable<any[]> {
+    console.log("STATEEEEs");
     return observableOf(this.sidebars);
   }
 
   onSidebarState(): Observable<any> {
+    console.log("STATEEEE");
     return this.sidebarState$.asObservable();
   }
 }

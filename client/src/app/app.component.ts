@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { NbMenuService, NbSidebarService } from '@nebular/theme';
-import { takeWhile } from 'rxjs';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { MENU_ITEMS, USER_MENU_ITEMS } from './nbutils/pages-menu';
 import { StateService } from './nbutils/state.service';
@@ -21,18 +20,24 @@ export class AppComponent implements OnInit, OnDestroy {
   private alive = true;
 
   private userSub: Subscription;
-  constructor(private http: HttpClient, private authService: AuthService, protected sidebarService: NbSidebarService, protected stateService: StateService, protected menuService: NbMenuService ) {
+  constructor(private http: HttpClient, private authService: AuthService, protected sidebarService: NbSidebarService, protected stateService: StateService, protected menuService: NbMenuService, private renderer: Renderer2) {
     this.menu = USER_MENU_ITEMS;
-    this.stateService.onSidebarState()
-      .pipe(takeWhile(() => this.alive))
-      .subscribe((sidebar: string) => {
-        this.sidebar = sidebar;
-      });
 
-      this.menuService.onItemSelect()
-      .pipe(takeWhile(() => this.alive))
-      .subscribe(() => this.sidebarService.compact('menu-sidebar'));
+    this.menuService.onItemClick().subscribe(() => {
+      if (window.innerWidth < 1200 && window.innerWidth >= 576) {
+        this.sidebarService.compact('menu-sidebar');
+      } else if (window.innerWidth < 576) {
+        this.sidebarService.collapse('menu-sidebar');
+      }
+    });
+
+
   }
+
+  hideSidebar(){
+    this.sidebarService.collapse('menu-sidebar');
+  }
+
 
   ngOnDestroy(): void {
     if (this.userSub) {

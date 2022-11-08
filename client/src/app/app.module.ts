@@ -68,6 +68,8 @@ import { DashboardChartComponent } from './pages/_dashboard/dashboard-chart/dash
 import { LandingPageComponent } from './publicPages/landing-page/landing-page.component';
 import { HowToUseComponent } from './publicPages/how-to-use/how-to-use.component';
 import { ReleaseNotesComponent } from './publicPages/release-notes/release-notes.component';
+import { StateService } from './nbutils/state.service';
+import { OutsideClickDirective } from './directives/outsideclick.directive';
 
 
 @NgModule({
@@ -102,6 +104,7 @@ import { ReleaseNotesComponent } from './publicPages/release-notes/release-notes
     LandingPageComponent,
     HowToUseComponent,
     ReleaseNotesComponent,
+    OutsideClickDirective,
   ],
   imports: [
     NgxEchartsModule.forRoot({
@@ -145,6 +148,7 @@ import { ReleaseNotesComponent } from './publicPages/release-notes/release-notes
   ],
   providers: [
     LayoutService,
+    StateService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: HeaderInterceptor,
