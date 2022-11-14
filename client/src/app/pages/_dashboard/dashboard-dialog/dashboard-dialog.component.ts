@@ -24,6 +24,7 @@ export class DashboardDialogComponent implements OnInit  {
   resourceGroupOptions : SelectItem[] = [];
   finalOptions : SelectItem[] = [];
   chartName:string="";
+  disabledPie:boolean = false;
 
   
   constructor(protected ref: NbDialogRef<DashboardDialogComponent>, private resourceService: ResourceService,
@@ -81,6 +82,7 @@ export class DashboardDialogComponent implements OnInit  {
     console.log(this.resourceGroupOptions);
     this.finalOptions=[];
     this.finalOptions = this.resourceGroupOptions;
+    this.disabledPie = false;
   }
 
   sourceTypeReloadResources(value: string){
@@ -89,6 +91,7 @@ export class DashboardDialogComponent implements OnInit  {
 
     this.finalOptions=[];
     this.finalOptions = this.resourceOptions;
+    this.disabledPie = true;
 
   }
 

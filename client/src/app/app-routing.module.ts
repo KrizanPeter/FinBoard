@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './guards/auth.guard';
 import { AuthTemplateComponent } from './pages/auth/auth-template/auth-template.component';
+import { CreateGuideComponent } from './pages/create-guide/create-guide/create-guide.component';
 import { ResourceGroupTemplateComponent } from './pages/resource-group/resource-group-template/resource-group-template.component';
 import { ResourceTemplateComponent } from './pages/resources/resource-template/resource-template.component';
 import { SnapshotAgregateComponent } from './pages/snapshot-agregate/snapshot-agregate/snapshot-agregate.component';
@@ -23,6 +24,8 @@ const routes: Routes = [
   { path:'dashboard', component: DashboardTemplateComponent, canActivate: [AuthGuard]},
   { path:'agregate-snapshot', component:SnapshotAgregateComponent, canActivate: [AuthGuard]},
   { path:'resource-group', component:ResourceGroupTemplateComponent, canActivate: [AuthGuard]},
+  { path:'create-guide', component:CreateGuideComponent, canActivate: [AuthGuard]},
+
 
 ];
 

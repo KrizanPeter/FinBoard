@@ -44,6 +44,7 @@ import {
   NbDatepickerModule,
   NbCheckboxModule,
   NbRadioModule,
+  NbStepperModule,
 } from '@nebular/theme';
 import { HeaderInterceptor } from './Interceptors/header.interceptor';
 import { FormsModule } from '@angular/forms';
@@ -70,6 +71,7 @@ import { HowToUseComponent } from './publicPages/how-to-use/how-to-use.component
 import { ReleaseNotesComponent } from './publicPages/release-notes/release-notes.component';
 import { StateService } from './nbutils/state.service';
 import { OutsideClickDirective } from './directives/outsideclick.directive';
+import { CreateGuideComponent } from './pages/create-guide/create-guide/create-guide.component';
 
 
 @NgModule({
@@ -105,6 +107,7 @@ import { OutsideClickDirective } from './directives/outsideclick.directive';
     HowToUseComponent,
     ReleaseNotesComponent,
     OutsideClickDirective,
+    CreateGuideComponent,
   ],
   imports: [
     NgxEchartsModule.forRoot({
@@ -138,6 +141,7 @@ import { OutsideClickDirective } from './directives/outsideclick.directive';
     NbInputModule,
     NbTreeGridModule,
     NbCardModule,
+    NbStepperModule,
     NbMenuModule.forRoot(),
     NbDialogModule.forRoot(),
     NbWindowModule.forRoot(),

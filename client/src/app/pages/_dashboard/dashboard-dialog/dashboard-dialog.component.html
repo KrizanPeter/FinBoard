@@ -3,7 +3,7 @@
     <nb-card-body class="">
         <div class="form-group mt-4">
             <label for="chartNameId" class="label">Name of graph</label>
-            <input type="text" ngModel id="chartNameId" name="inputChartNameId" nbInput [(ngModel)]="chartName" fullWidth placeholder="Likvid property" >
+            <input type="text" ngModel id="chartNameId" name="inputChartNameId" nbInput [(ngModel)]="chartName" fullWidth placeholder="Likvid property" autocomplete="off" >
           </div>
         <div class="form-group mt-4">
             <label for="resourceTypeOption" class="label">Source Type</label>
@@ -34,7 +34,7 @@
                 <nb-radio [value]="'Line'" (valueChange)="chartTypeRadioValue('Line')">
                     Line chart
                 </nb-radio>
-                <nb-radio  [value]="'Pie'" (valueChange)="chartTypeRadioValue('Pie')">
+                <nb-radio  [value]="'Pie'" (valueChange)="chartTypeRadioValue('Pie')" [disabled]="disabledPie">
                     Pie chart
                 </nb-radio>
             </nb-radio-group>

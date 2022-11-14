@@ -12,8 +12,6 @@ export class OutsideClickDirective {
   @HostListener('document:click', ['$event.target'])
   public onClick(target) {
     const clickedInside = this.elementRef.nativeElement.contains(target);
-    console.log("targetos")
-    //console.log(target.outerHTML)
 
     if (!clickedInside && !String(target.outerHTML).includes("<rect") && window.innerWidth < 576) {
       this.outsideClick.emit();

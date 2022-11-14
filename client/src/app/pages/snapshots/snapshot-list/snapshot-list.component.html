@@ -5,7 +5,7 @@
         </div>
         <nb-tabset *ngIf="!isLoading">
             <nb-card-header>Snapshot</nb-card-header>
-            <nb-tab tabTitle="List of snapshots">
+            <nb-tab tabTitle="List of snapshots" class="p-0 p-md-4">
                 <table mat-table class="col col-12">
                     <thead class="col col-12">
                         <tr class="col col-12">
@@ -16,12 +16,12 @@
                     </thead>
                     <tbody>
                         <tr *ngFor="let snapshot of snapshotList">
-                            <td>{{snapshot.dateOfChange}}</td>
+                            <td>{{snapshot.dateOfChange.split("T")[0]}}</td>
                             <td>{{snapshot.amount}}</td>
                             <td>
-                                <a class="options-icon" href="">
+                                <!-- <a class="options-icon" href="">
                                     <fa-icon [icon]="faPencil" (click)="editClick(snapshot.snapshotId)"></fa-icon>
-                                </a>
+                                </a> -->
                                 <a class="options-icon">
                                     <fa-icon [icon]="faTrashCan" (click)="deleteClick(snapshot.snapshotId)"></fa-icon>
                                 </a>

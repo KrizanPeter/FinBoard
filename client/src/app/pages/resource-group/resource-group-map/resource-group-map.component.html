@@ -2,7 +2,7 @@
   <nb-card-header>Add resource to group</nb-card-header>
   <nb-card-body>
     <form class="auth-form" #mapResourceToGroupForm="ngForm" (ngSubmit)="onSubmit(mapResourceToGroupForm)">
-      <div class="form-group">
+      <div class="form-group mb-4">
         <label for="resourceOptionInput" class="label">Resourc groups</label>
         <nb-select name="inputResourceId" [(selected)]="preselectOption" [(ngModel)]="selectedOption"   id="resourceOptionInput" fullWidth ngModel
           required (ngModelChange)="onSelectChange(mapResourceToGroupForm)">
@@ -10,8 +10,7 @@
             resourceGroup.resourceGroupName }}</nb-option>
         </nb-select>
       </div>
-      <div class="row col col-12 mt-5">
-
+      <div class="row col col-12 m-0 check-box-area">
         <div class="form-group col col-6" *ngFor="let resource of (resourceGroupMapList.resources || [] )">
           <nb-checkbox [(checked)]="resource.isInGroup">{{resource.name}}</nb-checkbox>
         </div>

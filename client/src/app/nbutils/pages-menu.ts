@@ -7,6 +7,11 @@ export const USER_MENU_ITEMS: NbMenuItem[] = [
     link: 'dashboard',
   },
   {
+    title: 'Create scheme',
+    icon: 'checkmark-square-outline',
+    link: 'create-guide',
+  },
+  {
     title: 'Management',
     group: true,
   },

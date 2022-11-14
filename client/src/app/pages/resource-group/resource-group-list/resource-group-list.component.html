@@ -5,7 +5,7 @@
         </div>
         <nb-tabset *ngIf="!isLoading">
             <nb-card-header>Resource</nb-card-header>
-            <nb-tab tabTitle="List of resource groups">
+            <nb-tab tabTitle="List of resource groups" class="p-0 p-md-4">
                 <table mat-table class="col col-12">
                     <thead class="col col-12">
                         <tr class="col col-12">
@@ -14,16 +14,16 @@
                             <th class="col col-2">Options</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody class="table-text-left">
                         <tr *ngFor="let resourceGroup of resouceGroupsList">
                             <td>{{resourceGroup.resourceGroupName}}</td>
                             <td><li *ngFor="let resource of resourceGroup.resources">
                                 {{resource.name}}
                             </li></td>
                             <td>
-                                <a class="options-icon" href="">
+                                <!-- <a class="options-icon" href="">
                                     <fa-icon [icon]="faPencil" (click)="editClick(resourceGroup.resourceGroupId)"></fa-icon>
-                                </a>
+                                </a> -->
                                 <a class="options-icon">
                                     <fa-icon [icon]="faTrashCan" (click)="deleteClick(resourceGroup.resourceGroupId)"></fa-icon>
                                 </a>
