@@ -16,7 +16,7 @@
                     </thead>
                     <tbody>
                         <tr *ngFor="let snapshot of snapshotList">
-                            <td>{{snapshot.dateOfChange.split("T")[0]}}</td>
+                            <td class="ps-4">{{snapshot.dateOfChange |  date:'dd.MM.yyyy'}}</td>
                             <td>{{snapshot.amount}}</td>
                             <td>
                                 <!-- <a class="options-icon" href="">

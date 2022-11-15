@@ -30,14 +30,15 @@ nb-card-body {
     margin-right: auto;
   }
 
-  .auth-button{
-    width: 15rem;
-    height: 3rem;
-  }
-
   .btn-container{
     
     margin-top: 2rem;
     text-align: right;
   }
 
+  @media only screen and (max-width: 600px) {
+    .btn-container{ 
+      margin-top: 2rem;
+      text-align: center;
+    }
+  }
