@@ -48,6 +48,7 @@ namespace FinBoard.Services.Services.Move
                 return Result.Fail("MoveDto cannot be null.");
             }
             var moveEntity = _mapper.Map<Domain.Entities.Snapshot>(moveDto);
+            moveEntity.DateOfChange = moveEntity.DateOfChange.Date;
             try
             {
                 await _moveRepository.AddAsync(moveEntity);

@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using FinBoard.Domain.Entities;
 using FinBoard.Domain.Repositories.Account;
+using FinBoard.Services.DTOs.Account;
 using FinBoard.Utils.Result;
 using Microsoft.Extensions.Logging;
 using System;
@@ -30,6 +31,8 @@ namespace FinBoard.Services.Services.AccountService
             {
                 AppUserId = userId,
                 DateOfCreation = DateTime.Now,
+                PeriodicityOfSnapshotsInDays = 30,
+                DateOfFirstSnapshot = DateTime.Now,
                 CreatedBy = userId,
                 LastModifyBy = userId
             };
@@ -45,6 +48,46 @@ namespace FinBoard.Services.Services.AccountService
             }
 
             return Result.Ok<Account>(accountEntity);
+        }
+
+        public async Task<Result<AccountBaseDataDto>> GetBaseAccountData(Guid accountId)
+        {
+            var account = await _accountRepository.GetFirstOrDefaultAsync(a => a.AccountId == accountId);
+
+            if (account == null)
+            {
+                return Result.Fail<AccountBaseDataDto>("Account does not exist!");
+            }
+
+            AccountBaseDataDto baseDataDto = new AccountBaseDataDto()
+            {
+                AccountId = accountId,
+                DateOfFirstSnapshot = account.DateOfFirstSnapshot,
+                PeriodicityOfSnapshotsInDays = account.PeriodicityOfSnapshotsInDays,
+            };
+
+            return Result.Ok<AccountBaseDataDto>(baseDataDto);
+        }
+
+        public async Task<Result<AccountBaseDataDto>> SetBaseAccountData(Guid value, AccountBaseDataDto accountBaseDataDto)
+        {
+            if (value != accountBaseDataDto.AccountId)
+            {
+                return Result.Fail<AccountBaseDataDto>("Invalid account!");
+            }
+
+            var account = await _accountRepository.GetFirstOrDefaultAsync(a => a.AccountId == accountBaseDataDto.AccountId);
+
+            if (account == null)
+            {
+                return Result.Fail<AccountBaseDataDto>("Account does not exist!");
+            }
+
+            account.DateOfFirstSnapshot = accountBaseDataDto.DateOfFirstSnapshot.Value.AddHours(2).Date;
+            account.PeriodicityOfSnapshotsInDays = accountBaseDataDto.PeriodicityOfSnapshotsInDays;
+
+            _accountRepository.SaveChanges();
+            return Result.Ok<AccountBaseDataDto>(accountBaseDataDto);
         }
     }
 }

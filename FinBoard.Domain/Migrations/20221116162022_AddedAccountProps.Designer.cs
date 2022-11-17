@@ -3,6 +3,7 @@ using System;
 using FinBoard.Domain.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,10 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace FinBoard.Domain.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20221116162022_AddedAccountProps")]
+    partial class AddedAccountProps
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -37,7 +39,7 @@ namespace FinBoard.Domain.Migrations
                     b.Property<DateTime>("DateOfCreation")
                         .HasColumnType("timestamp without time zone");
 
-                    b.Property<DateTime?>("DateOfFirstSnapshot")
+                    b.Property<DateTime>("DateOfFirstSnapshot")
                         .HasColumnType("timestamp without time zone");
 
                     b.Property<DateTime>("DateOfLastModification")

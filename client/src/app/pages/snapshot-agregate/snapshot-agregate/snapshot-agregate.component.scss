@@ -1,44 +1,84 @@
 nb-card-body {
-    overflow: visible;
-    padding-top: 0;
-  
-    > * {
-      margin-top: 1rem;
-    }
-  }
-  
-  .form-group{
-    margin-bottom: 1rem;
-  }
+  overflow: visible;
+  padding-top: 0;
 
-  .label{
-    padding-bottom: 0.5rem;
+  >* {
+    margin-top: 1rem;
   }
+}
 
-  .auth-form{
-    height: 100%;
-  }
+.form-group {
+  margin-bottom: 1rem;
+}
 
-  .auth-card{
-    height: 45rem;
-  }
+.label {
+  padding-bottom: 0.5rem;
+}
 
-  .auth-header{
-    padding-top: 10rem;
-    font-size: 3rem;
-    margin-left: auto;
-    margin-right: auto;
-  }
+.auth-form {
+  height: 100%;
+}
 
-  .btn-container{
-    
+.auth-card {
+  height: 45rem;
+}
+
+.auth-header {
+  padding-top: 10rem;
+  font-size: 3rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.btn-container {
+
+  margin-top: 2rem;
+  text-align: right;
+}
+
+@media only screen and (max-width: 600px) {
+  .btn-container {
     margin-top: 2rem;
-    text-align: right;
+    text-align: center;
   }
 
-  @media only screen and (max-width: 600px) {
-    .btn-container{ 
-      margin-top: 2rem;
-      text-align: center;
+  .time-line {
+    nb-icon {
+      font-size: 15px !important;
     }
   }
+}
+
+nb-icon:hover {
+  cursor: pointer;
+  transform: scale(1.2);
+}
+
+
+.time-line {
+  width: 100%;
+  max-width: 100%;
+  nb-icon {
+    font-size: 2rem;
+  }
+}
+
+.scroll {
+  overflow-x: scroll;
+}
+.scroll::-webkit-scrollbar {
+   width: 10px;
+   
+}
+
+.scroll::-webkit-scrollbar-track {
+   -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.8); 
+   border-radius: 10px;
+   
+}
+
+.scroll::-webkit-scrollbar-thumb {
+   border-radius: 10px;
+   background-color: rgba(0, 0, 0, 0.5); 
+   -webkit-box-shadow: inset 0 0 6px rgba(24, 15, 15, 0.5); 
+}

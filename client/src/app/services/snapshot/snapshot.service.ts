@@ -2,6 +2,7 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { BehaviorSubject } from "rxjs";
 import { SnapshotDto } from "src/app/_models/snapshotModels/snapshotDto";
+import { SnapshotTimelineElementDto } from "src/app/_models/snapshotModels/snapshotTimeLineDto";
 import { environment } from "src/environments/environment";
 
 
@@ -35,5 +36,9 @@ export class SnapshotService{
             element.dateOfChange.setHours( element.dateOfChange.getHours() + 2 );
         }); 
         return this.http.post(this.baseUrl+'Snapshot/createAggregate', data);
+    }
+
+    getSnapshotTimeline(){
+        return this.http.get<SnapshotTimelineElementDto[]>(this.baseUrl+'Snapshot/getSnapshotTimeline');
     }
 }

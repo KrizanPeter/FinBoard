@@ -13,6 +13,7 @@ using FinBoard.Domain.Repositories.ResourceGroup;
 using FinBoard.Services.Services.ResourceGroupService;
 using FinBoard.Services.Services.DashboardService;
 using FinBoard.Domain.Repositories.Dashboard;
+using FinBoard.Services.Services.TimeLIneService;
 
 namespace API.Extensions
 {
@@ -29,6 +30,7 @@ namespace API.Extensions
             services.AddScoped<IPersistentService, PersistentService>();
             services.AddScoped<ISnapshotService, SnapshotService>();
             services.AddScoped<IDashboardService, DashboardService>();
+            services.AddScoped<ITimeLineService, TimeLineService>();
 
             services.AddScoped<ISnapshotRepository, SnapshotRepository>();
             services.AddScoped<IAccountRepository, AccountRepository>();

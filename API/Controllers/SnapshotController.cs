@@ -10,6 +10,7 @@ using FinBoard.Services.Services.Move;
 using FinBoard.Services.Services.ResourceService;
 using FinBoard.Services.DTOs.Move;
 using Microsoft.AspNetCore.Authorization;
+using FinBoard.Services.Services.TimeLIneService;
 
 namespace API.Controllers
 {
@@ -19,17 +20,39 @@ namespace API.Controllers
         private readonly ISnapshotService _moveService;
         private readonly IResourceService _resourceService;
         private readonly IPersistentService _persistentService;
+        private readonly ITimeLineService _timeLineService;
 
 
         public SnapshotController(ILogger<SnapshotController> logger, IUserService userService, ISnapshotService moveService,
-            IPersistentService persistentService, IResourceService resourceService) : base(userService)
+            IPersistentService persistentService, IResourceService resourceService, ITimeLineService timeLineService) : base(userService)
         {
             _resourceService = resourceService;
             _logger = logger;
             _moveService = moveService;
             _persistentService = persistentService;
+            _timeLineService = timeLineService;
         }
 
+        [HttpGet("getSnapshotTimeline")]
+        [Authorize]
+        public async Task<IActionResult> GetSnapshotTimeline()
+        {
+            var requestId = this.GetRequestId();
+            var accountId = GetCurrentUserAccountId();
+            _logger.LogInformation(this.LogApiAccess(requestId, MethodBase.GetCurrentMethod()));
+            _persistentService.SetupRequestProperties(GetCurrentUserId().Value, GetCurrentUserAccountId().Value);
+
+            if (accountId.IsFailure) { return BadRequest(accountId.Error); }
+
+            var result = await _timeLineService.ConstructTimeLine(accountId.Value);
+
+            if (result.IsSuccess)
+            {
+                return Ok(result.Value);
+            }
+
+            return BadRequest(result.Error);
+        }
 
         [HttpGet("getAll")]
         [Authorize]

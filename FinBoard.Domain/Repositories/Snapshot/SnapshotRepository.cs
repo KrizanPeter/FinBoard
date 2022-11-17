@@ -1,6 +1,8 @@
 ﻿using FinBoard.Domain.Context;
+using FinBoard.Domain.Entities;
 using FinBoard.Domain.Repositories.Repository;
 using FinBoard.Utils.PersistenceService;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,6 +28,24 @@ namespace FinBoard.Domain.Repositories.Move
         public void Update(Entities.Resource user)
         {
             throw new NotImplementedException();
+        }
+
+        public List<Snapshot> GetAllAccountSnapshots(Guid accountId)
+        {
+            var resources = _db.Resources
+                .Where(a => a.AccountId == accountId)
+                .Include(a => a.Snapshots)
+                .OrderBy(a => a.DateOfCreation)
+                .ToList();
+
+            var snapshots = new List<Snapshot>();
+
+            foreach (var resource in resources)
+            {
+                snapshots = snapshots.Concat(resource.Snapshots).ToList();
+            }
+
+            return snapshots;
         }
     }
 }

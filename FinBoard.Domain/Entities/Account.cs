@@ -11,9 +11,12 @@ namespace FinBoard.Domain.Entities
     {
         public Guid AccountId { get; set; }
         public Guid AppUserId { get; set; }
+        public DateTime? DateOfFirstSnapshot { get; set; }
+        public int PeriodicityOfSnapshotsInDays { get; set; }
 
         public IEnumerable<Resource>? Resources { get; set; }
         public IEnumerable<DashboardChart> DashboardCharts { get; set; }
         public virtual AppUser AppUser { get; set; }
+
     }
 }

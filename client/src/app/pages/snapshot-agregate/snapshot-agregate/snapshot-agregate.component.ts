@@ -5,6 +5,7 @@ import { ResourceService } from 'src/app/services/resource/resource.service';
 import { SnapshotService } from 'src/app/services/snapshot/snapshot.service';
 import { ResourceDto } from 'src/app/_models/resourceModels/resourceDto';
 import { SnapshotDto } from 'src/app/_models/snapshotModels/snapshotDto';
+import { SnapshotTimelineElementDto } from 'src/app/_models/snapshotModels/snapshotTimeLineDto';
 
 @Component({
   selector: 'app-snapshot-agregate',
@@ -15,16 +16,45 @@ export class SnapshotAgregateComponent implements OnInit {
 
   resoucesList: ResourceDto[];
   inputAgregateSnapshot: SnapshotDto[] = [];
+  snapshotTimeline: SnapshotTimelineElementDto[];
+  snapshotTimelineElements = 0;
   isLoading = false;
-  
+  isTimelineLoading = false;
+  dateFromDto: Date;
+
   constructor(private resourceService: ResourceService, private router: Router, private snapshotService: SnapshotService) { }
 
   ngOnInit(): void {
     this.inputAgregateSnapshot = [];
-      this.loadResources();
-    }
+    this.loadResources();
+    this.loadSnapshotTimeline();
+  }
 
-  loadResources(){
+  loadSnapshotTimeline() {
+    this.snapshotService.getSnapshotTimeline().subscribe(
+      timelineData => {
+        this.isTimelineLoading = false;
+        this.snapshotTimeline = timelineData;
+        this.snapshotTimelineElements = timelineData.length;
+        this.setNearestDate();
+      },
+      error => {
+        this.isTimelineLoading = false;
+        console.log(error);
+      }
+    );
+  }
+
+  setNearestDate(){
+    this.snapshotTimeline.forEach(snapshot => {
+      if(snapshot.isSuccess == false){
+        this.dateFromDto = new Date(snapshot.date);
+        return;
+      }
+    });
+  }
+
+  loadResources() {
     this.isLoading = true;
     this.resourceService.getResources().subscribe(
       resData => {
@@ -32,23 +62,23 @@ export class SnapshotAgregateComponent implements OnInit {
         console.log(resData);
         this.resoucesList = resData;
         this.prepareInputArray();
-      }, 
+      },
       error => {
         this.isLoading = false;
         console.log(error);
       }
     );
   }
-  
-  prepareInputArray(){
+
+  prepareInputArray() {
     this.resoucesList.forEach(element => {
       this.inputAgregateSnapshot.push(new SnapshotDto(null, element.resourceId, null))
     });
   }
 
-  onSubmit(form: NgForm){
-    const date = form.value.inputDateOfSnapshot;
-    for(let i = 0; i<this.inputAgregateSnapshot.length; i++){
+  onSubmit(form: NgForm) {
+    const date = this.dateFromDto;
+    for (let i = 0; i < this.inputAgregateSnapshot.length; i++) {
       this.inputAgregateSnapshot[i].dateOfChange = date;
     }
 
@@ -57,14 +87,19 @@ export class SnapshotAgregateComponent implements OnInit {
     this.snapshotService.createAggregateSnapsthot(this.inputAgregateSnapshot).subscribe(
       resData => {
         this.isLoading = false;
-      }, 
+        this.ngOnInit();
+      },
       error => {
         this.isLoading = false;
         console.log(error);
       }
     );
     form.reset();
-    this.ngOnInit();
+  }
+
+  setDate(date: Date){
+    console.log(date)
+    this.dateFromDto = new Date(date);
   }
 
 }

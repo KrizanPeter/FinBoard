@@ -9,9 +9,6 @@ import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { LayoutService } from './nbutils/layout.service';
-import { AccountTemplateComponent } from './pages/account/account-template/account-template.component';
-import { AccountTabComponent } from './pages/account/account-tab/account-tab.component';
-import { AccountFormComponent } from './pages/account/account-form/account-form.component';
 import { AuthTemplateComponent } from './pages/auth/auth-template/auth-template.component';
 import { LoginFormComponent } from './pages/auth/login-form/login-form.component';
 import { RegisterFormComponent } from './pages/auth/register-form/register-form.component';
@@ -45,6 +42,7 @@ import {
   NbCheckboxModule,
   NbRadioModule,
   NbStepperModule,
+  NbTooltipModule,
 } from '@nebular/theme';
 import { HeaderInterceptor } from './Interceptors/header.interceptor';
 import { FormsModule } from '@angular/forms';
@@ -72,6 +70,7 @@ import { ReleaseNotesComponent } from './publicPages/release-notes/release-notes
 import { StateService } from './nbutils/state.service';
 import { OutsideClickDirective } from './directives/outsideclick.directive';
 import { CreateGuideComponent } from './pages/create-guide/create-guide/create-guide.component';
+import { BaseAccountDataComponent } from './pages/account/base-account-data/base-account-data.component';
 
 
 @NgModule({
@@ -79,9 +78,6 @@ import { CreateGuideComponent } from './pages/create-guide/create-guide/create-g
     AppComponent,
     HeaderComponent,
     FooterComponent,
-    AccountFormComponent,
-    AccountTemplateComponent,
-    AccountTabComponent,
     ResourceFormComponent,
     ResourceListComponent,
     ResourceTemplateComponent,
@@ -108,6 +104,7 @@ import { CreateGuideComponent } from './pages/create-guide/create-guide/create-g
     ReleaseNotesComponent,
     OutsideClickDirective,
     CreateGuideComponent,
+    BaseAccountDataComponent,
   ],
   imports: [
     NgxEchartsModule.forRoot({
@@ -142,6 +139,7 @@ import { CreateGuideComponent } from './pages/create-guide/create-guide/create-g
     NbTreeGridModule,
     NbCardModule,
     NbStepperModule,
+    NbTooltipModule,
     NbMenuModule.forRoot(),
     NbDialogModule.forRoot(),
     NbWindowModule.forRoot(),

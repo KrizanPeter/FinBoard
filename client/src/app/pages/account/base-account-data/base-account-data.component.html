@@ -1,0 +1,23 @@
+<nb-card class="col-md-6 col-lg-6 offset-lg-3">
+    <nb-card-header>Set base data</nb-card-header>
+    <nb-card-body>
+      <div style="text-align: center; margin-top:40px;"  *ngIf="isLoading">
+        <app-loading-spinner></app-loading-spinner>
+      </div>
+      <form class="auth-form" #baseDataForm="ngForm" (ngSubmit)="onSubmit(baseDataForm)" *ngIf="!isLoading">
+        <label for="datepickerInput" class="label">Date of first snapshot</label>
+        <div id="datepickerInput">
+            <input name="inputDateOfFirstSnapshot" fullWidth required ngModel nbInput [nbDatepicker]="formpicker" autocomplete="off" [(ngModel)]="dateFromDto" ng-model-options="{timezone: 'local'}">
+            <nb-datepicker  #formpicker></nb-datepicker>
+        </div>
+        <div class="form-group pt-2">
+          <label for="periodicityId" class="label">Periodicity of snapshots in days</label>
+          <input type="text" ngModel id="periodicityId" name="inputPeriodicity" nbInput required minlength="1" fullWidth [(ngModel)]="baseDataDto.periodicityOfSnapshotsInDays"  >
+        </div>
+        <div class="btn-container">
+          <button type="submit" nbButton status="danger" 
+            [disabled]="!baseDataForm.valid">Set data</button>
+        </div>
+      </form>
+    </nb-card-body>
+  </nb-card>

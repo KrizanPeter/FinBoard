@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
+import { ResourceGroupTemplateComponent } from '../../resource-group/resource-group-template/resource-group-template.component';
 import { ResourceTemplateComponent } from '../../resources/resource-template/resource-template.component';
 import { SnapshotAgregateComponent } from '../../snapshot-agregate/snapshot-agregate/snapshot-agregate.component';
 
@@ -10,14 +11,19 @@ import { SnapshotAgregateComponent } from '../../snapshot-agregate/snapshot-agre
 })
 export class CreateGuideComponent implements OnInit {
   @ViewChild(ResourceTemplateComponent) resourceTemplate:ResourceTemplateComponent;
+  @ViewChild(ResourceGroupTemplateComponent) resourceGroupTemplate:ResourceTemplateComponent;
   @ViewChild(SnapshotAgregateComponent) aggregateTemplate:SnapshotAgregateComponent;
   constructor(private router: Router) { }
 
   ngOnInit(): void {
   }
 
-  refreshTemplates(){
+  refreshResourceTemplates(){
     this.resourceTemplate.ngOnInit();
+    this.resourceGroupTemplate.ngOnInit();
+  }
+
+  refreshAggregateFormTemplate(){
     this.aggregateTemplate.ngOnInit();
   }
 

@@ -2,19 +2,25 @@
     <nb-card-body>
       <nb-stepper orientation="horizontal" class="p-xs-0" disableStepNavigation>
         <nb-step [label]="labelOne">
-          <ng-template #labelOne>Create resources</ng-template>
-          <app-resource-template></app-resource-template>
-          <button nbButton disabled nbStepperNext>prev</button>
-          <button nbButton nbStepperNext (click)="refreshTemplates()">next</button>
+          <ng-template #labelOne>Set base data</ng-template>
+          <app-base-account-data></app-base-account-data>
+          <button nbButton disabled nbStepperPrevious>prev</button>
+          <button nbButton nbStepperNext (click)="refreshResourceTemplates()">next</button>
         </nb-step>
         <nb-step [label]="labelTwo">
-          <ng-template #labelTwo>Group them!</ng-template>
-          <app-resource-group-template></app-resource-group-template>
+          <ng-template #labelTwo>Create resources</ng-template>
+          <app-resource-template></app-resource-template>
           <button nbButton nbStepperPrevious>prev</button>
-          <button nbButton nbStepperNext (click)="refreshTemplates()">next</button>
+          <button nbButton nbStepperNext (click)="refreshResourceTemplates()">next</button>
         </nb-step>
         <nb-step [label]="labelThree">
-          <ng-template #labelThree>Fill snapshots</ng-template>
+          <ng-template #labelThree>Group them!</ng-template>
+          <app-resource-group-template></app-resource-group-template>
+          <button nbButton nbStepperPrevious>prev</button>
+          <button nbButton nbStepperNext (click)="refreshAggregateFormTemplate()">next</button>
+        </nb-step>
+        <nb-step [label]="labelFour">
+          <ng-template #labelFour>Fill snapshots</ng-template>
           <app-snapshot-agregate></app-snapshot-agregate>
           <button nbButton nbStepperPrevious>prev</button>
           <button nbButton (click)="navigateToDashboardPage()">Finish</button>

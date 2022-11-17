@@ -33,7 +33,6 @@ export class SnapshotFormComponent implements OnInit {
         console.log(error);
       }
     );
-    //form.reset();
   }
 
   loadResources() {

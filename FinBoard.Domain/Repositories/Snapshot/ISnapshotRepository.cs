@@ -1,4 +1,5 @@
-﻿using FinBoard.Domain.Repositories.Repository;
+﻿using FinBoard.Domain.Entities;
+using FinBoard.Domain.Repositories.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,5 +12,6 @@ namespace FinBoard.Domain.Repositories.Move
     {
         void Update(Entities.Resource user);
         void SaveChanges();
+        List<Snapshot> GetAllAccountSnapshots(Guid accountId);
     }
 }
