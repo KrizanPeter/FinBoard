@@ -129,7 +129,7 @@ namespace FinBoard.Services.Services.DashboardService
 
             else if (chart.SourceType == Domain.Enums.SourceType.Resource)
             {
-                var result = await _snapshotService.GetAllMovesOfResourceAsync(chart.SourceId);
+                var result = await _snapshotService.GetAllSnapshotsOfResourceAsync(chart.SourceId);
                 if (result.IsSuccess) dataForChart.SnapshotsDto = result.Value.ToList();
             }
 
@@ -142,7 +142,7 @@ namespace FinBoard.Services.Services.DashboardService
             var resouceCount = 0;
             foreach (var resource in resultResourceGroup.Resources)
             {
-                resource.Snapshots = resource.Snapshots.OrderByDescending(a => a.DateOfChange).ToList();
+                resource.Snapshots = resource.Snapshots.OrderByDescending(a => a.DateOfSnapshot).ToList();
                 for (int snapshotIndex = 0; snapshotIndex < resource.Snapshots.Count(); snapshotIndex++)
                 {
                     if (resouceCount == 0)

@@ -1,4 +1,5 @@
-﻿using FinBoard.Services.DTOs.Resource;
+﻿using FinBoard.Services.DTOs.Account;
+using FinBoard.Services.DTOs.Resource;
 using FinBoard.Utils.Result;
 using System;
 using System.Collections.Generic;

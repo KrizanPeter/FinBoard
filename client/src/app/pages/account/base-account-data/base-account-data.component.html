@@ -1,23 +1,31 @@
 <nb-card class="col-md-6 col-lg-6 offset-lg-3">
-    <nb-card-header>Set base data</nb-card-header>
-    <nb-card-body>
-      <div style="text-align: center; margin-top:40px;"  *ngIf="isLoading">
-        <app-loading-spinner></app-loading-spinner>
+  <nb-card-header>Set base data</nb-card-header>
+  <nb-card-body>
+    <div style="text-align: center; margin-top:40px;" *ngIf="isLoading">
+      <app-loading-spinner></app-loading-spinner>
+    </div>
+    <form class="auth-form" #baseDataForm="ngForm" (ngSubmit)="onSubmit(baseDataForm)" *ngIf="!isLoading">
+      <label for="datepickerInput" class="label">Date of first snapshot</label>
+      <div id="datepickerInput" class="form-group m-0 p-0">
+        <input class="text-center " name="inputDateOfFirstSnapshot"  fullWidth required ngModel nbInput
+          [nbDatepicker]="formpicker" autocomplete="off" [(ngModel)]="dateFromDto"
+          ng-model-options="{timezone: 'local'}">
+        <nb-datepicker #formpicker [min]="min" [max]="max"></nb-datepicker>
       </div>
-      <form class="auth-form" #baseDataForm="ngForm" (ngSubmit)="onSubmit(baseDataForm)" *ngIf="!isLoading">
-        <label for="datepickerInput" class="label">Date of first snapshot</label>
-        <div id="datepickerInput">
-            <input name="inputDateOfFirstSnapshot" fullWidth required ngModel nbInput [nbDatepicker]="formpicker" autocomplete="off" [(ngModel)]="dateFromDto" ng-model-options="{timezone: 'local'}">
-            <nb-datepicker  #formpicker></nb-datepicker>
-        </div>
-        <div class="form-group pt-2">
-          <label for="periodicityId" class="label">Periodicity of snapshots in days</label>
-          <input type="text" ngModel id="periodicityId" name="inputPeriodicity" nbInput required minlength="1" fullWidth [(ngModel)]="baseDataDto.periodicityOfSnapshotsInDays"  >
-        </div>
-        <div class="btn-container">
-          <button type="submit" nbButton status="danger" 
-            [disabled]="!baseDataForm.valid">Set data</button>
-        </div>
-      </form>
-    </nb-card-body>
-  </nb-card>
+      <div class="form-group pt-2 ">
+        <label for="periodicityId" class="label">Periodicity of snapshots in days</label>
+        <nb-select class="m-0 p-0 text-center" name="inputPeriodicity" id="resourceOptionInput" fullWidth ngModel required selected={{baseDataDto.periodicityOfSnapshotsInDays}}>
+          <nb-option value="7">Weekly</nb-option>
+          <nb-option value="14">Biweekly</nb-option>
+          <nb-option value="30">Monthly</nb-option>
+          <nb-option value="90">Quarterly</nb-option>
+          <nb-option value="365">Yearly</nb-option>
+        </nb-select>
+        <!-- <input type="number" ngModel id="periodicityId" name="inputPeriodicity" nbInput required min="7" fullWidth [(ngModel)]="baseDataDto.periodicityOfSnapshotsInDays"  > -->
+      </div>
+      <div class="btn-container">
+        <button type="submit" nbButton status="danger" [disabled]="!baseDataForm.valid">Set data</button>
+      </div>
+    </form>
+  </nb-card-body>
+</nb-card>

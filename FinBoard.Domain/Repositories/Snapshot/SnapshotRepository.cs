@@ -32,18 +32,10 @@ namespace FinBoard.Domain.Repositories.Move
 
         public List<Snapshot> GetAllAccountSnapshots(Guid accountId)
         {
-            var resources = _db.Resources
+            var snapshots = _db.Snapshots
                 .Where(a => a.AccountId == accountId)
-                .Include(a => a.Snapshots)
                 .OrderBy(a => a.DateOfCreation)
                 .ToList();
-
-            var snapshots = new List<Snapshot>();
-
-            foreach (var resource in resources)
-            {
-                snapshots = snapshots.Concat(resource.Snapshots).ToList();
-            }
 
             return snapshots;
         }

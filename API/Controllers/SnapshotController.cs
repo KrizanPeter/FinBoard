@@ -11,6 +11,7 @@ using FinBoard.Services.Services.ResourceService;
 using FinBoard.Services.DTOs.Move;
 using Microsoft.AspNetCore.Authorization;
 using FinBoard.Services.Services.TimeLIneService;
+using FinBoard.Services.DTOs.Snapshot;
 
 namespace API.Controllers
 {
@@ -72,7 +73,28 @@ namespace API.Controllers
                 return BadRequest(validity.Error);
             }
 
-            var result = await _moveService.GetAllMovesOfResourceAsync(resourceId);
+            var result = await _moveService.GetAllSnapshotsOfResourceAsync(resourceId);
+
+            if (result.IsSuccess)
+            {
+                return Ok(result.Value);
+            }
+
+            return BadRequest(result.Error);
+        }
+
+        [HttpPost("getAllForDate")]
+        [Authorize]
+        public async Task<IActionResult> GetAllForDate(DateTimeDto dateDto)
+        {
+            var requestId = this.GetRequestId();
+            var accountId = GetCurrentUserAccountId();
+            _logger.LogInformation(this.LogApiAccess(requestId, MethodBase.GetCurrentMethod()));
+            _persistentService.SetupRequestProperties(GetCurrentUserId().Value, GetCurrentUserAccountId().Value);
+
+            if (accountId.IsFailure) { return BadRequest(accountId.Error); }
+            dateDto.Date = dateDto.Date.AddHours(2).Date;
+            var result = await _moveService.GetAllSnapshotsForDate(accountId.Value, dateDto.Date);
 
             if (result.IsSuccess)
             {
@@ -100,7 +122,7 @@ namespace API.Controllers
                 return BadRequest(validity.Error);
             }
 
-            var result = await _moveService.CreateMoveForResourceAsync(moveDto);
+            var result = await _moveService.CreateSnapshotForResourceAsync(moveDto, accountId.Value);
 
             if (result.IsSuccess)
             {
@@ -132,7 +154,7 @@ namespace API.Controllers
 
             foreach (var item in movesDto)
             {
-                var result = await _moveService.CreateMoveForResourceAsync(item);
+                var result = await _moveService.CreateSnapshotForResourceAsync(item, accountId.Value);
                 if (result.IsFailure) return BadRequest(result.Error);
             }
             return Ok();
@@ -157,7 +179,7 @@ namespace API.Controllers
                 return BadRequest(validity.Error);
             }
 
-            var result = await _moveService.DeleteMoveAsync(snapshotId);
+            var result = await _moveService.DeleteSnapshotAsync(snapshotId);
 
             if (result.IsSuccess)
             {

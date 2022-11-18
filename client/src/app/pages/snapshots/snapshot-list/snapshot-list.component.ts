@@ -61,7 +61,7 @@ export class SnapshotListComponent implements OnInit {
     let dateLabels = []
     data.forEach(element => {
       numberData.push(element.amount);
-      dateLabels.push(element.dateOfChange.toString().split('T')[0]);   
+      dateLabels.push(element.dateOfSnapshot.toString().split('T')[0]);   
     });
     dateLabels.reverse();
     numberData.reverse();

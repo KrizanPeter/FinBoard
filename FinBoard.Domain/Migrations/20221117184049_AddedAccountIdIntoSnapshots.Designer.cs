@@ -3,6 +3,7 @@ using System;
 using FinBoard.Domain.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,10 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace FinBoard.Domain.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20221117184049_AddedAccountIdIntoSnapshots")]
+    partial class AddedAccountIdIntoSnapshots
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -294,19 +296,19 @@ namespace FinBoard.Domain.Migrations
                     b.Property<Guid>("AccountId")
                         .HasColumnType("uuid");
 
-                    b.Property<float?>("Amount")
+                    b.Property<float>("Amount")
                         .HasColumnType("real");
 
                     b.Property<Guid>("CreatedBy")
                         .HasColumnType("uuid");
 
+                    b.Property<DateTime>("DateOfChange")
+                        .HasColumnType("timestamp without time zone");
+
                     b.Property<DateTime>("DateOfCreation")
                         .HasColumnType("timestamp without time zone");
 
                     b.Property<DateTime>("DateOfLastModification")
-                        .HasColumnType("timestamp without time zone");
-
-                    b.Property<DateTime>("DateOfSnapshot")
                         .HasColumnType("timestamp without time zone");
 
                     b.Property<Guid>("LastModifyBy")

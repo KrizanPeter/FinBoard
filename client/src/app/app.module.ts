@@ -43,6 +43,7 @@ import {
   NbRadioModule,
   NbStepperModule,
   NbTooltipModule,
+  NbPopoverModule,
 } from '@nebular/theme';
 import { HeaderInterceptor } from './Interceptors/header.interceptor';
 import { FormsModule } from '@angular/forms';
@@ -71,6 +72,7 @@ import { StateService } from './nbutils/state.service';
 import { OutsideClickDirective } from './directives/outsideclick.directive';
 import { CreateGuideComponent } from './pages/create-guide/create-guide/create-guide.component';
 import { BaseAccountDataComponent } from './pages/account/base-account-data/base-account-data.component';
+import { SnapshotPopoverComponent } from './components/popovers/snapshot-popover/snapshot-popover.component';
 
 
 @NgModule({
@@ -105,6 +107,7 @@ import { BaseAccountDataComponent } from './pages/account/base-account-data/base
     OutsideClickDirective,
     CreateGuideComponent,
     BaseAccountDataComponent,
+    SnapshotPopoverComponent,
   ],
   imports: [
     NgxEchartsModule.forRoot({
@@ -140,6 +143,7 @@ import { BaseAccountDataComponent } from './pages/account/base-account-data/base
     NbCardModule,
     NbStepperModule,
     NbTooltipModule,
+    NbPopoverModule,
     NbMenuModule.forRoot(),
     NbDialogModule.forRoot(),
     NbWindowModule.forRoot(),

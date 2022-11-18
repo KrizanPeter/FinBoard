@@ -2,13 +2,11 @@
 using FinBoard.Domain.Entities;
 using FinBoard.Domain.Repositories.Account;
 using FinBoard.Services.DTOs.Account;
+using FinBoard.Services.Services.ResourceService;
+using FinBoard.Services.Services.RestoreService;
 using FinBoard.Utils.Result;
 using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace FinBoard.Services.Services.AccountService
 {
@@ -16,12 +14,14 @@ namespace FinBoard.Services.Services.AccountService
     {
         private readonly ILogger<AccountService> _logger;
         private readonly IAccountRepository _accountRepository;
+        private readonly IRestoreService _restoreService;
         private readonly IMapper _mapper;
 
-        public AccountService(ILogger<AccountService> logger, IAccountRepository accountRepository, IMapper mapper)
+        public AccountService(ILogger<AccountService> logger, IAccountRepository accountRepository, IMapper mapper, IRestoreService restoreService)
         {
             _logger = logger;
             _accountRepository = accountRepository;
+            _restoreService = restoreService;
             _mapper = mapper;
         }
 
@@ -71,6 +71,7 @@ namespace FinBoard.Services.Services.AccountService
 
         public async Task<Result<AccountBaseDataDto>> SetBaseAccountData(Guid value, AccountBaseDataDto accountBaseDataDto)
         {
+            accountBaseDataDto.DateOfFirstSnapshot = accountBaseDataDto.DateOfFirstSnapshot.Value.AddHours(2).Date;
             if (value != accountBaseDataDto.AccountId)
             {
                 return Result.Fail<AccountBaseDataDto>("Invalid account!");
@@ -83,10 +84,15 @@ namespace FinBoard.Services.Services.AccountService
                 return Result.Fail<AccountBaseDataDto>("Account does not exist!");
             }
 
-            account.DateOfFirstSnapshot = accountBaseDataDto.DateOfFirstSnapshot.Value.AddHours(2).Date;
-            account.PeriodicityOfSnapshotsInDays = accountBaseDataDto.PeriodicityOfSnapshotsInDays;
+            if (account.PeriodicityOfSnapshotsInDays != accountBaseDataDto.PeriodicityOfSnapshotsInDays || account.DateOfFirstSnapshot != accountBaseDataDto.DateOfFirstSnapshot.Value.Date)
+            {
+                account.DateOfFirstSnapshot = accountBaseDataDto.DateOfFirstSnapshot;
+                account.PeriodicityOfSnapshotsInDays = accountBaseDataDto.PeriodicityOfSnapshotsInDays;
+                _accountRepository.SaveChanges();
+                _ = await _restoreService.RestoreDataForAccount(accountBaseDataDto);
+            }
 
-            _accountRepository.SaveChanges();
+
             return Result.Ok<AccountBaseDataDto>(accountBaseDataDto);
         }
     }

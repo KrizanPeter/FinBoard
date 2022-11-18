@@ -41,13 +41,13 @@ namespace FinBoard.Services.Services.TimeLIneService
             while (floatingDate <= DateTime.Now)
             {
                 timeline.Add(CreateNewSnapshotElementDto(resources, snapshots, floatingDate));
-                if (accountInfo.PeriodicityOfSnapshotsInDays != 30)
+                if (accountInfo.PeriodicityOfSnapshotsInDays % 30 == 0)
                 {
-                    floatingDate = floatingDate.Value.AddDays(accountInfo.PeriodicityOfSnapshotsInDays);
+                    floatingDate = floatingDate.Value.AddMonths(accountInfo.PeriodicityOfSnapshotsInDays / 30);
                 }
                 else
                 {
-                    floatingDate = floatingDate.Value.AddMonths(1);
+                    floatingDate = floatingDate.Value.AddDays(accountInfo.PeriodicityOfSnapshotsInDays);
                 }
             }
 
@@ -71,8 +71,8 @@ namespace FinBoard.Services.Services.TimeLIneService
 
         private bool CheckIfSnapshotExist(List<Domain.Entities.Snapshot> snapshots, DateTime? floatingDate, Guid resourceId)
         {
-            var result = snapshots.Any(a => a.ResourceId == resourceId && a.DateOfChange == floatingDate);
-            return result;
+            var result = snapshots.Where(a => a.ResourceId == resourceId && a.DateOfSnapshot == floatingDate).SingleOrDefault();
+            return (result != null && result.Amount != null);
         }
     }
 }

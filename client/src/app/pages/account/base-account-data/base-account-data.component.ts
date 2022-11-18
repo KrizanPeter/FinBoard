@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { NbDateService } from '@nebular/theme';
 import { AccountService } from 'src/app/services/account/account.service';
 import { baseAccountDataDto } from 'src/app/_models/accountModels/baseAccountDataDto';
 
@@ -12,7 +13,12 @@ export class BaseAccountDataComponent implements OnInit {
   isLoading = false;
   baseDataDto: baseAccountDataDto;
   dateFromDto: Date;
-  constructor(private accountService: AccountService) { }
+  min: Date;
+  max: Date;
+  constructor(private accountService: AccountService, protected dateService: NbDateService<Date>) {
+    this.min = this.dateService.addYear(this.dateService.today(), -5);
+    this.max = this.dateService.addMonth(this.dateService.today(), 1);
+   }
 
   ngOnInit(): void {
     this.loadData();

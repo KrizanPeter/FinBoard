@@ -25,7 +25,9 @@ namespace FinBoard.Domain.Entities
             {
                 if (Snapshots == null || Snapshots.Count == 0)
                     return 0;
-                return (float)Snapshots.OrderByDescending(a => a.DateOfChange).First().Amount;
+                var value = Snapshots.OrderByDescending(a => a.DateOfSnapshot).First().Amount;
+                if (value == null) return 0;
+                return (float)value;
             }
             set { }
         }

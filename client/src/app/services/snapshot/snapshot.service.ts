@@ -18,6 +18,10 @@ export class SnapshotService{
         return this.http.get<SnapshotDto[]>(this.baseUrl+'Snapshot/getAll?resourceId='+resourceId);
     }
 
+    getSnapshotForDate(date: Date) {
+        return this.http.post<SnapshotDto[]>(this.baseUrl+'Snapshot/getAllForDate',{date: date});
+    }
+
     deleteSnapshot(snapshotId:string){
         return this.http.delete(this.baseUrl+'Snapshot/delete?snapshotId='+snapshotId);
     }
@@ -26,14 +30,14 @@ export class SnapshotService{
         date.setHours( date.getHours() + 2 );
         return this.http.post(this.baseUrl+'Snapshot/create', {
             resourceId: resourceId,
-            dateOfChange: date.toJSON(),
+            dateOfSnapshot: date.toJSON(),
             amount: amount
         });
     }
 
     createAggregateSnapsthot(data: SnapshotDto[]){
         data.forEach(element => {
-            element.dateOfChange.setHours( element.dateOfChange.getHours() + 2 );
+            element.dateOfSnapshot.setHours( element.dateOfSnapshot.getHours() + 2 );
         }); 
         return this.http.post(this.baseUrl+'Snapshot/createAggregate', data);
     }

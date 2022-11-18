@@ -10,7 +10,7 @@ namespace FinBoard.Services.DTOs.Move
     {
         public Guid SnapshotId { get; set; }
         public Guid ResourceId { get; set; }
-        public float Amount { get; set; }
-        public DateTime DateOfChange { get; set; }
+        public float? Amount { get; set; }
+        public DateTime DateOfSnapshot { get; set; }
     }
 }

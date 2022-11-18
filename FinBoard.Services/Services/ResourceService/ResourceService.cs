@@ -1,7 +1,10 @@
 ﻿using AutoMapper;
 using FinBoard.Domain.Entities;
 using FinBoard.Domain.Repositories.Resource;
+using FinBoard.Services.DTOs.Account;
 using FinBoard.Services.DTOs.Resource;
+using FinBoard.Services.Services.AccountService;
+using FinBoard.Services.Services.Move;
 using FinBoard.Utils.Result;
 using Microsoft.Extensions.Logging;
 using System;
@@ -17,12 +20,16 @@ namespace FinBoard.Services.Services.ResourceService
         private readonly ILogger<ResourceService> _logger;
         private readonly IResourceRepository _resourceRepository;
         private readonly IMapper _mapper;
+        private readonly IAccountService _accountService;
+        private readonly ISnapshotService _snapshotService;
 
-        public ResourceService(ILogger<ResourceService> logger, IResourceRepository resourceRepository, IMapper mapper)
+        public ResourceService(ILogger<ResourceService> logger, IResourceRepository resourceRepository, IMapper mapper, IAccountService accountService, ISnapshotService snapshotService)
         {
             _logger = logger;
             _resourceRepository = resourceRepository;
             _mapper = mapper;
+            _accountService = accountService;
+            _snapshotService = snapshotService;
         }
 
         public async Task<Result> CheckValidityAsync(Guid resourceId, Guid accountId)
@@ -37,12 +44,14 @@ namespace FinBoard.Services.Services.ResourceService
 
         public async Task<Result> CreateResourceAsync(CreateResourceDto resourceDto, Guid accountId)
         {
-            if (resourceDto == null)
+            var accountInfo = await _accountService.GetBaseAccountData(accountId);
+            if (resourceDto == null || accountInfo.Value == null)
             {
                 return Result.Fail("Resource Dto cannot be null.");
             }
             var resourceEntity = _mapper.Map<Resource>(resourceDto);
             resourceEntity.AccountId = accountId;
+            resourceEntity.Snapshots = _snapshotService.GenerateSnapshotsForAccount(accountInfo.Value);
 
             try
             {
@@ -87,5 +96,6 @@ namespace FinBoard.Services.Services.ResourceService
             }
             return Result.Fail<IEnumerable<ResourceDto>>("Any Data for specific account.");
         }
+
     }
 }

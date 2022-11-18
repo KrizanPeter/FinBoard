@@ -11,7 +11,8 @@ namespace FinBoard.Domain.Entities
     {
         public Guid SnapshotId { get; set; }
         public Guid ResourceId { get; set; }
-        public float Amount { get; set; }
-        public DateTime DateOfChange { get; set; }
+        public Guid AccountId { get; set; }
+        public float? Amount { get; set; }
+        public DateTime DateOfSnapshot { get; set; }
     }
 }

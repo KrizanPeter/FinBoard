@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
+import { SnapshotPopoverComponent } from 'src/app/components/popovers/snapshot-popover/snapshot-popover.component';
 import { ResourceService } from 'src/app/services/resource/resource.service';
 import { SnapshotService } from 'src/app/services/snapshot/snapshot.service';
 import { ResourceDto } from 'src/app/_models/resourceModels/resourceDto';
@@ -17,10 +18,13 @@ export class SnapshotAgregateComponent implements OnInit {
   resoucesList: ResourceDto[];
   inputAgregateSnapshot: SnapshotDto[] = [];
   snapshotTimeline: SnapshotTimelineElementDto[];
+  loadedExistingSnapshots: SnapshotDto[] = [];
   snapshotTimelineElements = 0;
   isLoading = false;
   isTimelineLoading = false;
   dateFromDto: Date;
+  snapshotHint = SnapshotPopoverComponent;
+  a = 1;
 
   constructor(private resourceService: ResourceService, private router: Router, private snapshotService: SnapshotService) { }
 
@@ -46,12 +50,34 @@ export class SnapshotAgregateComponent implements OnInit {
   }
 
   setNearestDate(){
+    
     this.snapshotTimeline.forEach(snapshot => {
       if(snapshot.isSuccess == false){
         this.dateFromDto = new Date(snapshot.date);
         return;
       }
     });
+  }
+
+  getSnapshotForDate(date: Date){
+    console.log("hola holaa moji mili")
+    this.snapshotService.getSnapshotForDate(date).subscribe(
+      resData => {
+        this.loadedExistingSnapshots = resData;
+        console.log(resData);
+        this.inputAgregateSnapshot.forEach(input => {
+          this.loadedExistingSnapshots.forEach(data => {
+            if(input.resourceId === data.resourceId){
+              input.amount = data.amount;
+            }
+          });
+        });
+
+      },
+      error => {
+        console.log(error);
+      }
+    );
   }
 
   loadResources() {
@@ -79,7 +105,7 @@ export class SnapshotAgregateComponent implements OnInit {
   onSubmit(form: NgForm) {
     const date = this.dateFromDto;
     for (let i = 0; i < this.inputAgregateSnapshot.length; i++) {
-      this.inputAgregateSnapshot[i].dateOfChange = date;
+      this.inputAgregateSnapshot[i].dateOfSnapshot = date;
     }
 
     this.isLoading = true;
@@ -100,6 +126,8 @@ export class SnapshotAgregateComponent implements OnInit {
   setDate(date: Date){
     console.log(date)
     this.dateFromDto = new Date(date);
+    this.getSnapshotForDate(new Date(date));
+
   }
 
 }

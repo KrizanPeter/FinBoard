@@ -2,6 +2,10 @@ import { NbMenuItem } from '@nebular/theme';
 
 export const USER_MENU_ITEMS: NbMenuItem[] = [
   {
+    title: 'Home',
+    group: true,
+  },
+  {
     title: 'Dashboard',
     icon: 'browser-outline',
     link: 'dashboard',
@@ -12,7 +16,12 @@ export const USER_MENU_ITEMS: NbMenuItem[] = [
     link: 'create-guide',
   },
   {
-    title: 'Management',
+    title: 'Agregate snapshot',
+    icon: 'done-all-outline',
+    link: 'agregate-snapshot',
+  },
+  {
+    title: 'Data management',
     group: true,
   },
   {
@@ -31,25 +40,22 @@ export const USER_MENU_ITEMS: NbMenuItem[] = [
     link: 'snapshot',
   },
   {
-    title: 'Agregate snapshot',
-    icon: 'done-all-outline',
-    link: 'agregate-snapshot',
-  },
-  {
-    title: 'PROFILE',
+    title: 'Public',
     group: true,
   },
   {
-    title: 'My profile',
+    title: 'Public pages',
     icon: 'person-outline',
     children: [
       {
-        title: 'Profile management',
-        link: 'login',
+        title: 'What is Finboard?',
+        icon: 'home-outline',
+        link: 'landing-page',
       },
       {
-        title: 'Register',
-        link: 'login',
+        title: 'How to use Finboard?',
+        icon: 'book-outline',
+        link: 'how-to-use',
       },
     ],
   },

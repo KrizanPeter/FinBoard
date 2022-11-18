@@ -1,10 +1,10 @@
 export class SnapshotDto{
-    dateOfChange: Date;
+    dateOfSnapshot: Date;
     resourceId: string;
     amount: number;
 
     constructor(date: Date, resourceId:string, amount:number){
-        this.dateOfChange = date;
+        this.dateOfSnapshot = date;
         this.amount = amount;
         this.resourceId = resourceId;
     }
