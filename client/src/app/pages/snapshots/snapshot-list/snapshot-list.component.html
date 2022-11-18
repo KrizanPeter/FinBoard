@@ -18,14 +18,14 @@
                         <tr *ngFor="let snapshot of snapshotList">
                             <td class="ps-4">{{snapshot.dateOfSnapshot |  date:'dd.MM.yyyy'}}</td>
                             <td>{{snapshot.amount}}</td>
-                            <td>
+                            
                                 <!-- <a class="options-icon" href="">
                                     <fa-icon [icon]="faPencil" (click)="editClick(snapshot.snapshotId)"></fa-icon>
                                 </a> -->
                                 <!-- <a class="options-icon">
                                     <fa-icon [icon]="faTrashCan" (click)="deleteClick(snapshot.snapshotId)"></fa-icon>
                                 </a> -->
-                            </td>
+                            
                         </tr>
                     </tbody>
                 </table>
