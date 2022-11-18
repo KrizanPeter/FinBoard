@@ -20,6 +20,7 @@ export class SnapshotAgregateComponent implements OnInit {
   snapshotTimeline: SnapshotTimelineElementDto[];
   loadedExistingSnapshots: SnapshotDto[] = [];
   snapshotTimelineElements = 0;
+  isOveralValid: boolean;
   isLoading = false;
   isTimelineLoading = false;
   dateFromDto: Date;
@@ -40,6 +41,7 @@ export class SnapshotAgregateComponent implements OnInit {
         this.isTimelineLoading = false;
         this.snapshotTimeline = timelineData;
         this.snapshotTimelineElements = timelineData.length;
+        this.isOveralValid = this.checkValidity();
         this.setNearestDate();
       },
       error => {
@@ -49,6 +51,17 @@ export class SnapshotAgregateComponent implements OnInit {
     );
   }
 
+  checkValidity():boolean{
+    let result = true;
+    this.snapshotTimeline.forEach(element => {
+      if(!element.isSuccess){
+        result = false;
+      }
+    });
+    return result;
+  }
+
+  
   setNearestDate(){
     
     this.snapshotTimeline.forEach(snapshot => {

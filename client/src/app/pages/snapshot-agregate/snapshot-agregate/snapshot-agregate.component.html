@@ -1,6 +1,21 @@
 <div class="row">
     <nb-card class="card-padding col col-md-2">
-        <nb-card-header>Snapshot checker</nb-card-header>
+        <nb-card-header class="text-center">
+            Data checker
+        </nb-card-header>
+        <nb-card-header class="text-center">
+            <div>
+                <div *ngIf="isOveralValid">
+                    <nb-icon class="col" style="color: green ; font-size: 50px;" nbPrefix
+                    icon="checkmark-circle-outline" pack="eva" nbTooltip="Datas are correct!"></nb-icon>
+                </div>
+                <div class="row" *ngIf="!isOveralValid">
+                    <nb-icon class="col-12" *ngIf="!isOveralValid" style="color: red; font-size: 50px;" nbPrefix
+                    icon="alert-circle-outline" pack="eva" nbTooltip="Some data are missing!"></nb-icon>
+                </div>
+            </div>
+        </nb-card-header>
+
         <nb-card-body>
             <div class=" mb-4 mt-4 pe-0 time-line scroll">
                 <div [nbPopover]="popoverTemplate" [nbPopoverContext]="timelineSnapshot" nbPopoverTrigger="hint"
@@ -14,7 +29,7 @@
                     <nb-icon class="col" *ngIf="!timelineSnapshot.isSuccess" style="color: red ;" nbPrefix
                         icon="close-circle-outline" pack="eva"></nb-icon>
                 </div>
-            </div>
+        </div>
         </nb-card-body>
     </nb-card>
 
