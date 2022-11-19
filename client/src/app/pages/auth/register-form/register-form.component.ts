@@ -20,7 +20,7 @@ export class RegisterFormComponent implements OnInit {
     this.authService.register(form.value.registerUserName, form.value.registerEmail, form.value.registerPassword).subscribe(
       resData => {
         this.isLoading = false;
-        this.router.navigate(['/resource']);
+        this.router.navigate(['/create-guide']);
       }, 
       error => {
         this.isLoading = false;
