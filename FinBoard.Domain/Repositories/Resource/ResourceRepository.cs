@@ -23,8 +23,7 @@ namespace FinBoard.Domain.Repositories.Resource
         {
             var result = await _db.Resources
                 .Where(a => a.AccountId == accountId)
-                .Include(a => a.Snapshots)
-                .OrderBy(a => a.DateOfCreation)
+                .Include(a => a.Snapshots.OrderBy(a => a.DateOfSnapshot))
                 .ToListAsync();
             return result;
         }
