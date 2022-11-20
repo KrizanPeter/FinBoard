@@ -25,6 +25,7 @@ export class DashboardSummaryDataComponent implements OnInit {
         console.log(resData);
         this.overviewData = resData;
         this.overviewDataCount = this.overviewData.length;
+        console.log(this.overviewDataCount)
         this.isLoading = false;
       }, 
       error => {

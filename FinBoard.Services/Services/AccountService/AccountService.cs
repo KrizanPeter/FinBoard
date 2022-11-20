@@ -32,7 +32,7 @@ namespace FinBoard.Services.Services.AccountService
                 AppUserId = userId,
                 DateOfCreation = DateTime.Now,
                 PeriodicityOfSnapshotsInDays = 30,
-                DateOfFirstSnapshot = DateTime.Now,
+                DateOfFirstSnapshot = DateTime.Now.AddDays(-1),
                 CreatedBy = userId,
                 LastModifyBy = userId
             };
