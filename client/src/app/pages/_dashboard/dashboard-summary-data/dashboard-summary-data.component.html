@@ -3,7 +3,8 @@
         <b>Overview (compare to last snapshot)</b>
     </nb-card-header>
     <nb-card-body class="p-0 ms-2 me-2 scroll">
-        <div class="d-flex col-12 mt-1" *ngFor="let record of overviewData" style="border-bottom: 1px dashed gray ;">
+        <div class="d-flex col-12 mt-1" *ngFor="let record of overviewData; let i = index"  [ngStyle]="i-1 == overviewDataCount ? 'border-top: 1px dashed gray' : 'border-bottom: 1px dashed gray;'">
+            
             <div class="col-5 col-md-6 pt-2 ps-md-4">{{record.name}}</div>
             <div class="col-3 col-md-2 pt-2">{{record.amount | number : '1.2-2'}}€</div>
             <div class="col-2 col-md-2 pt-2">{{record.percentageMove | number : '1.2-2'}} %</div>

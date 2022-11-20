@@ -11,6 +11,7 @@ export class DashboardSummaryDataComponent implements OnInit {
 
   overviewData:DashboardOverviewDto[];
   isLoading:boolean = true;
+  overviewDataCount:number;
   constructor(private dashboardService: DashboardService) { }
 
   ngOnInit(): void {
@@ -23,6 +24,7 @@ export class DashboardSummaryDataComponent implements OnInit {
         console.log("dashData")
         console.log(resData);
         this.overviewData = resData;
+        this.overviewDataCount = this.overviewData.length;
         this.isLoading = false;
       }, 
       error => {
