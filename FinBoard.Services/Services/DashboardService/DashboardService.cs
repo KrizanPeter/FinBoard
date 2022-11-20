@@ -175,6 +175,8 @@ namespace FinBoard.Services.Services.DashboardService
 
         private List<DashboardOverviewDto> ResolveResources(IEnumerable<Resource> resources, List<DashboardOverviewDto> result)
         {
+            float newOveral = 0;
+            float oldOveral = 0;
             foreach (var resource in resources)
             {
                 if (resource.Snapshots.Count >= 2)
@@ -194,6 +196,8 @@ namespace FinBoard.Services.Services.DashboardService
                         PercentageMove = oldSnapshot == 0 ? 0 : (float)(newSnapshot >= oldSnapshot ? ((newSnapshot / oldSnapshot) - 1) * 100 : (1 - (newSnapshot / oldSnapshot)) * 100),
                         IsRising = isRising
                     });
+                    newOveral += (float)newSnapshot;
+                    oldOveral += (float)oldSnapshot;
 
                 }
                 else if (resource.Snapshots.Count == 1)
@@ -208,6 +212,7 @@ namespace FinBoard.Services.Services.DashboardService
                         PercentageMove = 0,
                         IsRising = false
                     });
+                    newOveral += (float)newSnapshot;
                 }
                 else
                 {
@@ -222,6 +227,16 @@ namespace FinBoard.Services.Services.DashboardService
                 }
 
             }
+
+            result.Add(new DashboardOverviewDto()
+            {
+                Amount = newOveral,
+                Name = "Summary",
+                ResourceType = "resource",
+                PercentageMove = oldOveral == 0 ? 0 : (float)(newOveral >= oldOveral ? ((newOveral / oldOveral) - 1) * 100 : (1 - (newOveral / oldOveral)) * 100),
+                IsRising = newOveral > oldOveral,
+            });
+
             return result;
         }
     }
