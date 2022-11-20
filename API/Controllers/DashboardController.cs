@@ -53,6 +53,27 @@ namespace API.Controllers
             return BadRequest(result.Error);
         }
 
+        [Authorize]
+        [HttpGet("getOverviewData")]
+        public async Task<IActionResult> GetOverviewData()
+        {
+            var requestId = this.GetRequestId();
+            var accountId = GetCurrentUserAccountId();
+            _logger.LogInformation(this.LogApiAccess(requestId, MethodBase.GetCurrentMethod()));
+            _persistentService.SetupRequestProperties(GetCurrentUserId().Value, GetCurrentUserAccountId().Value);
+
+            if (accountId.IsFailure) { return BadRequest(accountId.Error); }
+
+            var result = await _dashboardService.GetOverviewData(accountId.Value);
+
+            if (result.IsSuccess)
+            {
+                return Ok(result.Value);
+            }
+
+            return BadRequest(result.Error);
+        }
+
 
         [Authorize]
         [HttpPost("create")]

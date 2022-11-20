@@ -68,6 +68,7 @@ namespace API
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, DataContext context)
         {
             var dropdb = Environment.GetEnvironmentVariable("DATABASE_DROP");
+
             if (dropdb == "DATABASE_DROP")
             {
                 context.Database.EnsureDeleted();

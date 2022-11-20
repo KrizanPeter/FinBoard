@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using FinBoard.Domain.Entities;
 using FinBoard.Domain.Repositories.Dashboard;
+using FinBoard.Domain.Repositories.Resource;
 using FinBoard.Domain.Repositories.ResourceGroup;
 using FinBoard.Services.DTOs.DashBoardChart;
 using FinBoard.Services.DTOs.Move;
@@ -21,6 +22,7 @@ namespace FinBoard.Services.Services.DashboardService
         private readonly ILogger<DashboardService> _logger;
         private readonly IDashboardRepository _dashboardRepository;
         private readonly IResourceGroupRepository _resourceGroupRepository;
+        private readonly IResourceRepository _resourceRepository;
         private readonly ISnapshotService _snapshotService;
         private readonly IMapper _mapper;
 
@@ -28,8 +30,10 @@ namespace FinBoard.Services.Services.DashboardService
             IDashboardRepository dashboardRepository,
             IMapper mapper,
             IResourceGroupRepository resourceGroupRepository,
-            ISnapshotService snapshotService)
+            ISnapshotService snapshotService,
+            IResourceRepository resourceRepository)
         {
+            _resourceRepository = resourceRepository;
             _resourceGroupRepository = resourceGroupRepository;
             _logger = logger;
             _dashboardRepository = dashboardRepository;
@@ -158,6 +162,67 @@ namespace FinBoard.Services.Services.DashboardService
                 resouceCount++;
             }
             return snapshots;
+        }
+
+        public async Task<Result<List<DashboardOverviewDto>>> GetOverviewData(Guid accountId)
+        {
+            var resources = await _resourceRepository.GetAllWithSnapshotAsync(accountId);
+            var resourceGroups = await _resourceGroupRepository.GetAllWithResourcesAndSnapshotsAsync(accountId);
+            List<DashboardOverviewDto> result = new List<DashboardOverviewDto>();
+            result = ResolveResources(resources, result);
+            return Result.Ok(result);
+        }
+
+        private List<DashboardOverviewDto> ResolveResources(IEnumerable<Resource> resources, List<DashboardOverviewDto> result)
+        {
+            foreach (var resource in resources)
+            {
+                if (resource.Snapshots.Count >= 2)
+                {
+                    var newSnapshot = resource.Snapshots.ElementAt(resource.Snapshots.Count - 1).Amount;
+                    var oldSnapshot = resource.Snapshots.ElementAt(resource.Snapshots.Count - 2).Amount;
+                    newSnapshot = newSnapshot == null ? 0 : newSnapshot;
+                    oldSnapshot = oldSnapshot == null ? 0 : oldSnapshot;
+                    bool? isRising = null;
+                    isRising = newSnapshot > oldSnapshot ? true : false;
+
+                    result.Add(new DashboardOverviewDto()
+                    {
+                        Amount = (float)newSnapshot,
+                        Name = resource.Name,
+                        ResourceType = "resource",
+                        PercentageMove = oldSnapshot == 0 ? 0 : (float)(newSnapshot >= oldSnapshot ? ((newSnapshot / oldSnapshot) - 1) * 100 : (1 - (newSnapshot / oldSnapshot)) * 100),
+                        IsRising = isRising
+                    });
+
+                }
+                else if (resource.Snapshots.Count == 1)
+                {
+                    float? newSnapshot = resource.Snapshots.ElementAt(resource.Snapshots.Count - 1).Amount;
+
+                    result.Add(new DashboardOverviewDto()
+                    {
+                        Amount = (float)(newSnapshot == null ? 0 : newSnapshot),
+                        Name = resource.Name,
+                        ResourceType = "resource",
+                        PercentageMove = 0,
+                        IsRising = false
+                    });
+                }
+                else
+                {
+                    result.Add(new DashboardOverviewDto()
+                    {
+                        Amount = 0,
+                        Name = resource.Name,
+                        ResourceType = "resource",
+                        PercentageMove = 0,
+                        IsRising = null
+                    });
+                }
+
+            }
+            return result;
         }
     }
 }

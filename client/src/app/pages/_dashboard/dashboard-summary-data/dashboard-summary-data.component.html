@@ -1,0 +1,16 @@
+<nb-card class="dashboard-window chart-window">
+    <nb-card-header class="dashboard-header ms-2 me-2">
+        <b>Overview (compare to last snapshot)</b>
+    </nb-card-header>
+    <nb-card-body class="p-0 ms-2 me-2 scroll">
+        <div class="d-flex col-12 mt-1" *ngFor="let record of overviewData" style="border-bottom: 1px dashed gray ;">
+            <div class="col-6 pt-2 ps-4">{{record.name}}</div>
+            <div class="col-2 pt-2">{{record.amount | number : '1.2-2'}}€</div>
+            <div class="col-2 pt-2">{{record.percentageMove | number : '1.2-2'}} %</div>
+            <nb-icon *ngIf="record.isRising==true" class="col-2" style="color: green; font-size: 35px; font-weight:900;" nbPrefix
+            icon="arrow-up" pack="eva" nbTooltip="Some data are missing!"></nb-icon>
+            <nb-icon *ngIf="record.isRising==false" class="col-2" style="color: red; font-size: 35px; font-weight:900;" nbPrefix
+            icon="arrow-down" pack="eva" nbTooltip="Some data are missing!"></nb-icon>
+        </div>
+    </nb-card-body>
+</nb-card>

@@ -13,5 +13,6 @@ namespace FinBoard.Domain.Repositories.ResourceGroup
         void Update(Entities.ResourceGroup user);
         void SaveChanges();
         Task<Entities.ResourceGroup?> GetDataForGroupChart(Guid dashboardChartId);
+        Task<List<Entities.ResourceGroup>> GetAllWithResourcesAndSnapshotsAsync(Guid accountId);
     }
 }

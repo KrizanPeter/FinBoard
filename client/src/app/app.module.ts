@@ -73,6 +73,7 @@ import { OutsideClickDirective } from './directives/outsideclick.directive';
 import { CreateGuideComponent } from './pages/create-guide/create-guide/create-guide.component';
 import { BaseAccountDataComponent } from './pages/account/base-account-data/base-account-data.component';
 import { SnapshotPopoverComponent } from './components/popovers/snapshot-popover/snapshot-popover.component';
+import { DashboardSummaryDataComponent } from './pages/_dashboard/dashboard-summary-data/dashboard-summary-data.component';
 
 
 @NgModule({
@@ -108,6 +109,7 @@ import { SnapshotPopoverComponent } from './components/popovers/snapshot-popover
     CreateGuideComponent,
     BaseAccountDataComponent,
     SnapshotPopoverComponent,
+    DashboardSummaryDataComponent,
   ],
   imports: [
     NgxEchartsModule.forRoot({

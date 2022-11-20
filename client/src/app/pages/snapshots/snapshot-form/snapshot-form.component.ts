@@ -41,8 +41,10 @@ export class SnapshotFormComponent implements OnInit {
       resData => {
         console.log(resData);
         this.resourceOptions = resData;
-        this.selectedOption = resData[0].resourceId;
-        this.snapshotService.reloadTrigger.next(this.selectedOption);
+        if(resData.length>0){
+          this.selectedOption = resData[0].resourceId;
+          this.snapshotService.reloadTrigger.next(this.selectedOption);
+        }
         this.isLoading = false;
       },
       error => {
@@ -50,11 +52,14 @@ export class SnapshotFormComponent implements OnInit {
         this.isLoading = false;
       }
     );
-  }
+  } 
 
   onSelectChange(form :NgForm){
-    console.log(form.value.inputResourceId);
+    console.log(form.value.inputResourceId)
+    if(form.value.inputResourceId === undefined || form.value.inputResourceId == null || form.value.inputResourceId === '') {return;}
+    console.log("presiel")
     this.snapshotService.reloadTrigger.next(form.value.inputResourceId);
+    }
   }
 
-}
+

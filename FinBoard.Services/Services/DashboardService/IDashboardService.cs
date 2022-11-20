@@ -17,5 +17,6 @@ namespace FinBoard.Services.Services.DashboardService
         Task<Result> DeleteDashboardChartAsync(Guid dashboardId);
 
         Task<Result<DataForDaschboardChartsDto>> GetDataOfChart(Guid dashboardChartId);
+        Task<Result<List<DashboardOverviewDto>>> GetOverviewData(Guid value);
     }
 }

@@ -3,6 +3,7 @@ import { Injectable } from "@angular/core";
 import { BehaviorSubject } from "rxjs";
 import { DataForDaschboardChartsDto } from "src/app/_models/dashboard/dashboardChartsDataDto";
 import { DashboardDto } from "src/app/_models/dashboard/dashboardDto";
+import { DashboardOverviewDto } from "src/app/_models/dashboard/dashboardOverviewDto";
 import { ResourceDto } from "src/app/_models/resourceModels/resourceDto";
 import { environment } from "src/environments/environment";
 
@@ -14,6 +15,10 @@ export class DashboardService{
     reloadTrigger = new BehaviorSubject<boolean>(true);
     baseUrl = environment.apiUrl;
     constructor(private http: HttpClient){
+    }
+
+    getOverviewData(){
+        return this.http.get<DashboardOverviewDto[]>(this.baseUrl+'Dashboard/getOverviewData');
     }
 
     getChartData(dashboardChartId: string) {

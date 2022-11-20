@@ -11,33 +11,39 @@ export const USER_MENU_ITEMS: NbMenuItem[] = [
     link: 'dashboard',
   },
   {
-    title: 'Create scheme',
-    icon: 'checkmark-square-outline',
-    link: 'create-guide',
-  },
-  {
-    title: 'Agregate snapshot',
+    title: 'Add snapshot',
     icon: 'done-all-outline',
     link: 'agregate-snapshot',
   },
   {
-    title: 'Data management',
+    title: 'Create portfolio',
+    icon: 'checkmark-square-outline',
+    link: 'create-guide',
+  },
+  {
+    title: 'Settings',
     group: true,
   },
   {
-    title: 'Resources',
-    icon: 'keypad-outline',
-    link: 'resource',
-  },
-  {
-    title: 'Resource groups',
-    icon: 'grid-outline',
-    link: 'resource-group',
-  },
-  {
-    title: 'Snapshots',
-    icon: 'checkmark-outline',
-    link: 'snapshot',
+    title: 'Data overview',
+    icon: 'settings-2-outline',
+    children: [
+      {
+        title: 'Resources',
+        icon: 'keypad-outline',
+        link: 'resource',
+      },
+      {
+        title: 'Resource groups',
+        icon: 'grid-outline',
+        link: 'resource-group',
+      },
+      {
+        title: 'Snapshots',
+        icon: 'checkmark-outline',
+        link: 'snapshot',
+      }
+    ]
   },
   {
     title: 'Public',

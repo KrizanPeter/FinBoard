@@ -1,5 +1,6 @@
 <nb-card class="col-md-6 col-lg-6 offset-lg-3">
-  <nb-card-header>Set base data</nb-card-header>
+  <nb-card-header>Set base data
+  </nb-card-header>
   <nb-card-body>
     <div style="text-align: center; margin-top:40px;" *ngIf="isLoading">
       <app-loading-spinner></app-loading-spinner>
@@ -23,8 +24,13 @@
         </nb-select>
         <!-- <input type="number" ngModel id="periodicityId" name="inputPeriodicity" nbInput required min="7" fullWidth [(ngModel)]="baseDataDto.periodicityOfSnapshotsInDays"  > -->
       </div>
+      <p class="pt-2" style="font-size: 16px; color: red;">
+        <nb-icon class="" style="color: orange;" nbPrefix
+        icon="alert-circle-outline" pack="eva"></nb-icon>
+        Updating of base data will erase whole user data!
+      </p>
       <div class="btn-container">
-        <button type="submit" nbButton status="danger" [disabled]="!baseDataForm.valid">Set data</button>
+        <button type="submit" nbButton status="danger" [disabled]="!baseDataForm.valid">Update base data</button>
       </div>
     </form>
   </nb-card-body>

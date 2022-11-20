@@ -24,8 +24,6 @@ export class AuthService{
             tap( resData =>{
                 const currentUser = new AuthenticatedUser(resData.userName, resData.email, resData.token, resData.id, resData.accountId);
                 this.user.next(currentUser);
-                console.log("storujem user data");
-                console.log(currentUser);
                 localStorage.setItem('userData', JSON.stringify(currentUser))
             })
         )
@@ -56,14 +54,11 @@ export class AuthService{
         if(!userData){
             return;
         }
-        console.log("vytahujem usera");
-        console.log(userData);
         const authUser = new AuthenticatedUser(userData.userName, userData.email, userData.token, userData.id, userData.accountId);
         this.user.next(authUser);
     }
 
     logout() {
-        console.log('logout hitted');
         this.user.next(null);
     }
 }
