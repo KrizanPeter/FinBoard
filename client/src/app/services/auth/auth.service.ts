@@ -1,5 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
+import { Router } from "@angular/router";
 import { BehaviorSubject, Subject, tap } from "rxjs";
 import { AuthenticatedUser } from "src/app/_models/userModels/authenticatedUser";
 import { RegisterUserDto } from "src/app/_models/userModels/userRegisterResponse";
@@ -11,7 +12,7 @@ export class AuthService{
 
     baseUrl = environment.apiUrl;
     user = new BehaviorSubject<AuthenticatedUser>(null);
-    constructor(private http: HttpClient){
+    constructor(private http: HttpClient, private router: Router){
 
     }
 

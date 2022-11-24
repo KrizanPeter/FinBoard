@@ -15,6 +15,8 @@ export class BaseAccountDataComponent implements OnInit {
   dateFromDto: Date;
   min: Date;
   max: Date;
+  oldPeriodicity: number;
+  updateAllowed:boolean = false;
   constructor(private accountService: AccountService, protected dateService: NbDateService<Date>) {
     this.min = this.dateService.addYear(this.dateService.today(), -5);
     this.max = this.dateService.addMonth(this.dateService.today(), 1);
@@ -32,6 +34,7 @@ export class BaseAccountDataComponent implements OnInit {
         console.log(baseData)
         this.baseDataDto = baseData
         this.dateFromDto = new Date(baseData.dateOfFirstSnapshot);
+        this.oldPeriodicity = baseData.periodicityOfSnapshotsInDays;
         this.isLoading = false;
       },
       error => {
@@ -43,6 +46,9 @@ export class BaseAccountDataComponent implements OnInit {
 
   onSubmit(form : NgForm){
     this.isLoading = true;
+    if(form.value.inputPeriodicity === '') {
+      form.value.inputPeriodicity = this.oldPeriodicity;
+    }
     let baseData = new baseAccountDataDto(this.baseDataDto.accountId, this.dateFromDto, form.value.inputPeriodicity)
     this.accountService.setBaseData(baseData).subscribe(
       baseData => {
@@ -60,4 +66,13 @@ export class BaseAccountDataComponent implements OnInit {
     //form.reset();
   }
 
+  validateOfChange(form : NgForm){
+    let oldPeriodicity = this.baseDataDto.periodicityOfSnapshotsInDays;
+    let oldDate = this.baseDataDto.dateOfFirstSnapshot;
+    let newPeriodicity = form.value.inputPeriodicity
+    let newDate = this.dateFromDto;
+
+    this.updateAllowed = (new Date(oldDate).toISOString() !== newDate.toISOString() || (form.value.inputPeriodicity !=='' && form.value.inputPeriodicity != this.oldPeriodicity))
+
+  }
 }

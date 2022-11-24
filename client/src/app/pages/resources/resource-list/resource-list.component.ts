@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { ResourceService } from 'src/app/services/resource/resource.service';
@@ -12,6 +12,7 @@ import { PieChartData, PieRawData } from 'src/app/_models/chartData/pieChartData
   styleUrls: ['./resource-list.component.scss']
 })
 export class ResourceListComponent implements OnInit, OnDestroy {
+  @Output() resourceExist = new EventEmitter<boolean>();
   faPencil = faPencil;
   faTrashCan = faTrashCan;
   private resourceListSub : Subscription;
@@ -34,8 +35,8 @@ export class ResourceListComponent implements OnInit, OnDestroy {
     this.isLoading = true;
     this.resourceService.getResources().subscribe(
       resData => {
+        this.resolveValidityForStepper(resData);
         this.isLoading = false;
-        console.log(resData);
         this.resoucesList = resData;
         this.pieChartData = this.constructChartData(resData);
       }, 
@@ -45,8 +46,18 @@ export class ResourceListComponent implements OnInit, OnDestroy {
       }
     );
   }
-  
 
+  resolveValidityForStepper(resData: ResourceDto[]) {
+    console.log("list resolver");
+
+    if(resData.length>0){
+      this.resourceExist.emit(true);
+    }
+    else{
+      this.resourceExist.emit(false);
+    }
+  }
+  
   constructChartData(data : ResourceDto[]){
     let chartData = new PieChartData();
     chartData.legend = data.map(a=>a.name);

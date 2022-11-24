@@ -9,13 +9,13 @@
       <label for="datepickerInput" class="label">Date of first snapshot</label>
       <div id="datepickerInput" class="form-group m-0 p-0">
         <input class="text-center " name="inputDateOfFirstSnapshot"  fullWidth required ngModel nbInput
-          [nbDatepicker]="formpicker" autocomplete="off" [(ngModel)]="dateFromDto"
+          [nbDatepicker]="formpicker" autocomplete="off" [(ngModel)]="dateFromDto" (ngModelChange)="validateOfChange(baseDataForm)"
           ng-model-options="{timezone: 'local'}">
         <nb-datepicker #formpicker [min]="min" [max]="max"></nb-datepicker>
       </div>
       <div class="form-group pt-2 ">
         <label for="periodicityId" class="label">Periodicity of snapshots in days</label>
-        <nb-select class="m-0 p-0 text-center" name="inputPeriodicity" id="resourceOptionInput" fullWidth ngModel required selected={{baseDataDto.periodicityOfSnapshotsInDays}}>
+        <nb-select class="m-0 p-0 text-center" name="inputPeriodicity" id="resourceOptionInput" (ngModelChange)="validateOfChange(baseDataForm)" fullWidth ngModel selected={{this.baseDataDto.periodicityOfSnapshotsInDays}} >
           <nb-option value="7">Weekly</nb-option>
           <nb-option value="14">Biweekly</nb-option>
           <nb-option value="30">Monthly</nb-option>
@@ -24,13 +24,13 @@
         </nb-select>
         <!-- <input type="number" ngModel id="periodicityId" name="inputPeriodicity" nbInput required min="7" fullWidth [(ngModel)]="baseDataDto.periodicityOfSnapshotsInDays"  > -->
       </div>
-      <p class="pt-2" style="font-size: 16px; color: red;">
+      <p *ngIf="updateAllowed" class="pt-2" style="font-size: 16px; color: red;">
         <nb-icon class="" style="color: orange;" nbPrefix
         icon="alert-circle-outline" pack="eva"></nb-icon>
-        Updating of base data will erase whole user data!
+        Updating of base data will erase all current snapshots!
       </p>
       <div class="btn-container">
-        <button type="submit" nbButton status="danger" [disabled]="!baseDataForm.valid">Update base data</button>
+        <button type="submit" nbButton status="danger" [disabled]="!updateAllowed">Update base data</button>
       </div>
     </form>
   </nb-card-body>

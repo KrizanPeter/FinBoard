@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { SnapshotPopoverComponent } from 'src/app/components/popovers/snapshot-popover/snapshot-popover.component';
@@ -14,8 +14,8 @@ import { SnapshotTimelineElementDto } from 'src/app/_models/snapshotModels/snaps
   styleUrls: ['./snapshot-agregate.component.scss']
 })
 export class SnapshotAgregateComponent implements OnInit {
-
-  resoucesList: ResourceDto[];
+  @Output() snapshotsFilled = new EventEmitter<boolean>();
+  resoucesList: ResourceDto[] = [];
   inputAgregateSnapshot: SnapshotDto[] = [];
   snapshotTimeline: SnapshotTimelineElementDto[];
   loadedExistingSnapshots: SnapshotDto[] = [];
@@ -42,6 +42,7 @@ export class SnapshotAgregateComponent implements OnInit {
         this.snapshotTimeline = timelineData;
         this.snapshotTimelineElements = timelineData.length;
         this.isOveralValid = this.checkValidity();
+        this.snapshotsFilled.emit(this.isOveralValid);     
         this.setNearestDate();
       },
       error => {
@@ -65,7 +66,7 @@ export class SnapshotAgregateComponent implements OnInit {
   setNearestDate(){
     
     this.snapshotTimeline.forEach(snapshot => {
-      if(snapshot.isSuccess == false){
+      if(snapshot.isSuccess === false){
         this.dateFromDto = new Date(snapshot.date);
         return;
       }
@@ -73,11 +74,9 @@ export class SnapshotAgregateComponent implements OnInit {
   }
 
   getSnapshotForDate(date: Date){
-    console.log("hola holaa moji mili")
     this.snapshotService.getSnapshotForDate(date).subscribe(
       resData => {
         this.loadedExistingSnapshots = resData;
-        console.log(resData);
         this.inputAgregateSnapshot.forEach(input => {
           this.loadedExistingSnapshots.forEach(data => {
             if(input.resourceId === data.resourceId){

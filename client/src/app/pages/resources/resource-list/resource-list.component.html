@@ -17,7 +17,7 @@
                     <tbody>
                         <tr *ngFor="let resource of resoucesList">
                             <td>{{resource.name}}</td>
-                            <td>{{resource.amount}}</td>
+                            <td>{{resource.amount | number : '1.2-2'}}</td>
                             <td>
                                 <!-- <a class="options-icon" href="">
                                     <fa-icon [icon]="faPencil" (click)="editClick(resource.resourceId)"></fa-icon>

@@ -31,16 +31,23 @@ namespace FinBoard.Services.Services.AccountService
             {
                 AppUserId = userId,
                 DateOfCreation = DateTime.Now,
-                PeriodicityOfSnapshotsInDays = 30,
-                DateOfFirstSnapshot = DateTime.Now.AddDays(-1),
                 CreatedBy = userId,
-                LastModifyBy = userId
+                LastModifyBy = userId,
+                PeriodicityOfSnapshotsInDays = 30,
+                DateOfFirstSnapshot = DateTime.Now.Date,
             };
 
             try
             {
                 await _accountRepository.AddAsync(accountEntity);
                 _accountRepository.SaveChanges();
+                var accountBaseData = new AccountBaseDataDto()
+                {
+                    AccountId = accountEntity.AccountId,
+                    PeriodicityOfSnapshotsInDays = accountEntity.PeriodicityOfSnapshotsInDays,
+                    DateOfFirstSnapshot = accountEntity.DateOfFirstSnapshot,
+                };
+                _ = await _restoreService.RestoreDataForAccount(accountBaseData);
             }
             catch (Exception ex)
             {

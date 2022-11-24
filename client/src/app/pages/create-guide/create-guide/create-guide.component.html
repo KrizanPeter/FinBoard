@@ -4,26 +4,26 @@
         <nb-step [label]="labelOne">
           <ng-template #labelOne>Set base data</ng-template>
           <app-base-account-data></app-base-account-data>
-          <button nbButton disabled nbStepperPrevious>prev</button>
-          <button nbButton nbStepperNext (click)="refreshResourceTemplates()">next</button>
+          <!-- <button nbButton disabled nbStepperPrevious>prev</button> -->
+          <button nbButton status="info" nbStepperNext (click)="refreshResourceTemplates()">Create resources >></button>
         </nb-step>
         <nb-step [label]="labelTwo">
           <ng-template #labelTwo>Create resources</ng-template>
-          <app-resource-template></app-resource-template>
-          <button nbButton nbStepperPrevious>prev</button>
-          <button nbButton nbStepperNext (click)="refreshResourceTemplates()">next</button>
+          <app-resource-template (resourceExist)="resolveGroupStepValidity($event)"></app-resource-template>
+          <button nbButton status="info" nbStepperPrevious>&lt; &lt; Set base data</button>
+          <button nbButton status="info" [disabled]="!isGroupStepAvailable" nbStepperNext (click)="refreshResourceTemplates()">Group them >></button>
         </nb-step>
         <nb-step [label]="labelThree">
           <ng-template #labelThree>Group them!</ng-template>
           <app-resource-group-template></app-resource-group-template>
-          <button nbButton nbStepperPrevious>prev</button>
-          <button nbButton nbStepperNext (click)="refreshAggregateFormTemplate()">next</button>
+          <button nbButton status="info" nbStepperPrevious> &lt; &lt; Create resources</button>
+          <button nbButton status="info" nbStepperNext (click)="refreshAggregateFormTemplate()">Fill snapshots >></button>
         </nb-step>
         <nb-step [label]="labelFour">
           <ng-template #labelFour>Fill snapshots</ng-template>
-          <app-snapshot-agregate></app-snapshot-agregate>
-          <button nbButton nbStepperPrevious>prev</button>
-          <button nbButton (click)="navigateToDashboardPage()">Finish</button>
+          <app-snapshot-agregate (snapshotsFilled)="resolveDashboardStepValidity($event)"></app-snapshot-agregate>
+          <button nbButton status="info" nbStepperPrevious>&lt; &lt; Group them</button>
+          <button nbButton status="success" [disabled]="isDashboardStepAvailable" (click)="navigateToDashboardPage()">To dashboard</button>
         </nb-step>
       </nb-stepper>
     </nb-card-body>

@@ -17,7 +17,7 @@
                     <tbody>
                         <tr *ngFor="let snapshot of snapshotList">
                             <td class="ps-4">{{snapshot.dateOfSnapshot |  date:'dd.MM.yyyy'}}</td>
-                            <td>{{snapshot.amount}}</td>
+                            <td>{{snapshot.amount | number : '1.2-2'}}</td>
                             
                                 <!-- <a class="options-icon" href="">
                                     <fa-icon [icon]="faPencil" (click)="editClick(snapshot.snapshotId)"></fa-icon>

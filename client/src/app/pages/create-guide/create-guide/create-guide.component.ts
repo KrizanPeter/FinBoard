@@ -13,6 +13,8 @@ export class CreateGuideComponent implements OnInit {
   @ViewChild(ResourceTemplateComponent) resourceTemplate:ResourceTemplateComponent;
   @ViewChild(ResourceGroupTemplateComponent) resourceGroupTemplate:ResourceTemplateComponent;
   @ViewChild(SnapshotAgregateComponent) aggregateTemplate:SnapshotAgregateComponent;
+  isGroupStepAvailable:boolean = false;
+  isDashboardStepAvailable:boolean = false;
   constructor(private router: Router) { }
 
   ngOnInit(): void {
@@ -29,5 +31,16 @@ export class CreateGuideComponent implements OnInit {
 
   navigateToDashboardPage(){
     this.router.navigateByUrl("/dashboard");
+  }
+
+  resolveGroupStepValidity(data: boolean){
+    this.isGroupStepAvailable = data;
+  }
+
+  resolveDashboardStepValidity(data: boolean){
+    console.log('tudle nudle')
+    console.log(!data)
+
+    this.isDashboardStepAvailable = !data;
   }
 }

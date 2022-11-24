@@ -40,7 +40,7 @@ namespace FinBoard.Services.Services.TimeLIneService
 
             while (floatingDate <= DateTime.Now)
             {
-                timeline.Add(CreateNewSnapshotElementDto(resources, snapshots, floatingDate));
+                timeline.Add(await CreateNewSnapshotElementDtoAsync(resources, snapshots, floatingDate, accountId));
                 if (accountInfo.PeriodicityOfSnapshotsInDays % 30 == 0)
                 {
                     floatingDate = floatingDate.Value.AddMonths(accountInfo.PeriodicityOfSnapshotsInDays / 30);
@@ -54,14 +54,14 @@ namespace FinBoard.Services.Services.TimeLIneService
             return Result.Ok(timeline);
         }
 
-        private SnapshotTimelineElementDto CreateNewSnapshotElementDto(IEnumerable<Domain.Entities.Resource> resources, List<Domain.Entities.Snapshot> snapshots, DateTime? floatingDate)
+        private async Task<SnapshotTimelineElementDto> CreateNewSnapshotElementDtoAsync(IEnumerable<Domain.Entities.Resource> resources, List<Domain.Entities.Snapshot> snapshots, DateTime? floatingDate, Guid accountId)
         {
             SnapshotTimelineElementDto newSnapshotElementDto = new SnapshotTimelineElementDto();
             newSnapshotElementDto.Date = floatingDate;
             var elementSuccess = true;
             foreach (var resource in resources)
             {
-                bool existSnapshot = CheckIfSnapshotExist(snapshots, floatingDate, resource.ResourceId);
+                bool existSnapshot = await CheckIfSnapshotExistAsync(snapshots, floatingDate, resource.ResourceId, accountId);
                 if (!existSnapshot) elementSuccess = false;
                 newSnapshotElementDto.Resources.Add(new TimelineResourceDto() { Name = resource.Name, IsSnapped = existSnapshot });
             }
@@ -69,9 +69,23 @@ namespace FinBoard.Services.Services.TimeLIneService
             return newSnapshotElementDto;
         }
 
-        private bool CheckIfSnapshotExist(List<Domain.Entities.Snapshot> snapshots, DateTime? floatingDate, Guid resourceId)
+        private async Task<bool> CheckIfSnapshotExistAsync(List<Domain.Entities.Snapshot> snapshots, DateTime? floatingDate, Guid resourceId, Guid accountId)
         {
             var result = snapshots.Where(a => a.ResourceId == resourceId && a.DateOfSnapshot == floatingDate).SingleOrDefault();
+
+            if (result == null)
+            {
+                await _snapshotRepository.AddAsync(new Domain.Entities.Snapshot()
+                {
+                    AccountId = accountId,
+                    Amount = null,
+                    ResourceId = resourceId,
+                    DateOfSnapshot = floatingDate.Value.Date,
+                });
+                _snapshotRepository.SaveChanges();
+                return false;
+            }
+
             return (result != null && result.Amount != null);
         }
     }
