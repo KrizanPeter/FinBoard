@@ -14,7 +14,7 @@
         <nb-datepicker #formpicker [min]="min" [max]="max"></nb-datepicker>
       </div>
       <div class="form-group pt-2 ">
-        <label for="periodicityId" class="label">Periodicity of snapshots in days</label>
+        <label for="periodicityId" class="label">Periodicity of snapshots</label>
         <nb-select class="m-0 p-0 text-center" name="inputPeriodicity" id="resourceOptionInput" (ngModelChange)="validateOfChange(baseDataForm)" fullWidth ngModel selected={{this.baseDataDto.periodicityOfSnapshotsInDays}} >
           <nb-option value="7">Weekly</nb-option>
           <nb-option value="14">Biweekly</nb-option>
