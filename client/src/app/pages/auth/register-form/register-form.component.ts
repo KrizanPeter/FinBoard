@@ -17,7 +17,7 @@ export class RegisterFormComponent implements OnInit {
 
   onSubmit(form: NgForm){
     this.isLoading = true;
-    this.authService.register(form.value.registerUserName, form.value.registerEmail, form.value.registerPassword).subscribe(
+    this.authService.register(form.value.registerUserName.trim(), form.value.registerEmail.trim(), form.value.registerPassword).subscribe(
       resData => {
         this.isLoading = false;
         this.router.navigate(['/create-guide']);

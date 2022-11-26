@@ -16,7 +16,7 @@ export const USER_MENU_ITEMS: NbMenuItem[] = [
     link: 'agregate-snapshot',
   },
   {
-    title: 'Create portfolio',
+    title: 'Manage portfolio',
     icon: 'checkmark-square-outline',
     link: 'create-guide',
   },
@@ -29,6 +29,11 @@ export const USER_MENU_ITEMS: NbMenuItem[] = [
     icon: 'settings-2-outline',
     children: [
       {
+        title: 'Snapshots',
+        icon: 'checkmark-outline',
+        link: 'snapshot',
+      },
+      {
         title: 'Resources',
         icon: 'keypad-outline',
         link: 'resource',
@@ -37,11 +42,6 @@ export const USER_MENU_ITEMS: NbMenuItem[] = [
         title: 'Resource groups',
         icon: 'grid-outline',
         link: 'resource-group',
-      },
-      {
-        title: 'Snapshots',
-        icon: 'checkmark-outline',
-        link: 'snapshot',
       }
     ]
   },
