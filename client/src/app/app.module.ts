@@ -74,6 +74,7 @@ import { CreateGuideComponent } from './pages/create-guide/create-guide/create-g
 import { BaseAccountDataComponent } from './pages/account/base-account-data/base-account-data.component';
 import { SnapshotPopoverComponent } from './components/popovers/snapshot-popover/snapshot-popover.component';
 import { DashboardSummaryDataComponent } from './pages/_dashboard/dashboard-summary-data/dashboard-summary-data.component';
+import { DataBackupComponent } from './pages/data-backup/data-backup.component';
 
 
 @NgModule({
@@ -110,6 +111,7 @@ import { DashboardSummaryDataComponent } from './pages/_dashboard/dashboard-summ
     BaseAccountDataComponent,
     SnapshotPopoverComponent,
     DashboardSummaryDataComponent,
+    DataBackupComponent,
   ],
   imports: [
     NgxEchartsModule.forRoot({

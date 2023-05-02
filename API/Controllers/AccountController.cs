@@ -6,7 +6,10 @@ using FinBoard.Services.Services.UserService;
 using FinBoard.Utils.PersistenceService;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using System.Reflection;
+using System.Text.Json;
+
 
 namespace API.Controllers
 {
@@ -65,6 +68,29 @@ namespace API.Controllers
             if (result.IsSuccess)
             {
                 return Ok(result.Value);
+            }
+
+            return BadRequest(result.Error);
+        }
+
+        [Authorize]
+        [HttpGet("downloadData")]
+        public async Task<IActionResult> DownloadDataOfAccount()
+        {
+            var requestId = this.GetRequestId();
+            var accountId = GetCurrentUserAccountId();
+            _logger.LogInformation(this.LogApiAccess(requestId, MethodBase.GetCurrentMethod()));
+            _persistentService.SetupRequestProperties(GetCurrentUserId().Value, GetCurrentUserAccountId().Value);
+
+            if (accountId.IsFailure) { return BadRequest(accountId.Error); }
+
+            var result = await _accountService.DownloadDataStructure(accountId.Value);
+
+            if (result.IsSuccess)
+            {
+                var jsonData = System.Text.Json.JsonSerializer.Serialize(result.Value);
+                byte[] byteArray = System.Text.Encoding.UTF8.GetBytes(jsonData);
+                return File(byteArray, "application/json", "data_backup.json");
             }
 
             return BadRequest(result.Error);

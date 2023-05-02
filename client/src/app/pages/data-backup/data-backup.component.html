@@ -1,0 +1,25 @@
+<div class="row">
+    <div class="col-12 col-md-6">
+        <nb-card>
+            <nb-card-header>Data export</nb-card-header>
+            <nb-card-body>
+                <div style="text-align: center; margin-top:40px;"  *ngIf="isLoading">
+                    <app-loading-spinner></app-loading-spinner>
+                  </div>
+                <button  *ngIf="!isLoading" type="submit" nbButton class="btn-download"
+                (click)="downloadData()">
+                    <nb-icon class="col-12" style="color: gray; font-size: 90px;" nbPrefix
+                    icon="download-outline" pack="eva"></nb-icon>
+                </button>
+            </nb-card-body>
+          </nb-card>        
+    </div>
+
+    <div class="col-12 col-md-6">
+        <nb-card>
+            <nb-card-header>Data import</nb-card-header>
+            <nb-card-body>
+            </nb-card-body>
+          </nb-card>        
+    </div>
+</div>

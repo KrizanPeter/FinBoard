@@ -1,7 +1,12 @@
 ﻿using AutoMapper;
 using FinBoard.Domain.Entities;
 using FinBoard.Domain.Repositories.Account;
+using FinBoard.Domain.Repositories.Move;
+using FinBoard.Domain.Repositories.Resource;
+using FinBoard.Domain.Repositories.ResourceGroup;
 using FinBoard.Services.DTOs.Account;
+using FinBoard.Services.DTOs.DownloadStructure;
+using FinBoard.Services.Services.ResourceGroupService;
 using FinBoard.Services.Services.ResourceService;
 using FinBoard.Services.Services.RestoreService;
 using FinBoard.Utils.Result;
@@ -15,13 +20,21 @@ namespace FinBoard.Services.Services.AccountService
         private readonly ILogger<AccountService> _logger;
         private readonly IAccountRepository _accountRepository;
         private readonly IRestoreService _restoreService;
+        private readonly IResourceGroupRepository _resourceGroupRepository;
+        private readonly IResourceRepository _resourceRepository;
+        private readonly ISnapshotRepository _snapshotRepository;
         private readonly IMapper _mapper;
 
-        public AccountService(ILogger<AccountService> logger, IAccountRepository accountRepository, IMapper mapper, IRestoreService restoreService)
+        public AccountService(ILogger<AccountService> logger, IAccountRepository accountRepository, 
+            IMapper mapper, IRestoreService restoreService, ISnapshotRepository snapshotRepository, 
+            IResourceGroupRepository resourceGroupRepository, IResourceRepository resourceRepository)
         {
             _logger = logger;
             _accountRepository = accountRepository;
             _restoreService = restoreService;
+            _snapshotRepository = snapshotRepository;
+            _resourceGroupRepository = resourceGroupRepository;
+            _resourceRepository = resourceRepository;
             _mapper = mapper;
         }
 
@@ -55,6 +68,18 @@ namespace FinBoard.Services.Services.AccountService
             }
 
             return Result.Ok<Account>(accountEntity);
+        }
+
+        public async Task<Result<DownloadStructureDto>> DownloadDataStructure(Guid accountId)
+        {
+            var structure = new DownloadStructureDto();
+            
+            structure.Account = await _accountRepository.GetFirstOrDefaultAsync(a=>a.AccountId == accountId);
+            structure.Snapshot = _snapshotRepository.GetAllAccountSnapshots(accountId);
+            structure.ResourceGroup = _resourceGroupRepository.GetAllAsync(a=>a.AccountId == accountId).Result.ToList();
+            structure.Resource = _resourceRepository.GetAllAsync(a=>a.AccountId==accountId).Result.ToList();
+
+            return Result.Ok(structure);
         }
 
         public async Task<Result<AccountBaseDataDto>> GetBaseAccountData(Guid accountId)

@@ -1,5 +1,6 @@
 ﻿using FinBoard.Domain.Entities;
 using FinBoard.Services.DTOs.Account;
+using FinBoard.Services.DTOs.DownloadStructure;
 using FinBoard.Utils.Result;
 using System;
 using System.Collections.Generic;
@@ -14,5 +15,6 @@ namespace FinBoard.Services.Services.AccountService
         Task<Result<Account>> CreateNewAccountForUser(Guid userId);
         Task<Result<AccountBaseDataDto>> SetBaseAccountData(Guid value, AccountBaseDataDto accountBaseDataDto);
         Task<Result<AccountBaseDataDto>> GetBaseAccountData(Guid accountId);
+        Task<Result<DownloadStructureDto>> DownloadDataStructure(Guid value);
     }
 }

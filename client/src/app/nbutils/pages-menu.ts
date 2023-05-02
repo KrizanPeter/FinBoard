@@ -42,6 +42,11 @@ export const USER_MENU_ITEMS: NbMenuItem[] = [
         title: 'Resource groups',
         icon: 'grid-outline',
         link: 'resource-group',
+      },
+      {
+        title: 'Data backup',
+        icon: 'save-outline',
+        link: 'data-backup',
       }
     ]
   },

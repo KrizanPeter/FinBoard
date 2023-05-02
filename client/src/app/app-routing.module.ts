@@ -12,6 +12,7 @@ import { DashboardTemplateComponent } from './pages/_dashboard/dashboard-templat
 import { HowToUseComponent } from './publicPages/how-to-use/how-to-use.component';
 import { LandingPageComponent } from './publicPages/landing-page/landing-page.component';
 import { ReleaseNotesComponent } from './publicPages/release-notes/release-notes.component';
+import { DataBackupComponent } from './pages/data-backup/data-backup.component';
 
 
 const routes: Routes = [
@@ -27,6 +28,8 @@ const routes: Routes = [
   { path:'agregate-snapshot', component:SnapshotAgregateComponent, canActivate: [AuthGuard]},
   { path:'resource-group', component:ResourceGroupTemplateComponent, canActivate: [AuthGuard]},
   { path:'create-guide', component:CreateGuideComponent, canActivate: [AuthGuard]},
+  { path:'data-backup', component:DataBackupComponent, canActivate: [AuthGuard]},
+
 
 
 ];

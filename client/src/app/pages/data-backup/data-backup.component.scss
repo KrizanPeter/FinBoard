@@ -1,0 +1,30 @@
+.btn-download{
+    border: 2px solid gray;
+    border-radius: 5px;
+    width: 15rem;
+    height: 5rem;
+    font-size: 90px;
+    align-content: center;
+}
+
+.btn-download :hover{
+    border: 3px solid gray;
+    border-radius: 4px;
+    width: 15rem;
+    height: 5rem;
+    font-size: 95px;
+    align-content: center;
+}
+
+nb-icon{
+    width: 15rem !important;
+    height: 5rem !important;
+}
+
+nb-card-body{
+    display: grid;
+    justify-content: center;
+    margin-bottom: 20px;
+    margin-top: 20px;
+
+}
