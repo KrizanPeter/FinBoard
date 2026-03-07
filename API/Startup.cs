@@ -2,8 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using API.Data;
 using API.Extensions;
 using FinBoard.Domain.Context;
+using FinBoard.Domain.Entities;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -13,6 +15,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.OpenApi.Models;
 
 namespace API
@@ -74,6 +77,15 @@ namespace API
                 context.Database.EnsureDeleted();
             }
             context.Database.Migrate();
+
+            if (env.IsDevelopment())
+            {
+                using (var scope = app.ApplicationServices.CreateScope())
+                {
+                    var userManager = scope.ServiceProvider.GetRequiredService<UserManager<AppUser>>();
+                    Seed.SeedData(userManager, context).GetAwaiter().GetResult();
+                }
+            }
 
             if (env.IsDevelopment())
             {

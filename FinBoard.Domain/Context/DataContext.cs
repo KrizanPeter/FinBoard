@@ -35,14 +35,10 @@ namespace FinBoard.Domain.Context
                 .IsRequired();
 
             builder.Entity<AppUser>()
-            .HasOne(a => a.Account)
-            .WithOne(a => a.AppUser)
-            .HasForeignKey<Account>(c => c.AppUserId);
-
-            builder.Entity<Account>()
-            .HasOne(a => a.AppUser)
-            .WithOne(a => a.Account)
-            .HasForeignKey<AppUser>(c => c.AccountId);
+                .HasOne(a => a.Account)
+                .WithOne(a => a.AppUser)
+                .HasForeignKey<AppUser>(c => c.AccountId)
+                .IsRequired(false);
         }
 
         public DbSet<Account> Accounts { get; set; }

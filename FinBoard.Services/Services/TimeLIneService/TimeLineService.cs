@@ -71,14 +71,14 @@ namespace FinBoard.Services.Services.TimeLIneService
 
         private async Task<bool> CheckIfSnapshotExistAsync(List<Domain.Entities.Snapshot> snapshots, DateTime? floatingDate, Guid resourceId, Guid accountId)
         {
-            var result = snapshots.Where(a => a.ResourceId == resourceId && a.DateOfSnapshot == floatingDate).SingleOrDefault();
+            var result = snapshots.Where(a => a.ResourceId == resourceId && a.DateOfSnapshot.Date == floatingDate.Value.Date).FirstOrDefault();
 
             if (result == null)
             {
                 await _snapshotRepository.AddAsync(new Domain.Entities.Snapshot()
                 {
                     AccountId = accountId,
-                    Amount = null,
+                    Amount = 0,
                     ResourceId = resourceId,
                     DateOfSnapshot = floatingDate.Value.Date,
                 });

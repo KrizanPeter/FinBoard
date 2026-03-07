@@ -16,6 +16,7 @@ import { ResourceFormComponent } from './pages/resources/resource-form/resource-
 import { ResourceListComponent } from './pages/resources/resource-list/resource-list.component';
 import { ResourceTemplateComponent } from './pages/resources/resource-template/resource-template.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { LIGHT_THEME } from './styles/theme.light';
 import { DARK_THEME } from './styles/theme.dark';
 
 import {
@@ -126,9 +127,9 @@ import { DataBackupComponent } from './pages/data-backup/data-backup.component';
     FormsModule, 
     NbThemeModule.forRoot(
       {
-        name: 'dark',
+        name: localStorage.getItem('theme') || 'default',
       },
-      [ DARK_THEME ],
+      [ LIGHT_THEME, DARK_THEME ],
     ),
     NbLayoutModule,
     NbEvaIconsModule,

@@ -50,7 +50,7 @@ namespace FinBoard.Services.Services.Move
             {
                 return Result.Fail("MoveDto cannot be null.");
             }
-            var moveEntity = await _snapshotRepository.GetFirstOrDefaultAsync(a => a.DateOfSnapshot == moveDto.DateOfSnapshot && a.AccountId == accountId && a.ResourceId == moveDto.ResourceId);
+            var moveEntity = await _snapshotRepository.GetFirstOrDefaultAsync(a => a.DateOfSnapshot.Date == moveDto.DateOfSnapshot && a.AccountId == accountId && a.ResourceId == moveDto.ResourceId);
             moveEntity.Amount = moveDto.Amount;
             try
             {
@@ -104,7 +104,7 @@ namespace FinBoard.Services.Services.Move
             var now = DateTime.Now;
             while (floatingDate <= now)
             {
-                snapshots.Add(new Snapshot() { AccountId = accountInfo.AccountId, DateOfSnapshot = floatingDate.Value.Date });
+                snapshots.Add(new Snapshot() { AccountId = accountInfo.AccountId, DateOfSnapshot = floatingDate.Value.Date, Amount = 0 });
                 if (accountInfo.PeriodicityOfSnapshotsInDays % 30 == 0)
                 {
                     floatingDate = floatingDate.Value.AddMonths(accountInfo.PeriodicityOfSnapshotsInDays / 30);
@@ -126,7 +126,7 @@ namespace FinBoard.Services.Services.Move
 
         public async Task<Result<IEnumerable<SnapshotDto>>> GetAllSnapshotsForDate(Guid accountId, DateTime date)
         {
-            var result = await _snapshotRepository.GetAllAsync(a => a.AccountId == accountId && a.DateOfSnapshot == date);
+            var result = await _snapshotRepository.GetAllAsync(a => a.AccountId == accountId && a.DateOfSnapshot.Date == date);
             var movesDtoList = _mapper.Map<IEnumerable<SnapshotDto>>(result);
 
             return Result.Ok(movesDtoList);

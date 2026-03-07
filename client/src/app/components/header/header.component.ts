@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { NbMenuService, NbSidebarService } from '@nebular/theme';
+import { NbMenuService, NbSidebarService, NbThemeService } from '@nebular/theme';
 import { Subscription } from 'rxjs';
 import { LayoutService } from 'src/app/nbutils/layout.service';
 import { AuthService } from 'src/app/services/auth/auth.service';
@@ -14,13 +14,17 @@ export class HeaderComponent implements OnInit, OnDestroy {
   private userSub : Subscription;
   isAuthenticated :boolean;
   userName : string;
+  isDarkTheme: boolean;
 
   constructor(
     private sidebarService: NbSidebarService,
     private layoutService: LayoutService,
     private authService: AuthService,
     private router: Router,
-  ) { }
+    private themeService: NbThemeService,
+  ) {
+    this.isDarkTheme = (localStorage.getItem('theme') || 'default') === 'dark';
+  }
 
 
   ngOnInit(): void {
@@ -58,9 +62,17 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.router.navigate(["/login"])
   }
 
+  toggleTheme() {
+    this.isDarkTheme = !this.isDarkTheme;
+    const themeName = this.isDarkTheme ? 'dark' : 'default';
+    this.themeService.changeTheme(themeName);
+    localStorage.setItem('theme', themeName);
+  }
+
   logout(){
     this.authService.logout();
-    localStorage.clear()
+    localStorage.removeItem('user');
+    localStorage.removeItem('token');
     this.router.navigate(["/login"])
   }
 }

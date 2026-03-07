@@ -20,13 +20,11 @@ export class LineRawData{
         this.type = 'line';
         this.smooth = true;
         this.areaStyle= {};
+
         this.label = {
             normal: {
               show: true,
               position: 'top',
-              textStyle: {
-                color: '#ffffff',
-              },
             },
           }
     }

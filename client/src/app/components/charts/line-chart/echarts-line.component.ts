@@ -22,7 +22,25 @@ export class EchartsLineComponent implements AfterViewInit, OnDestroy {
 
       const colors: any = config.variables;
       const echarts: any = config.variables.echarts;
-      console.log(this.chartData);
+
+      const maxPoints = 10;
+      const totalPoints = this.chartData.xAxisLabels.length;
+
+      let xLabels = this.chartData.xAxisLabels;
+      let seriesData = this.chartData.data;
+
+      if (totalPoints > maxPoints) {
+        const indices: number[] = [];
+        for (let i = 0; i < maxPoints; i++) {
+          indices.push(Math.round(i * (totalPoints - 1) / (maxPoints - 1)));
+        }
+        xLabels = indices.map(i => this.chartData.xAxisLabels[i]);
+        seriesData = this.chartData.data.map(s => ({
+          ...s,
+          data: indices.map(i => s.data[i]),
+        }));
+      }
+
       this.options = {
         backgroundColor: echarts.bg,
         color: [colors.danger, colors.primary, colors.info],
@@ -40,7 +58,7 @@ export class EchartsLineComponent implements AfterViewInit, OnDestroy {
         xAxis: [
           {
             type: 'category',
-            data: this.chartData.xAxisLabels,
+            data: xLabels,
             axisTick: {
               alignWithLabel: true,
             },
@@ -86,7 +104,7 @@ export class EchartsLineComponent implements AfterViewInit, OnDestroy {
           bottom: '5%',
           containLabel: true,
         },
-        series: this.chartData.data,
+        series: seriesData,
       };
     });
   }
