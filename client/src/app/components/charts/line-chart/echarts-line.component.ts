@@ -41,9 +41,24 @@ export class EchartsLineComponent implements AfterViewInit, OnDestroy {
         }));
       }
 
+      const trendColors = seriesData.map(s => {
+        const values = s.data;
+        if (values.length >= 2) {
+          return values[values.length - 1] >= values[values.length - 2] ? '#00d68f' : '#ff3d71';
+        }
+        return '#00d68f';
+      });
+
+      seriesData = seriesData.map((s, i) => ({
+        ...s,
+        itemStyle: { color: trendColors[i] },
+        lineStyle: { color: trendColors[i] },
+        areaStyle: { color: trendColors[i], opacity: 0.15 },
+      }));
+
       this.options = {
         backgroundColor: echarts.bg,
-        color: [colors.danger, colors.primary, colors.info],
+        color: trendColors,
         tooltip: {
           trigger: 'item',
           formatter: '{a} <br/>{b} : {c}',
