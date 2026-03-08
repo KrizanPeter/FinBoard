@@ -19,6 +19,24 @@
         <nb-card>
             <nb-card-header>Data import</nb-card-header>
             <nb-card-body>
+                <div style="text-align: center; margin-top:40px;" *ngIf="isImportLoading">
+                    <app-loading-spinner></app-loading-spinner>
+                </div>
+                <div class="import-container" *ngIf="!isImportLoading">
+                    <textarea nbInput fullWidth
+                        class="json-input"
+                        placeholder="Paste your backup JSON here..."
+                        [(ngModel)]="importJson"
+                        rows="8">
+                    </textarea>
+                    <div *ngIf="importError" class="import-error">{{ importError }}</div>
+                    <div *ngIf="importSuccess" class="import-success">{{ importSuccess }}</div>
+                    <button nbButton status="primary" class="btn-recover"
+                        [disabled]="!importJson"
+                        (click)="recoverData()">
+                        Recover
+                    </button>
+                </div>
             </nb-card-body>
           </nb-card>        
     </div>

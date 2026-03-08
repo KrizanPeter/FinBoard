@@ -18,9 +18,9 @@ namespace FinBoard.Domain.Entities
         [JsonIgnore]
         public IEnumerable<Resource>? Resources { get; set; }
         [JsonIgnore]
-        public IEnumerable<DashboardChart> DashboardCharts { get; set; }
+        public IEnumerable<DashboardChart>? DashboardCharts { get; set; }
         [JsonIgnore]
-        public virtual AppUser AppUser { get; set; }
+        public virtual AppUser? AppUser { get; set; }
 
     }
 }

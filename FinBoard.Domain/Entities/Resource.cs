@@ -18,9 +18,9 @@ namespace FinBoard.Domain.Entities
         public Currency Currency { get; set; }
 
         [JsonIgnore]
-        public virtual ICollection<Snapshot> Snapshots { get; set; }
+        public virtual ICollection<Snapshot>? Snapshots { get; set; }
         [JsonIgnore]
-        public virtual ICollection<ResourceGroup> ResourceGroups { get; set; }
+        public virtual ICollection<ResourceGroup>? ResourceGroups { get; set; }
 
         [NotMapped]
         [JsonIgnore]

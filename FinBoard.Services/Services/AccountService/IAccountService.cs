@@ -16,5 +16,6 @@ namespace FinBoard.Services.Services.AccountService
         Task<Result<AccountBaseDataDto>> SetBaseAccountData(Guid value, AccountBaseDataDto accountBaseDataDto);
         Task<Result<AccountBaseDataDto>> GetBaseAccountData(Guid accountId);
         Task<Result<DownloadStructureDto>> DownloadDataStructure(Guid value);
+        Task<Result> UploadDataStructure(Guid accountId, Guid userId, DownloadStructureDto data);
     }
 }

@@ -22,9 +22,44 @@ nb-icon{
 }
 
 nb-card-body{
-    display: grid;
-    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     margin-bottom: 20px;
     margin-top: 20px;
+    min-height: 300px;
+}
 
+.import-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    flex: 1;
+}
+
+.json-input {
+    width: 100%;
+    min-height: 60%;
+    flex: 1;
+    resize: vertical;
+    font-family: monospace;
+    font-size: 13px;
+}
+
+.btn-recover {
+    margin-top: 15px;
+    width: 15rem;
+}
+
+.import-error {
+    color: #ff3d71;
+    margin-top: 8px;
+    font-size: 13px;
+}
+
+.import-success {
+    color: #00d68f;
+    margin-top: 8px;
+    font-size: 13px;
 }

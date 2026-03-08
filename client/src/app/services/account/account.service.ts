@@ -31,5 +31,9 @@ export class AccountService{
           };
         return this.http.get(this.baseUrl+'Account/downloadData', httpOptions);
       }
+
+    uploadData(data: any) {
+        return this.http.post(this.baseUrl+'Account/uploadData', data);
+    }
    
 }

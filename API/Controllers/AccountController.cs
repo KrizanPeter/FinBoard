@@ -1,5 +1,6 @@
 ﻿using API.Controllers.Base;
 using FinBoard.Services.DTOs.Account;
+using FinBoard.Services.DTOs.DownloadStructure;
 using FinBoard.Services.Services.AccountService;
 using FinBoard.Services.Services.AuthServices;
 using FinBoard.Services.Services.UserService;
@@ -91,6 +92,28 @@ namespace API.Controllers
                 var jsonData = System.Text.Json.JsonSerializer.Serialize(result.Value);
                 byte[] byteArray = System.Text.Encoding.UTF8.GetBytes(jsonData);
                 return File(byteArray, "application/json", "data_backup.json");
+            }
+
+            return BadRequest(result.Error);
+        }
+
+        [Authorize]
+        [HttpPost("uploadData")]
+        public async Task<IActionResult> UploadDataOfAccount([FromBody] DownloadStructureDto data)
+        {
+            var requestId = this.GetRequestId();
+            var accountId = GetCurrentUserAccountId();
+            var userId = GetCurrentUserId();
+            _logger.LogInformation(this.LogApiAccess(requestId, MethodBase.GetCurrentMethod()));
+            _persistentService.SetupRequestProperties(userId.Value, accountId.Value);
+
+            if (accountId.IsFailure) { return BadRequest(accountId.Error); }
+
+            var result = await _accountService.UploadDataStructure(accountId.Value, userId.Value, data);
+
+            if (result.IsSuccess)
+            {
+                return Ok();
             }
 
             return BadRequest(result.Error);

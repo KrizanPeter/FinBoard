@@ -15,6 +15,6 @@ namespace FinBoard.Domain.Entities
         public string ResourceGroupName { get; set; }
 
         [JsonIgnore]
-        public virtual ICollection<Resource> Resources { get; set; }
+        public virtual ICollection<Resource>? Resources { get; set; }
     }
 }
