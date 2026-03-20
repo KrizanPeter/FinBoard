@@ -2,6 +2,7 @@
 using FinBoard.Domain.Entities;
 using FinBoard.Services.DTOs.Account;
 using FinBoard.Services.DTOs.DashBoardChart;
+using FinBoard.Services.DTOs.FinancialGoal;
 using FinBoard.Services.DTOs.Move;
 using FinBoard.Services.DTOs.Resource;
 using FinBoard.Services.DTOs.ResourceGroup;
@@ -33,6 +34,9 @@ namespace FinBoard.Services.Mapper
 
             CreateMap<DashboardChart, CreateDashboardChartDto>().ReverseMap();
             CreateMap<DashboardChart, DashboardChartDto>().ReverseMap();
+
+            CreateMap<FinancialGoal, CreateFinancialGoalDto>().ReverseMap();
+            CreateMap<FinancialGoal, FinancialGoalDto>().ReverseMap();
 
         }
     }

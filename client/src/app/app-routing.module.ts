@@ -13,6 +13,7 @@ import { HowToUseComponent } from './publicPages/how-to-use/how-to-use.component
 import { LandingPageComponent } from './publicPages/landing-page/landing-page.component';
 import { ReleaseNotesComponent } from './publicPages/release-notes/release-notes.component';
 import { DataBackupComponent } from './pages/data-backup/data-backup.component';
+import { FinancialGoalTemplateComponent } from './pages/financial-goal/financial-goal-template/financial-goal-template.component';
 
 
 const routes: Routes = [
@@ -29,6 +30,7 @@ const routes: Routes = [
   { path:'resource-group', component:ResourceGroupTemplateComponent, canActivate: [AuthGuard]},
   { path:'create-guide', component:CreateGuideComponent, canActivate: [AuthGuard]},
   { path:'data-backup', component:DataBackupComponent, canActivate: [AuthGuard]},
+  { path:'financial-goals', component:FinancialGoalTemplateComponent, canActivate: [AuthGuard]},
 
 
 

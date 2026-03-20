@@ -220,6 +220,44 @@ namespace FinBoard.Domain.Migrations
                     b.ToTable("DashboardCharts");
                 });
 
+            modelBuilder.Entity("FinBoard.Domain.Entities.FinancialGoal", b =>
+                {
+                    b.Property<Guid>("FinancialGoalId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("AccountId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("CreatedBy")
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime>("DateOfCreation")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<DateTime>("DateOfLastModification")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<DateTime>("DueDate")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<Guid>("LastModifyBy")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid?>("ResourceGroupId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid?>("ResourceId")
+                        .HasColumnType("uuid");
+
+                    b.Property<float>("TargetValue")
+                        .HasColumnType("real");
+
+                    b.HasKey("FinancialGoalId");
+
+                    b.ToTable("FinancialGoals");
+                });
+
             modelBuilder.Entity("FinBoard.Domain.Entities.Resource", b =>
                 {
                     b.Property<Guid>("ResourceId")
@@ -533,8 +571,7 @@ namespace FinBoard.Domain.Migrations
 
             modelBuilder.Entity("FinBoard.Domain.Entities.Account", b =>
                 {
-                    b.Navigation("AppUser")
-                        .IsRequired();
+                    b.Navigation("AppUser");
 
                     b.Navigation("DashboardCharts");
 

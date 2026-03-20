@@ -1,0 +1,48 @@
+<nb-card>
+    <nb-card-header>Create Financial Goal</nb-card-header>
+    <nb-card-body>
+        <form class="auth-form" #createGoalForm="ngForm" (ngSubmit)="onSubmit(createGoalForm)">
+            <div class="form-group">
+                <label class="label">Goal type</label>
+                <nb-radio-group [(ngModel)]="goalType" name="goalType" (ngModelChange)="onGoalTypeChange()">
+                    <nb-radio value="resource">Resource</nb-radio>
+                    <nb-radio value="resourceGroup">Resource Group</nb-radio>
+                </nb-radio-group>
+            </div>
+
+            <div class="form-group" *ngIf="goalType === 'resource'">
+                <label class="label">Select Resource</label>
+                <nb-select fullWidth placeholder="Select resource" [(ngModel)]="selectedEntityId" name="selectedEntity">
+                    <nb-option *ngFor="let resource of resources" [value]="resource.resourceId">
+                        {{resource.name}}
+                    </nb-option>
+                </nb-select>
+            </div>
+
+            <div class="form-group" *ngIf="goalType === 'resourceGroup'">
+                <label class="label">Select Resource Group</label>
+                <nb-select fullWidth placeholder="Select resource group" [(ngModel)]="selectedEntityId" name="selectedEntity">
+                    <nb-option *ngFor="let group of resourceGroups" [value]="group.resourceGroupId">
+                        {{group.resourceGroupName}}
+                    </nb-option>
+                </nb-select>
+            </div>
+
+            <div class="form-group">
+                <label class="label">Target Value</label>
+                <input type="number" nbInput fullWidth placeholder="10000" [(ngModel)]="targetValue" name="targetValue" required min="0">
+            </div>
+
+            <div class="form-group">
+                <label class="label">Due Date</label>
+                <input nbInput fullWidth placeholder="Pick date" [nbDatepicker]="dueDatePicker" [(ngModel)]="dueDate" name="dueDate" required>
+                <nb-datepicker #dueDatePicker></nb-datepicker>
+            </div>
+
+            <div class="btn-container">
+                <button type="submit" nbButton status="danger"
+                    [disabled]="!createGoalForm.valid || !selectedEntityId || !targetValue || !dueDate">Create Goal</button>
+            </div>
+        </form>
+    </nb-card-body>
+</nb-card>

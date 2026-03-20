@@ -78,7 +78,7 @@ namespace API
             }
             context.Database.Migrate();
 
-            if (false)
+            if (true)
             {
                 using (var scope = app.ApplicationServices.CreateScope())
                 {

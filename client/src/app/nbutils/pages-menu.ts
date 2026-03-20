@@ -44,6 +44,11 @@ export const USER_MENU_ITEMS: NbMenuItem[] = [
         link: 'resource-group',
       },
       {
+        title: 'Financial Goals',
+        icon: 'trending-up-outline',
+        link: 'financial-goals',
+      },
+      {
         title: 'Data backup',
         icon: 'save-outline',
         link: 'data-backup',

@@ -76,6 +76,9 @@ import { BaseAccountDataComponent } from './pages/account/base-account-data/base
 import { SnapshotPopoverComponent } from './components/popovers/snapshot-popover/snapshot-popover.component';
 import { DashboardSummaryDataComponent } from './pages/_dashboard/dashboard-summary-data/dashboard-summary-data.component';
 import { DataBackupComponent } from './pages/data-backup/data-backup.component';
+import { FinancialGoalTemplateComponent } from './pages/financial-goal/financial-goal-template/financial-goal-template.component';
+import { FinancialGoalFormComponent } from './pages/financial-goal/financial-goal-form/financial-goal-form.component';
+import { FinancialGoalListComponent } from './pages/financial-goal/financial-goal-list/financial-goal-list.component';
 
 
 @NgModule({
@@ -113,6 +116,9 @@ import { DataBackupComponent } from './pages/data-backup/data-backup.component';
     SnapshotPopoverComponent,
     DashboardSummaryDataComponent,
     DataBackupComponent,
+    FinancialGoalTemplateComponent,
+    FinancialGoalFormComponent,
+    FinancialGoalListComponent,
   ],
   imports: [
     NgxEchartsModule.forRoot({

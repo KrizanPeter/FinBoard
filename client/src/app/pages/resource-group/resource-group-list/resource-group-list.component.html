@@ -17,9 +17,13 @@
                     <tbody class="table-text-left">
                         <tr *ngFor="let resourceGroup of resouceGroupsList">
                             <td>{{resourceGroup.resourceGroupName}}</td>
-                            <td><li *ngFor="let resource of resourceGroup.resources">
-                                {{resource.name}}
-                            </li></td>
+                            <td>
+                                <ul>
+                                    <li *ngFor="let resource of resourceGroup.resources">
+                                        {{resource.name}}
+                                    </li>
+                                </ul>
+                            </td>
                             <td>
                                 <!-- <a class="options-icon" href="">
                                     <fa-icon [icon]="faPencil" (click)="editClick(resourceGroup.resourceGroupId)"></fa-icon>
