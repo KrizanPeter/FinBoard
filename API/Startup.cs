@@ -97,17 +97,17 @@ namespace API
 
             //app.UseHttpsRedirection();
 
+            app.UseDefaultFiles();
+
+            app.UseStaticFiles();
+
             app.UseRouting();
 
-            app.UseCors(policy => policy.AllowAnyHeader().AllowAnyMethod().WithOrigins("http://localhost:4200"));
+            app.UseCors(policy => policy.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
 
             app.UseAuthentication();
 
             app.UseAuthorization();
-
-            app.UseDefaultFiles();
-
-            app.UseStaticFiles();
 
             app.UseEndpoints(endpoints =>
             {
