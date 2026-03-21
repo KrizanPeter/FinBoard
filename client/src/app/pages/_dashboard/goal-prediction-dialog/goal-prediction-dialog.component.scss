@@ -1,0 +1,89 @@
+:host ::ng-deep nb-dialog-container {
+    width: 1600px !important;
+    max-width: 95vw !important;
+    max-height: 95vh !important;
+}
+
+.goal-prediction-dialog {
+    margin: 0;
+}
+
+nb-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.close-icon {
+    cursor: pointer;
+    color: gray;
+    display: flex;
+    align-items: center;
+
+    &:hover {
+        color: red;
+    }
+}
+
+.charts-container {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.chart-panel {
+    flex: 1;
+    min-width: 480px;
+
+    h6 {
+        text-align: center;
+        margin-bottom: 8px;
+    }
+
+    ngx-echarts-line {
+        display: block;
+        height: 500px;
+        width: 100%;
+
+        ::ng-deep .echart {
+            height: 100%;
+            width: 100%;
+        }
+    }
+}
+
+.prediction-chart {
+    height: 500px;
+    width: 100%;
+}
+
+.goal-info {
+    margin-top: 16px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+
+.goal-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 16px;
+    border-radius: 4px;
+    background-color: rgba(255, 61, 113, 0.1);
+    color: #ff3d71;
+    font-weight: 600;
+}
+
+.estimation {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 16px;
+    border-radius: 4px;
+    background-color: rgba(255, 170, 0, 0.1);
+    color: #ffaa00;
+    font-weight: 600;
+}

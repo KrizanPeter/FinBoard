@@ -65,3 +65,19 @@
 .options-icon:hover{
     color: red;
 }
+
+.goal-icon{
+    position: absolute;
+    left: 0;
+    color: #ff3d71;
+    cursor: pointer;
+    padding-left: 10px;
+    padding-right: 10px;
+    display: flex;
+    align-items: center;
+    transition: transform 0.2s ease;
+}
+.goal-icon:hover{
+    transform: scale(1.2);
+    color: #ff3d71;
+}

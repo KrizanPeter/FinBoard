@@ -1,12 +1,16 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { faTrashCan } from '@fortawesome/free-solid-svg-icons';
+import { NbDialogService } from '@nebular/theme';
 import { DashboardService } from 'src/app/services/dashboard/dashboard.service';
+import { FinancialGoalService } from 'src/app/services/financialGoal/financialGoal.service';
 import { ResourceService } from 'src/app/services/resource/resource.service';
 import { LineChartData, LineRawData } from 'src/app/_models/chartData/lineChartData';
 import { PieChartData, PieRawData } from 'src/app/_models/chartData/pieChartData';
-import { ChartType, DashboardDto } from 'src/app/_models/dashboard/dashboardDto';
+import { ChartType, DashboardDto, SourceType } from 'src/app/_models/dashboard/dashboardDto';
+import { FinancialGoalDto } from 'src/app/_models/financialGoalModels/financialGoalDto';
 import { ResourceDto } from 'src/app/_models/resourceModels/resourceDto';
 import { SnapshotDto } from 'src/app/_models/snapshotModels/snapshotDto';
+import { GoalPredictionDialogComponent } from '../goal-prediction-dialog/goal-prediction-dialog.component';
 
 @Component({
   selector: 'app-dashboard-chart',
@@ -26,10 +30,17 @@ export class DashboardChartComponent implements OnInit {
   isLoading = true;
   pieChartData: PieChartData;
   lineChartData: LineChartData;
-  constructor(private resourceService: ResourceService, private dashboardService: DashboardService) { }
+  matchingGoal: FinancialGoalDto | null = null;
+  constructor(
+    private resourceService: ResourceService,
+    private dashboardService: DashboardService,
+    private financialGoalService: FinancialGoalService,
+    private dialogService: NbDialogService
+  ) { }
 
   ngOnInit(): void {
     this.loadResources();
+    this.loadMatchingGoal();
   }
 
   loadResources(){
@@ -83,6 +94,35 @@ export class DashboardChartComponent implements OnInit {
     console.log(chartData);
     return chartData;
   } 
+
+  loadMatchingGoal() {
+    if (this.chartInfo.chartType !== ChartType.Line) return;
+    this.financialGoalService.getGoals().subscribe(
+      goals => {
+        this.matchingGoal = goals.find(g => {
+          if (this.chartInfo.sourceType === SourceType.Resource) {
+            return g.resourceId === this.chartInfo.sourceId;
+          } else if (this.chartInfo.sourceType === SourceType.ResourceGroup) {
+            return g.resourceGroupId === this.chartInfo.sourceId;
+          }
+          return false;
+        }) || null;
+      },
+      error => console.log(error)
+    );
+  }
+
+  openGoalPrediction() {
+    if (!this.matchingGoal || !this.lineChartData) return;
+    this.dialogService.open(GoalPredictionDialogComponent, {
+      autoFocus: false,
+      context: {
+        chartName: this.chartInfo.chartName,
+        originalChartData: this.lineChartData,
+        goal: this.matchingGoal,
+      }
+    });
+  }
 
   deleteChart(){
     this.dashboardService.deleteDashboardChart(this.chartInfo.dashboardChartId).subscribe(

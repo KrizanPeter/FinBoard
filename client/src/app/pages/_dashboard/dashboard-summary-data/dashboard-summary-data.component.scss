@@ -38,6 +38,28 @@
     white-space: nowrap;
 }
 
+.portfolio-change {
+    display: flex;
+    align-items: center;
+    gap: 0.1rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    margin-top: 0.15rem;
+    white-space: nowrap;
+
+    &.rising {
+        color: #00d68f;
+    }
+
+    &.falling {
+        color: #ff3d71;
+    }
+
+    nb-icon {
+        font-size: 0.95rem;
+    }
+}
+
 .goals-link {
     display: flex;
     align-items: center;

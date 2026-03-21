@@ -25,6 +25,8 @@ export class DashboardSummaryDataComponent implements OnInit {
   isLoading: boolean = true;
   totalValue: number = 0;
   hasAnyGoal: boolean = false;
+  portfolioPercentageMove: number = 0;
+  portfolioIsRising: boolean = true;
 
   private overviewData: DashboardOverviewDto[] = [];
   private goals: FinancialGoalDto[] = [];
@@ -75,7 +77,15 @@ export class DashboardSummaryDataComponent implements OnInit {
   private tryBuildRows() {
     if (!this.overviewLoaded || !this.goalsLoaded) return;
 
-    this.totalValue = this.overviewData.reduce((sum, r) => sum + r.amount, 0);
+    // Extract Summary entry for portfolio growth, then exclude it from tiles
+    const summaryEntry = this.overviewData.find(r => r.name === 'Summary');
+    const tileData = this.overviewData.filter(r => r.name !== 'Summary');
+
+    this.totalValue = tileData.reduce((sum, r) => sum + r.amount, 0);
+    if (summaryEntry) {
+      this.portfolioPercentageMove = summaryEntry.percentageMove;
+      this.portfolioIsRising = summaryEntry.isRising;
+    }
 
     // Build a map: targetName -> nearest goal (smallest positive remainingDays, or overdue)
     const goalMap = new Map<string, FinancialGoalDto>();
@@ -88,7 +98,7 @@ export class DashboardSummaryDataComponent implements OnInit {
 
     // Build rows from overview data, attaching matching goal
     const matchedGoalNames = new Set<string>();
-    this.rows = this.overviewData.map(record => {
+    this.rows = tileData.map(record => {
       const goal = goalMap.get(record.name) || null;
       if (goal) matchedGoalNames.add(record.name);
       return {

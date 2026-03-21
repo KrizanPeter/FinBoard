@@ -80,6 +80,7 @@ import { DataBackupComponent } from './pages/data-backup/data-backup.component';
 import { FinancialGoalTemplateComponent } from './pages/financial-goal/financial-goal-template/financial-goal-template.component';
 import { FinancialGoalFormComponent } from './pages/financial-goal/financial-goal-form/financial-goal-form.component';
 import { FinancialGoalListComponent } from './pages/financial-goal/financial-goal-list/financial-goal-list.component';
+import { GoalPredictionDialogComponent } from './pages/_dashboard/goal-prediction-dialog/goal-prediction-dialog.component';
 
 
 @NgModule({
@@ -120,6 +121,7 @@ import { FinancialGoalListComponent } from './pages/financial-goal/financial-goa
     FinancialGoalTemplateComponent,
     FinancialGoalFormComponent,
     FinancialGoalListComponent,
+    GoalPredictionDialogComponent,
   ],
   imports: [
     NgxEchartsModule.forRoot({

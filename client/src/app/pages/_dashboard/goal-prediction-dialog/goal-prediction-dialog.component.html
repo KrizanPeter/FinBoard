@@ -1,0 +1,31 @@
+<nb-card class="goal-prediction-dialog">
+    <nb-card-header>
+        <span><b>{{chartName}}</b> — Goal Prediction</span>
+        <a class="close-icon" (click)="close()">
+            <nb-icon icon="close-outline" pack="eva"></nb-icon>
+        </a>
+    </nb-card-header>
+    <nb-card-body>
+        <div class="charts-container">
+            <div class="chart-panel">
+                <h6>Current Data</h6>
+                <ngx-echarts-line [chartData]="originalChartData"></ngx-echarts-line>
+            </div>
+            <div class="chart-panel">
+                <h6>Prediction &amp; Goal</h6>
+                <div echarts [options]="predictionOptions" class="prediction-chart"></div>
+            </div>
+        </div>
+        <div class="goal-info">
+            <div class="goal-badge">
+                <nb-icon icon="flag-outline" pack="eva"></nb-icon>
+                <span>Target: {{goal.targetValue | number}} | Current: {{goal.currentValue | number}} | {{goal.percentageFulfilled | number:'1.0-1'}}% achieved</span>
+                <span *ngIf="goal.remainingDays > 0"> | {{goal.remainingDays}} days remaining</span>
+            </div>
+            <div class="estimation" *ngIf="estimatedDate">
+                <nb-icon icon="trending-up-outline" pack="eva"></nb-icon>
+                <span>Estimated achievement: <b>{{estimatedDate}}</b></span>
+            </div>
+        </div>
+    </nb-card-body>
+</nb-card>

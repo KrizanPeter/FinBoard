@@ -9,6 +9,11 @@
             <div class="total-tile">
                 <span class="total-label">Portfolio</span>
                 <span class="total-amount">{{ totalValue | number:'1.2-2' }} €</span>
+                <span class="portfolio-change" [ngClass]="portfolioIsRising ? 'rising' : 'falling'"
+                      *ngIf="portfolioPercentageMove !== 0">
+                    <nb-icon [icon]="portfolioIsRising ? 'arrow-upward-outline' : 'arrow-downward-outline'" pack="eva"></nb-icon>
+                    {{ portfolioPercentageMove | number:'1.1-1' }}%
+                </span>
                 <a class="goals-link" *ngIf="hasAnyGoal" (click)="navigateToGoals()">
                     <nb-icon icon="flag-outline" pack="eva"></nb-icon> Goals
                 </a>

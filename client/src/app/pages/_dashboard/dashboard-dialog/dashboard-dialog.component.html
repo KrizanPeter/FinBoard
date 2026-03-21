@@ -43,6 +43,6 @@
     </nb-card-body>
     <nb-card-footer>
         <button class="cancel" nbButton status="danger" (click)="cancel()">Cancel</button>
-        <button nbButton status="success" class="btn-float-right" (click)="OnSubmit()" >Submit</button>
+        <button nbButton status="success" class="btn-float-right" (click)="OnSubmit()" [disabled]="!isFormValid">Submit</button>
     </nb-card-footer>
 </nb-card>

@@ -90,11 +90,11 @@ namespace API.Data
             var snapshots = new List<Snapshot>();
             var rng = new Random(42);
 
-            snapshots.AddRange(GenerateSnapshots(savings.ResourceId, accountId, userId, now, 5000f, 50f, rng));
-            snapshots.AddRange(GenerateSnapshots(stocks.ResourceId, accountId, userId, now, 10000f, 500f, rng));
-            snapshots.AddRange(GenerateSnapshots(bonds.ResourceId, accountId, userId, now, 8000f, 100f, rng));
-            snapshots.AddRange(GenerateSnapshots(crypto.ResourceId, accountId, userId, now, 3000f, 800f, rng));
-            snapshots.AddRange(GenerateSnapshots(realEstate.ResourceId, accountId, userId, now, 20000f, 300f, rng));
+            snapshots.AddRange(GenerateSnapshots(savings.ResourceId, accountId, userId, now, 5000f, 400f, 150f, rng));
+            snapshots.AddRange(GenerateSnapshots(stocks.ResourceId, accountId, userId, now, 10000f, 500f, 350f, rng));
+            snapshots.AddRange(GenerateSnapshots(bonds.ResourceId, accountId, userId, now, 8000f, 100f, 10f, rng));
+            snapshots.AddRange(GenerateSnapshots(crypto.ResourceId, accountId, userId, now, 3000f, 800f, 0f, rng));
+            snapshots.AddRange(GenerateSnapshots(realEstate.ResourceId, accountId, userId, now, 20000f, 300f, 30f, rng));
 
             context.Snapshots.AddRange(snapshots);
             await context.SaveChangesAsync();
@@ -117,7 +117,7 @@ namespace API.Data
 
         private static List<Snapshot> GenerateSnapshots(
             Guid resourceId, Guid accountId, Guid userId, DateTime now,
-            float startAmount, float volatility, Random rng)
+            float startAmount, float volatility, float drift, Random rng)
         {
             var snapshots = new List<Snapshot>();
             var amount = startAmount;
@@ -125,7 +125,7 @@ namespace API.Data
             for (int i = 30; i >= 1; i--)
             {
                 var date = now.AddMonths(-i);
-                amount += (float)(rng.NextDouble() * 2 - 1) * volatility + volatility * 0.1f;
+                amount += (float)(rng.NextDouble() * 2 - 1) * volatility + drift;
                 if (amount < 0) amount = 100f;
 
                 snapshots.Add(new Snapshot

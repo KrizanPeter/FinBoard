@@ -99,6 +99,13 @@ export class DashboardDialogComponent implements OnInit  {
     this.radioGroupChartType = value;
   }
 
+  get isFormValid(): boolean {
+    return this.chartName.trim() !== ''
+      && this.radioGroupValue !== ''
+      && this.selectedOption !== ''
+      && this.radioGroupChartType !== '';
+  }
+
   OnSubmit(){
     let dashboardDto : DashboardDto;
     dashboardDto = this.fillDtoWithData(dashboardDto);

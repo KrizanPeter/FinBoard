@@ -1,5 +1,8 @@
 <nb-card class="col-12 col-md-12 dashboard-window chart-window">
     <nb-card-header class="dashboard-header">
+        <a class="goal-icon" *ngIf="matchingGoal" (click)="openGoalPrediction()" nbTooltip="View goal prediction">
+            <nb-icon icon="flag-outline" pack="eva"></nb-icon>
+        </a>
         <div class="header-center">
             <a class="nav-arrow" [class.disabled]="chartIndex === 0" (click)="moveLeftEvent.emit(chartIndex)">
                 <nb-icon icon="arrow-back-outline" pack="eva"></nb-icon>
