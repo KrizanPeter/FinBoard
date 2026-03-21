@@ -19,6 +19,7 @@ export class DashboardChartComponent implements OnInit {
   @Input() chartTotal: number = 0;
   @Output() moveLeftEvent = new EventEmitter<number>();
   @Output() moveRightEvent = new EventEmitter<number>();
+  @Output() deleteEvent = new EventEmitter<string>();
   faTrashCan = faTrashCan;
   chartTypePie =  ChartType.Pie;
   chartTypeLine = ChartType.Line;
@@ -84,10 +85,9 @@ export class DashboardChartComponent implements OnInit {
   } 
 
   deleteChart(){
-    console.log("I am HITEEEEED")
     this.dashboardService.deleteDashboardChart(this.chartInfo.dashboardChartId).subscribe(
-      resData => {
-        location.reload();
+      () => {
+        this.deleteEvent.emit(this.chartInfo.dashboardChartId);
       }, 
       error => {
         console.log(error);

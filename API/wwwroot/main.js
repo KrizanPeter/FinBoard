@@ -1602,6 +1602,7 @@ class DashboardChartComponent {
         this.chartTotal = 0;
         this.moveLeftEvent = new _angular_core__WEBPACK_IMPORTED_MODULE_8__.EventEmitter();
         this.moveRightEvent = new _angular_core__WEBPACK_IMPORTED_MODULE_8__.EventEmitter();
+        this.deleteEvent = new _angular_core__WEBPACK_IMPORTED_MODULE_8__.EventEmitter();
         this.faTrashCan = _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_9__.faTrashCan;
         this.chartTypePie = src_app_models_dashboard_dashboardDto__WEBPACK_IMPORTED_MODULE_2__.ChartType.Pie;
         this.chartTypeLine = src_app_models_dashboard_dashboardDto__WEBPACK_IMPORTED_MODULE_2__.ChartType.Line;
@@ -1655,16 +1656,15 @@ class DashboardChartComponent {
         return chartData;
     }
     deleteChart() {
-        console.log("I am HITEEEEED");
-        this.dashboardService.deleteDashboardChart(this.chartInfo.dashboardChartId).subscribe(resData => {
-            location.reload();
+        this.dashboardService.deleteDashboardChart(this.chartInfo.dashboardChartId).subscribe(() => {
+            this.deleteEvent.emit(this.chartInfo.dashboardChartId);
         }, error => {
             console.log(error);
         });
     }
 }
 DashboardChartComponent.ɵfac = function DashboardChartComponent_Factory(t) { return new (t || DashboardChartComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵdirectiveInject"](src_app_services_resource_resource_service__WEBPACK_IMPORTED_MODULE_3__.ResourceService), _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵdirectiveInject"](src_app_services_dashboard_dashboard_service__WEBPACK_IMPORTED_MODULE_4__.DashboardService)); };
-DashboardChartComponent.ɵcmp = /*@__PURE__*/ _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵdefineComponent"]({ type: DashboardChartComponent, selectors: [["app-dashboard-chart"]], inputs: { chartInfo: "chartInfo", chartIndex: "chartIndex", chartTotal: "chartTotal" }, outputs: { moveLeftEvent: "moveLeftEvent", moveRightEvent: "moveRightEvent" }, decls: 15, vars: 9, consts: [[1, "col-12", "col-md-12", "dashboard-window", "chart-window"], [1, "dashboard-header"], [1, "header-center"], [1, "nav-arrow", 3, "click"], ["icon", "arrow-back-outline", "pack", "eva"], ["icon", "arrow-forward-outline", "pack", "eva"], [1, "options-icon"], [3, "icon", "click"], [1, "dashboard-body"], ["style", "text-align: center; margin-top:40px;", 4, "ngIf"], [4, "ngIf"], [2, "text-align", "center", "margin-top", "40px"], [3, "chartData"]], template: function DashboardChartComponent_Template(rf, ctx) { if (rf & 1) {
+DashboardChartComponent.ɵcmp = /*@__PURE__*/ _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵdefineComponent"]({ type: DashboardChartComponent, selectors: [["app-dashboard-chart"]], inputs: { chartInfo: "chartInfo", chartIndex: "chartIndex", chartTotal: "chartTotal" }, outputs: { moveLeftEvent: "moveLeftEvent", moveRightEvent: "moveRightEvent", deleteEvent: "deleteEvent" }, decls: 15, vars: 9, consts: [[1, "col-12", "col-md-12", "dashboard-window", "chart-window"], [1, "dashboard-header"], [1, "header-center"], [1, "nav-arrow", 3, "click"], ["icon", "arrow-back-outline", "pack", "eva"], ["icon", "arrow-forward-outline", "pack", "eva"], [1, "options-icon"], [3, "icon", "click"], [1, "dashboard-body"], ["style", "text-align: center; margin-top:40px;", 4, "ngIf"], [4, "ngIf"], [2, "text-align", "center", "margin-top", "40px"], [3, "chartData"]], template: function DashboardChartComponent_Template(rf, ctx) { if (rf & 1) {
         _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵelementStart"](0, "nb-card", 0)(1, "nb-card-header", 1)(2, "div", 2)(3, "a", 3);
         _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵlistener"]("click", function DashboardChartComponent_Template_a_click_3_listener() { return ctx.moveLeftEvent.emit(ctx.chartIndex); });
         _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵelement"](4, "nb-icon", 4);
@@ -1732,17 +1732,15 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-function DashboardDialogComponent_nb_option_20_Template(rf, ctx) { if (rf & 1) {
-    _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](0, "nb-option", 16);
+function DashboardDialogComponent_option_20_Template(rf, ctx) { if (rf & 1) {
+    _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](0, "option", 16);
     _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵtext"](1);
     _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementEnd"]();
 } if (rf & 2) {
     const resource_r1 = ctx.$implicit;
-    const i_r2 = ctx.index;
-    _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵpropertyInterpolate"]("value", resource_r1.id);
-    _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵproperty"]("selected", i_r2 == 0);
+    _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵproperty"]("value", resource_r1.id);
     _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵadvance"](1);
-    _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵtextInterpolate1"](" ", resource_r1.name, "");
+    _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵtextInterpolate"](resource_r1.name);
 } }
 class DashboardDialogComponent {
     constructor(ref, resourceService, resourceGroupService, dashboardService) {
@@ -1813,18 +1811,12 @@ class DashboardDialogComponent {
     OnSubmit() {
         let dashboardDto;
         dashboardDto = this.fillDtoWithData(dashboardDto);
-        this.dashboardService.createDashboardChart(dashboardDto).subscribe(resData => {
-            ///this.isLoading = false;
-            //this.resourceGroupService.reloadTrigger.next(true);
-            this.cancel();
-            location.reload();
+        this.dashboardService.createDashboardChart(dashboardDto).subscribe(() => {
+            this.dashboardService.reloadTrigger.next(true);
+            this.ref.close();
         }, error => {
-            //this.isLoading = false;
             console.log(error);
         });
-        console.log(this.selectedOption);
-        console.log(this.radioGroupValue);
-        console.log(this.radioGroupChartType);
     }
     fillDtoWithData(dashboardDto) {
         dashboardDto = new src_app_models_dashboard_dashboardDto__WEBPACK_IMPORTED_MODULE_1__.DashboardDto();
@@ -1849,7 +1841,7 @@ class DashboardDialogComponent {
     }
 }
 DashboardDialogComponent.ɵfac = function DashboardDialogComponent_Factory(t) { return new (t || DashboardDialogComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵdirectiveInject"](_nebular_theme__WEBPACK_IMPORTED_MODULE_6__.NbDialogRef), _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵdirectiveInject"](src_app_services_resource_resource_service__WEBPACK_IMPORTED_MODULE_2__.ResourceService), _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵdirectiveInject"](src_app_services_resourceGroup_resourceGroup_service__WEBPACK_IMPORTED_MODULE_3__.ResourceGroupService), _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵdirectiveInject"](src_app_services_dashboard_dashboard_service__WEBPACK_IMPORTED_MODULE_4__.DashboardService)); };
-DashboardDialogComponent.ɵcmp = /*@__PURE__*/ _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵdefineComponent"]({ type: DashboardDialogComponent, selectors: [["ngx-dialog-name-prompt"]], decls: 34, vars: 10, consts: [[1, "dashboard-dialog"], [1, ""], [1, "form-group", "mt-4"], ["for", "chartNameId", 1, "label"], ["type", "text", "ngModel", "", "id", "chartNameId", "name", "inputChartNameId", "nbInput", "", "fullWidth", "", "placeholder", "Likvid property", "autocomplete", "off", 3, "ngModel", "ngModelChange"], ["for", "resourceTypeOption", 1, "label"], ["name", "resourceType", "id", "resourceTypeOption", 3, "ngModel", "ngModelChange"], [3, "value", "valueChange"], ["for", "resourceOptionInput", 1, "label"], ["name", "inputResourceId", "id", "resourceOptionInput", "fullWidth", "", "ngModel", "", "required", "", 3, "ngModel", "ngModelChange"], [3, "selected", "value", 4, "ngFor", "ngForOf"], ["for", "chartTypeOption", 1, "label"], ["name", "chartType", "id", "chartTypeOption", 3, "value", "valueChange"], [3, "value", "disabled", "valueChange"], ["nbButton", "", "status", "danger", 1, "cancel", 3, "click"], ["nbButton", "", "status", "success", 1, "btn-float-right", 3, "click"], [3, "selected", "value"]], template: function DashboardDialogComponent_Template(rf, ctx) { if (rf & 1) {
+DashboardDialogComponent.ɵcmp = /*@__PURE__*/ _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵdefineComponent"]({ type: DashboardDialogComponent, selectors: [["ngx-dialog-name-prompt"]], decls: 34, vars: 10, consts: [[1, "dashboard-dialog"], [1, ""], [1, "form-group", "mt-4"], ["for", "chartNameId", 1, "label"], ["type", "text", "ngModel", "", "id", "chartNameId", "name", "inputChartNameId", "nbInput", "", "fullWidth", "", "placeholder", "Likvid property", "autocomplete", "off", 3, "ngModel", "ngModelChange"], ["for", "resourceTypeOption", 1, "label"], ["name", "resourceType", "id", "resourceTypeOption", 3, "ngModel", "ngModelChange"], [3, "value", "valueChange"], ["for", "resourceOptionInput", 1, "label"], ["nbInput", "", "fullWidth", "", "name", "inputResourceId", "id", "resourceOptionInput", "required", "", 3, "ngModel", "ngModelChange"], [3, "value", 4, "ngFor", "ngForOf"], ["for", "chartTypeOption", 1, "label"], ["name", "chartType", "id", "chartTypeOption", 3, "value", "valueChange"], [3, "value", "disabled", "valueChange"], ["nbButton", "", "status", "danger", 1, "cancel", 3, "click"], ["nbButton", "", "status", "success", 1, "btn-float-right", 3, "click"], [3, "value"]], template: function DashboardDialogComponent_Template(rf, ctx) { if (rf & 1) {
         _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](0, "nb-card", 0)(1, "nb-card-header");
         _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵtext"](2, "Add new dashboard view");
         _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementEnd"]();
@@ -1875,9 +1867,9 @@ DashboardDialogComponent.ɵcmp = /*@__PURE__*/ _angular_core__WEBPACK_IMPORTED_M
         _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](16, "div", 2)(17, "label", 8);
         _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵtext"](18, "Source");
         _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementEnd"]();
-        _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](19, "nb-select", 9);
-        _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵlistener"]("ngModelChange", function DashboardDialogComponent_Template_nb_select_ngModelChange_19_listener($event) { return ctx.selectedOption = $event; });
-        _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵtemplate"](20, DashboardDialogComponent_nb_option_20_Template, 2, 3, "nb-option", 10);
+        _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](19, "select", 9);
+        _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵlistener"]("ngModelChange", function DashboardDialogComponent_Template_select_ngModelChange_19_listener($event) { return ctx.selectedOption = $event; });
+        _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵtemplate"](20, DashboardDialogComponent_option_20_Template, 2, 2, "option", 10);
         _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementEnd"]()();
         _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](21, "div", 2)(22, "label", 11);
         _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵtext"](23, "Source Type");
@@ -1919,7 +1911,7 @@ DashboardDialogComponent.ɵcmp = /*@__PURE__*/ _angular_core__WEBPACK_IMPORTED_M
         _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵproperty"]("value", "Line");
         _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵadvance"](2);
         _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵproperty"]("value", "Pie")("disabled", ctx.disabledPie);
-    } }, dependencies: [_angular_common__WEBPACK_IMPORTED_MODULE_7__.NgForOf, _angular_forms__WEBPACK_IMPORTED_MODULE_8__.DefaultValueAccessor, _angular_forms__WEBPACK_IMPORTED_MODULE_8__.NgControlStatus, _angular_forms__WEBPACK_IMPORTED_MODULE_8__.RequiredValidator, _angular_forms__WEBPACK_IMPORTED_MODULE_8__.NgModel, _nebular_theme__WEBPACK_IMPORTED_MODULE_6__.NbButtonComponent, _nebular_theme__WEBPACK_IMPORTED_MODULE_6__.NbRadioComponent, _nebular_theme__WEBPACK_IMPORTED_MODULE_6__.NbRadioGroupComponent, _nebular_theme__WEBPACK_IMPORTED_MODULE_6__.NbSelectComponent, _nebular_theme__WEBPACK_IMPORTED_MODULE_6__.NbOptionComponent, _nebular_theme__WEBPACK_IMPORTED_MODULE_6__.NbInputDirective, _nebular_theme__WEBPACK_IMPORTED_MODULE_6__.NbCardComponent, _nebular_theme__WEBPACK_IMPORTED_MODULE_6__.NbCardBodyComponent, _nebular_theme__WEBPACK_IMPORTED_MODULE_6__.NbCardFooterComponent, _nebular_theme__WEBPACK_IMPORTED_MODULE_6__.NbCardHeaderComponent], styles: ["[_nghost-%COMP%]     nb-dialog-container {\n  width: 450px !important;\n}\n\n.btn-float-right[_ngcontent-%COMP%] {\n  float: right;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImRhc2hib2FyZC1kaWFsb2cuY29tcG9uZW50LnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQ0E7RUFDSSx1QkFBQTtBQUFKOztBQUdBO0VBQ0ksWUFBQTtBQUFKIiwiZmlsZSI6ImRhc2hib2FyZC1kaWFsb2cuY29tcG9uZW50LnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyJcclxuOmhvc3QgOjpuZy1kZWVwIG5iLWRpYWxvZy1jb250YWluZXIge1xyXG4gICAgd2lkdGg6IDQ1MHB4ICFpbXBvcnRhbnQ7XHJcbn1cclxuXHJcbi5idG4tZmxvYXQtcmlnaHR7XHJcbiAgICBmbG9hdDogcmlnaHQ7XHJcbn1cclxuIl19 */"] });
+    } }, dependencies: [_angular_common__WEBPACK_IMPORTED_MODULE_7__.NgForOf, _angular_forms__WEBPACK_IMPORTED_MODULE_8__.NgSelectOption, _angular_forms__WEBPACK_IMPORTED_MODULE_8__["ɵNgSelectMultipleOption"], _angular_forms__WEBPACK_IMPORTED_MODULE_8__.DefaultValueAccessor, _angular_forms__WEBPACK_IMPORTED_MODULE_8__.SelectControlValueAccessor, _angular_forms__WEBPACK_IMPORTED_MODULE_8__.NgControlStatus, _angular_forms__WEBPACK_IMPORTED_MODULE_8__.RequiredValidator, _angular_forms__WEBPACK_IMPORTED_MODULE_8__.NgModel, _nebular_theme__WEBPACK_IMPORTED_MODULE_6__.NbButtonComponent, _nebular_theme__WEBPACK_IMPORTED_MODULE_6__.NbRadioComponent, _nebular_theme__WEBPACK_IMPORTED_MODULE_6__.NbRadioGroupComponent, _nebular_theme__WEBPACK_IMPORTED_MODULE_6__.NbInputDirective, _nebular_theme__WEBPACK_IMPORTED_MODULE_6__.NbCardComponent, _nebular_theme__WEBPACK_IMPORTED_MODULE_6__.NbCardBodyComponent, _nebular_theme__WEBPACK_IMPORTED_MODULE_6__.NbCardFooterComponent, _nebular_theme__WEBPACK_IMPORTED_MODULE_6__.NbCardHeaderComponent], styles: ["[_nghost-%COMP%]     nb-dialog-container {\n  width: 450px !important;\n}\n\nselect[nbInput][_ngcontent-%COMP%] {\n  width: 100%;\n  -webkit-appearance: auto;\n          appearance: auto;\n  background-color: var(--input-basic-background-color);\n  color: var(--input-basic-text-color);\n  border-color: var(--input-basic-border-color);\n}\n\nselect[nbInput][_ngcontent-%COMP%]   option[_ngcontent-%COMP%] {\n  background-color: var(--card-background-color);\n  color: var(--input-basic-text-color);\n}\n\n.btn-float-right[_ngcontent-%COMP%] {\n  float: right;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImRhc2hib2FyZC1kaWFsb2cuY29tcG9uZW50LnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQ0E7RUFDSSx1QkFBQTtBQUFKOztBQUdBO0VBQ0ksV0FBQTtFQUNBLHdCQUFBO1VBQUEsZ0JBQUE7RUFDQSxxREFBQTtFQUNBLG9DQUFBO0VBQ0EsNkNBQUE7QUFBSjs7QUFFSTtFQUNJLDhDQUFBO0VBQ0Esb0NBQUE7QUFBUjs7QUFJQTtFQUNJLFlBQUE7QUFESiIsImZpbGUiOiJkYXNoYm9hcmQtZGlhbG9nLmNvbXBvbmVudC5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiXHJcbjpob3N0IDo6bmctZGVlcCBuYi1kaWFsb2ctY29udGFpbmVyIHtcclxuICAgIHdpZHRoOiA0NTBweCAhaW1wb3J0YW50O1xyXG59XHJcblxyXG5zZWxlY3RbbmJJbnB1dF0ge1xyXG4gICAgd2lkdGg6IDEwMCU7XHJcbiAgICBhcHBlYXJhbmNlOiBhdXRvO1xyXG4gICAgYmFja2dyb3VuZC1jb2xvcjogdmFyKC0taW5wdXQtYmFzaWMtYmFja2dyb3VuZC1jb2xvcik7XHJcbiAgICBjb2xvcjogdmFyKC0taW5wdXQtYmFzaWMtdGV4dC1jb2xvcik7XHJcbiAgICBib3JkZXItY29sb3I6IHZhcigtLWlucHV0LWJhc2ljLWJvcmRlci1jb2xvcik7XHJcblxyXG4gICAgb3B0aW9uIHtcclxuICAgICAgICBiYWNrZ3JvdW5kLWNvbG9yOiB2YXIoLS1jYXJkLWJhY2tncm91bmQtY29sb3IpO1xyXG4gICAgICAgIGNvbG9yOiB2YXIoLS1pbnB1dC1iYXNpYy10ZXh0LWNvbG9yKTtcclxuICAgIH1cclxufVxyXG5cclxuLmJ0bi1mbG9hdC1yaWdodHtcclxuICAgIGZsb2F0OiByaWdodDtcclxufVxyXG4iXX0= */"] });
 
 
 /***/ }),
@@ -2193,7 +2185,7 @@ __webpack_require__.r(__webpack_exports__);
 function DashboardTemplateComponent_div_2_Template(rf, ctx) { if (rf & 1) {
     const _r4 = _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵgetCurrentView"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](0, "div", 3)(1, "app-dashboard-chart", 4);
-    _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵlistener"]("moveLeftEvent", function DashboardTemplateComponent_div_2_Template_app_dashboard_chart_moveLeftEvent_1_listener($event) { _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵrestoreView"](_r4); const ctx_r3 = _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵnextContext"](); return _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵresetView"](ctx_r3.moveLeft($event)); })("moveRightEvent", function DashboardTemplateComponent_div_2_Template_app_dashboard_chart_moveRightEvent_1_listener($event) { _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵrestoreView"](_r4); const ctx_r5 = _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵnextContext"](); return _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵresetView"](ctx_r5.moveRight($event)); });
+    _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵlistener"]("moveLeftEvent", function DashboardTemplateComponent_div_2_Template_app_dashboard_chart_moveLeftEvent_1_listener($event) { _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵrestoreView"](_r4); const ctx_r3 = _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵnextContext"](); return _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵresetView"](ctx_r3.moveLeft($event)); })("moveRightEvent", function DashboardTemplateComponent_div_2_Template_app_dashboard_chart_moveRightEvent_1_listener($event) { _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵrestoreView"](_r4); const ctx_r5 = _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵnextContext"](); return _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵresetView"](ctx_r5.moveRight($event)); })("deleteEvent", function DashboardTemplateComponent_div_2_Template_app_dashboard_chart_deleteEvent_1_listener($event) { _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵrestoreView"](_r4); const ctx_r6 = _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵnextContext"](); return _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵresetView"](ctx_r6.onChartDeleted($event)); });
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]()();
 } if (rf & 2) {
     const chart_r1 = ctx.$implicit;
@@ -2208,6 +2200,12 @@ class DashboardTemplateComponent {
         this.dashboardChartInfo = [];
     }
     ngOnInit() {
+        this.loadCharts();
+        this.dashboardService.reloadTrigger.subscribe(() => {
+            this.loadCharts();
+        });
+    }
+    loadCharts() {
         this.dashboardService.getDashboards().subscribe(resData => {
             this.dashboardChartInfo = resData;
         }, error => {
@@ -2236,9 +2234,12 @@ class DashboardTemplateComponent {
             console.log(error);
         });
     }
+    onChartDeleted(chartId) {
+        this.dashboardChartInfo = this.dashboardChartInfo.filter(c => c.dashboardChartId !== chartId);
+    }
 }
 DashboardTemplateComponent.ɵfac = function DashboardTemplateComponent_Factory(t) { return new (t || DashboardTemplateComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵdirectiveInject"](src_app_services_dashboard_dashboard_service__WEBPACK_IMPORTED_MODULE_0__.DashboardService)); };
-DashboardTemplateComponent.ɵcmp = /*@__PURE__*/ _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵdefineComponent"]({ type: DashboardTemplateComponent, selectors: [["app-dashboard-template"]], decls: 4, vars: 1, consts: [[1, "col-12"], [1, "row"], ["class", "col-12 col-md-4", 4, "ngFor", "ngForOf"], [1, "col-12", "col-md-4"], [3, "chartInfo", "chartIndex", "chartTotal", "moveLeftEvent", "moveRightEvent"]], template: function DashboardTemplateComponent_Template(rf, ctx) { if (rf & 1) {
+DashboardTemplateComponent.ɵcmp = /*@__PURE__*/ _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵdefineComponent"]({ type: DashboardTemplateComponent, selectors: [["app-dashboard-template"]], decls: 4, vars: 1, consts: [[1, "col-12"], [1, "row"], ["class", "col-12 col-md-4", 4, "ngFor", "ngForOf"], [1, "col-12", "col-md-4"], [3, "chartInfo", "chartIndex", "chartTotal", "moveLeftEvent", "moveRightEvent", "deleteEvent"]], template: function DashboardTemplateComponent_Template(rf, ctx) { if (rf & 1) {
         _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelement"](0, "app-dashboard-summary-data", 0);
         _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](1, "div", 1);
         _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtemplate"](2, DashboardTemplateComponent_div_2_Template, 2, 3, "div", 2);

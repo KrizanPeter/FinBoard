@@ -3,6 +3,19 @@
     width: 450px !important;
 }
 
+select[nbInput] {
+    width: 100%;
+    appearance: auto;
+    background-color: var(--input-basic-background-color);
+    color: var(--input-basic-text-color);
+    border-color: var(--input-basic-border-color);
+
+    option {
+        background-color: var(--card-background-color);
+        color: var(--input-basic-text-color);
+    }
+}
+
 .btn-float-right{
     float: right;
 }

@@ -13,6 +13,13 @@ export class DashboardTemplateComponent implements OnInit {
   constructor(private dashboardService: DashboardService) { }
 
   ngOnInit(): void {
+    this.loadCharts();
+    this.dashboardService.reloadTrigger.subscribe(() => {
+      this.loadCharts();
+    });
+  }
+
+  private loadCharts() {
     this.dashboardService.getDashboards().subscribe(
       resData => {
         this.dashboardChartInfo = resData;
@@ -49,6 +56,10 @@ export class DashboardTemplateComponent implements OnInit {
         console.log(error);
       }
     );
+  }
+
+  onChartDeleted(chartId: string) {
+    this.dashboardChartInfo = this.dashboardChartInfo.filter(c => c.dashboardChartId !== chartId);
   }
 
 }

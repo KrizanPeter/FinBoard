@@ -103,20 +103,14 @@ export class DashboardDialogComponent implements OnInit  {
     let dashboardDto : DashboardDto;
     dashboardDto = this.fillDtoWithData(dashboardDto);
     this.dashboardService.createDashboardChart(dashboardDto).subscribe(
-      resData => {
-        ///this.isLoading = false;
-        //this.resourceGroupService.reloadTrigger.next(true);
-        this.cancel();
-        location.reload();
+      () => {
+        this.dashboardService.reloadTrigger.next(true);
+        this.ref.close();
       }, 
       error => {
-        //this.isLoading = false;
         console.log(error);
       }
     );
-    console.log(this.selectedOption)
-    console.log(this.radioGroupValue)
-    console.log(this.radioGroupChartType)
   }
 
   fillDtoWithData(dashboardDto: DashboardDto){
