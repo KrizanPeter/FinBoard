@@ -154,5 +154,26 @@ namespace API.Controllers
 
         }
 
+        [Authorize]
+        [HttpPut("reorder")]
+        public async Task<IActionResult> Reorder(List<ReorderChartDto> reorderList)
+        {
+            var requestId = this.GetRequestId();
+            var accountId = GetCurrentUserAccountId();
+            _logger.LogInformation(this.LogApiAccess(requestId, MethodBase.GetCurrentMethod()));
+            _persistentService.SetupRequestProperties(GetCurrentUserId().Value, GetCurrentUserAccountId().Value);
+
+            if (accountId.IsFailure) { return BadRequest(accountId.Error); }
+
+            var result = await _dashboardService.ReorderChartsAsync(reorderList, accountId.Value);
+
+            if (result.IsSuccess)
+            {
+                return Ok();
+            }
+
+            return BadRequest(result.Error);
+        }
+
     }
 }

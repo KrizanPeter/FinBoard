@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { faTrashCan } from '@fortawesome/free-solid-svg-icons';
 import { DashboardService } from 'src/app/services/dashboard/dashboard.service';
 import { ResourceService } from 'src/app/services/resource/resource.service';
@@ -15,6 +15,10 @@ import { SnapshotDto } from 'src/app/_models/snapshotModels/snapshotDto';
 })
 export class DashboardChartComponent implements OnInit {
   @Input() chartInfo : DashboardDto;
+  @Input() chartIndex: number = 0;
+  @Input() chartTotal: number = 0;
+  @Output() moveLeftEvent = new EventEmitter<number>();
+  @Output() moveRightEvent = new EventEmitter<number>();
   faTrashCan = faTrashCan;
   chartTypePie =  ChartType.Pie;
   chartTypeLine = ChartType.Line;

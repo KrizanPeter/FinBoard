@@ -1,16 +1,51 @@
-<nb-card class="dashboard-window chart-window">
-    <nb-card-header class="dashboard-header ms-2 me-2">
-        <b>Overview (compare to last snapshot)</b>
-    </nb-card-header>
-    <nb-card-body class="p-0 ms-2 me-2 scroll">
-        <div class="d-flex col-12 mt-1" *ngFor="let record of overviewData; let i = index"  [ngClass]="(i === overviewDataCount-1) ? 'dashed-top':'dashed-bottom'">
-            <div class="col-5 col-md-6 pt-2 ps-md-4">{{record.name}}</div>
-            <div class="col-3 col-md-2 pt-2">{{record.amount | number : '1.2-2'}} €</div>
-            <div class="col-2 col-md-2 pt-2 ps-2">{{record.percentageMove | number : '1.2-2'}} %</div>
-            <nb-icon *ngIf="record.isRising==true" class="col-1 col-md-2" style="color: green; font-size: 35px; font-weight:900;" nbPrefix
-            icon="arrow-up" pack="eva"></nb-icon>
-            <nb-icon *ngIf="record.isRising==false" class="col-1 col-md-2" style="color: red; font-size: 35px; font-weight:900;" nbPrefix
-            icon="arrow-down" pack="eva"></nb-icon>
+<nb-card class="overview-strip">
+    <nb-card-body class="strip-body">
+        <div style="text-align: center; padding: 1rem;" *ngIf="isLoading">
+            <app-loading-spinner></app-loading-spinner>
+        </div>
+
+        <div class="strip-content" *ngIf="!isLoading">
+            <!-- Total value tile -->
+            <div class="total-tile">
+                <span class="total-label">Portfolio</span>
+                <span class="total-amount">{{ totalValue | number:'1.2-2' }} €</span>
+                <a class="goals-link" *ngIf="hasAnyGoal" (click)="navigateToGoals()">
+                    <nb-icon icon="flag-outline" pack="eva"></nb-icon> Goals
+                </a>
+            </div>
+
+            <!-- Divider -->
+            <div class="strip-divider"></div>
+
+            <!-- Scrollable resource tiles -->
+            <div class="tiles-scroll">
+                <div class="resource-tile" *ngFor="let row of rows">
+                    <div class="tile-top">
+                        <span class="tile-name">{{ row.name }}</span>
+                        <span class="group-badge" *ngIf="row.resourceType === 'group'">Group</span>
+                    </div>
+                    <div class="tile-mid">
+                        <span class="tile-amount">{{ row.amount | number:'1.2-2' }} €</span>
+                        <span class="tile-change" [ngClass]="row.isRising ? 'rising' : 'falling'"
+                              *ngIf="row.resourceType !== 'group'">
+                            <nb-icon [icon]="row.isRising ? 'arrow-upward-outline' : 'arrow-downward-outline'" pack="eva"></nb-icon>
+                            {{ row.percentageMove | number:'1.1-1' }}%
+                        </span>
+                    </div>
+                    <div class="tile-goal" *ngIf="row.goal">
+                        <div class="goal-bar-track">
+                            <div class="goal-bar-fill"
+                                [style.width.%]="row.goal.percentageFulfilled"
+                                [ngClass]="getProgressStatus(row.goal.percentageFulfilled)">
+                            </div>
+                        </div>
+                        <span class="goal-label">
+                            {{ row.goal.percentageFulfilled | number:'1.0-0' }}%
+                            · {{ row.goal.remainingDays > 0 ? row.goal.remainingDays + 'd' : 'Overdue' }}
+                        </span>
+                    </div>
+                </div>
+            </div>
         </div>
     </nb-card-body>
 </nb-card>

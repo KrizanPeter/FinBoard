@@ -15,6 +15,7 @@ namespace FinBoard.Services.Services.DashboardService
         Task<Result<IEnumerable<DashboardChartDto>>> GetAllDashboardChartsAsync(Guid value);
         Task<Result> CheckValidityAsync(Guid dashboardId, Guid accountId);
         Task<Result> DeleteDashboardChartAsync(Guid dashboardId);
+        Task<Result> ReorderChartsAsync(List<ReorderChartDto> reorderList, Guid accountId);
 
         Task<Result<DataForDaschboardChartsDto>> GetDataOfChart(Guid dashboardChartId);
         Task<Result<List<DashboardOverviewDto>>> GetOverviewData(Guid value);

@@ -11,7 +11,7 @@ import { ChartType, DashboardDto, SourceType } from 'src/app/_models/dashboard/d
   selector: 'ngx-dialog-name-prompt',
   templateUrl: 'dashboard-dialog.component.html',
   styleUrls: ['dashboard-dialog.component.scss'],
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.Emulated
 })
 
 

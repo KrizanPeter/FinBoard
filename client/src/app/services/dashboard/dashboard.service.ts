@@ -38,4 +38,8 @@ export class DashboardService{
         return this.http.delete(this.baseUrl+'Dashboard/delete?dashboardChartId='+dashboardChartId);
     }
 
+    reorderCharts(reorderList: { dashboardChartId: string, orderIndex: number }[]) {
+        return this.http.put(this.baseUrl + 'Dashboard/reorder', reorderList);
+    }
+
 }

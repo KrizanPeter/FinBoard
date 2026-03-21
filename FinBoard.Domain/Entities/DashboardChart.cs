@@ -16,5 +16,6 @@ namespace FinBoard.Domain.Entities
         public string ChartName { get; set; }
         public SourceType SourceType { get; set; }
         public ChartType ChartType { get; set; }
+        public int OrderIndex { get; set; }
     }
 }

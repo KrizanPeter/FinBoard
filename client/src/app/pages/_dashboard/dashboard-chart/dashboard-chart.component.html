@@ -1,6 +1,14 @@
 <nb-card class="col-12 col-md-12 dashboard-window chart-window">
     <nb-card-header class="dashboard-header">
-        <b>{{chartInfo.chartName}}</b>
+        <div class="header-center">
+            <a class="nav-arrow" [class.disabled]="chartIndex === 0" (click)="moveLeftEvent.emit(chartIndex)">
+                <nb-icon icon="arrow-back-outline" pack="eva"></nb-icon>
+            </a>
+            <b>{{chartInfo.chartName}}</b>
+            <a class="nav-arrow" [class.disabled]="chartIndex === chartTotal - 1" (click)="moveRightEvent.emit(chartIndex)">
+                <nb-icon icon="arrow-forward-outline" pack="eva"></nb-icon>
+            </a>
+        </div>
         <a class="options-icon">
             <fa-icon [icon]="faTrashCan" (click)="deleteChart()"></fa-icon>
         </a>

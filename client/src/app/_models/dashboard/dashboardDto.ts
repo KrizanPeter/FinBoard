@@ -5,6 +5,7 @@ export class DashboardDto{
     chartName: string;
     chartType: ChartType;
     sourceType: SourceType;
+    orderIndex: number;
 }
 
 export enum SourceType{

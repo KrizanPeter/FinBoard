@@ -4,26 +4,49 @@
     margin-left: 10px;
     padding: 8px 0px 4px 0px;
     border-bottom: 1px solid gray;
-    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.header-center {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.nav-arrow {
+    cursor: pointer;
+    color: gray;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    transition: opacity 0.2s ease;
+
+    &:hover {
+        opacity: 1;
+        color: gray;
+    }
+
+    &.disabled {
+        opacity: 0.3;
+        pointer-events: none;
+    }
 }
 
 .close-btn{
     cursor: pointer;
     float:right !important;
-
-
 }
 
 .close-btn:hover{
     float:right !important;
     font-size: 20px;
-    color: white;
 }
 
 .dashboard-window{
     min-height: 27rem;
-    //padding: 20px;
-
 }
 
 .dashboard-body{
@@ -32,7 +55,8 @@
 }
 
 .options-icon{
-    float: right;
+    position: absolute;
+    right: 0;
     color: gray;
     cursor: pointer;
     padding-left: 10px;

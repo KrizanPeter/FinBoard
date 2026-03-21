@@ -50,6 +50,9 @@ namespace FinBoard.Services.Services.DashboardService
             var dashboardChartentity = _mapper.Map<DashboardChart>(dashboardChartDto);
             dashboardChartentity.AccountId = accountId;
 
+            var existingCharts = await _dashboardRepository.GetAllAsync(a => a.AccountId == accountId);
+            dashboardChartentity.OrderIndex = existingCharts.Any() ? existingCharts.Max(c => c.OrderIndex) + 1 : 0;
+
             try
             {
                 await _dashboardRepository.AddAsync(dashboardChartentity);
@@ -65,7 +68,9 @@ namespace FinBoard.Services.Services.DashboardService
 
         public async Task<Result<IEnumerable<DashboardChartDto>>> GetAllDashboardChartsAsync(Guid accountId)
         {
-            var result = await _dashboardRepository.GetAllAsync(a => a.AccountId == accountId);
+            var result = await _dashboardRepository.GetAllAsync(
+                a => a.AccountId == accountId,
+                q => q.OrderBy(c => c.OrderIndex));
             var resultDto = _mapper.Map<IEnumerable<DashboardChartDto>>(result);
 
             if (result != null)
@@ -101,6 +106,31 @@ namespace FinBoard.Services.Services.DashboardService
             {
                 return Result.Fail(ex.Message);
             }
+            return Result.Ok();
+        }
+
+        public async Task<Result> ReorderChartsAsync(List<ReorderChartDto> reorderList, Guid accountId)
+        {
+            var charts = await _dashboardRepository.GetAllAsync(a => a.AccountId == accountId);
+            var chartDict = charts.ToDictionary(c => c.DashboardChartId);
+
+            foreach (var item in reorderList)
+            {
+                if (chartDict.TryGetValue(item.DashboardChartId, out var chart))
+                {
+                    chart.OrderIndex = item.OrderIndex;
+                }
+            }
+
+            try
+            {
+                _dashboardRepository.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                return Result.Fail(ex.Message);
+            }
+
             return Result.Ok();
         }
 

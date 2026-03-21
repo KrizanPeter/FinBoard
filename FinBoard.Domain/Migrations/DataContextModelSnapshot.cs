@@ -207,6 +207,9 @@ namespace FinBoard.Domain.Migrations
                     b.Property<Guid>("LastModifyBy")
                         .HasColumnType("uuid");
 
+                    b.Property<int>("OrderIndex")
+                        .HasColumnType("integer");
+
                     b.Property<Guid>("SourceId")
                         .HasColumnType("uuid");
 

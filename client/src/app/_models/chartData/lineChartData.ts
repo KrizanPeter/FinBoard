@@ -25,6 +25,7 @@ export class LineRawData{
             normal: {
               show: true,
               position: 'top',
+              formatter: (params) => Math.round(params.value).toLocaleString(),
             },
           }
     }

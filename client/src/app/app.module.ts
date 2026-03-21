@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http'
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -161,7 +162,8 @@ import { FinancialGoalListComponent } from './pages/financial-goal/financial-goa
     NbToastrModule.forRoot(),
     ToastrModule.forRoot({
       positionClass :'toast-top-right'
-    })
+    }),
+    DragDropModule,
   ],
   providers: [
     LayoutService,

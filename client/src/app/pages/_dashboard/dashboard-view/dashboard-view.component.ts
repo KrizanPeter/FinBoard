@@ -19,7 +19,7 @@ export class DashboardViewComponent implements OnInit {
   }
 
   openDashboardDialog() {
-    this.dialogService.open(DashboardDialogComponent)
+    this.dialogService.open(DashboardDialogComponent, { autoFocus: false })
       .onClose.subscribe(name => name && this.names.push(name));
   }
 }

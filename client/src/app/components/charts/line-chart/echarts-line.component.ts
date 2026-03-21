@@ -61,7 +61,10 @@ export class EchartsLineComponent implements AfterViewInit, OnDestroy {
         color: trendColors,
         tooltip: {
           trigger: 'item',
-          formatter: '{a} <br/>{b} : {c}',
+          formatter: (params) => {
+            const val = Math.round(params.value).toLocaleString();
+            return `${params.seriesName} <br/>${params.name} : ${val}`;
+          },
         },
         legend: {
           left: 'left',
@@ -107,6 +110,7 @@ export class EchartsLineComponent implements AfterViewInit, OnDestroy {
               },
             },
             axisLabel: {
+              formatter: (value) => Math.round(value).toLocaleString(),
               textStyle: {
                 color: echarts.textColor,
               },

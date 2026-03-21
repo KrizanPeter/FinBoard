@@ -16,5 +16,6 @@ namespace FinBoard.Services.DTOs.DashBoardChart
 
         public SourceType SourceType { get; set; }
         public ChartType ChartType { get; set; }
+        public int OrderIndex { get; set; }
     }
 }
