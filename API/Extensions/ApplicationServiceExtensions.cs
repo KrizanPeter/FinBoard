@@ -18,7 +18,7 @@ namespace API.Extensions
             services.AddDbContext<DataContext>(options =>
             {
                 var env = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
-                env = "Development";
+                //env = "Development";
                 string connStr;
 
                 if (env == "DevelopmentMsql")
@@ -31,18 +31,18 @@ namespace API.Extensions
                     if (env == "Development")
                     {
                         //postgres:postgrespw
-                        connStr = "Server=localhost;Port=5432;User Id=myuser;Password=mypassword;Database=Finboard";
-                        //var connUrl = Environment.GetEnvironmentVariable("DATABASE_URL");
-                        //// Parse connection URL to connection string for Npgsql
-                        //connUrl = connUrl.Replace("postgres://", string.Empty);
+                        //connStr = "Server=localhost;Port=5432;User Id=myuser;Password=mypassword;Database=Finboard";
+                        var connUrl = Environment.GetEnvironmentVariable("DATABASE_URL");
+                        // Parse connection URL to connection string for Npgsql
+                        connUrl = connUrl.Replace("postgres://", string.Empty);
 
-                        //var pgDb = Environment.GetEnvironmentVariable("PGDATABASE");
-                        //var pgUser = Environment.GetEnvironmentVariable("PGUSER");
-                        //var pgPass = Environment.GetEnvironmentVariable("PGPASSWORD");
-                        //var pgHost = Environment.GetEnvironmentVariable("PGHOST");
-                        //var pgPort = Environment.GetEnvironmentVariable("PGPORT");
+                        var pgDb = Environment.GetEnvironmentVariable("PGDATABASE");
+                        var pgUser = Environment.GetEnvironmentVariable("PGUSER");
+                        var pgPass = Environment.GetEnvironmentVariable("PGPASSWORD");
+                        var pgHost = Environment.GetEnvironmentVariable("PGHOST");
+                        var pgPort = Environment.GetEnvironmentVariable("PGPORT");
 
-                        //connStr = $"Server={pgHost};Port={pgPort};User Id={pgUser};Password={pgPass};Database={pgDb};SSL Mode=Prefer;TrustServerCertificate=True";
+                        connStr = $"Server={pgHost};Port={pgPort};User Id={pgUser};Password={pgPass};Database={pgDb};SSL Mode=Prefer;TrustServerCertificate=True";
                         Console.WriteLine(connStr);
                     }
                     else
