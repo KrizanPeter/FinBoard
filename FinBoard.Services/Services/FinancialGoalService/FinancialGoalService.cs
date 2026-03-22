@@ -64,6 +64,38 @@ namespace FinBoard.Services.Services.FinancialGoalService
             return Result.Ok();
         }
 
+        public async Task<Result> UpdateGoalAsync(UpdateFinancialGoalDto goalDto, Guid accountId)
+        {
+            if (goalDto == null)
+            {
+                return Result.Fail("Goal Dto cannot be null.");
+            }
+
+            var goal = await _financialGoalRepository.GetFirstOrDefaultAsync(
+                a => a.FinancialGoalId == goalDto.FinancialGoalId && a.AccountId == accountId);
+
+            if (goal == null)
+            {
+                return Result.Fail("Financial goal with specified ID not found.");
+            }
+
+            goal.ResourceId = goalDto.ResourceId;
+            goal.ResourceGroupId = goalDto.ResourceGroupId;
+            goal.TargetValue = goalDto.TargetValue;
+            goal.DueDate = goalDto.DueDate;
+
+            try
+            {
+                _financialGoalRepository.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                return Result.Fail(ex.Message);
+            }
+
+            return Result.Ok();
+        }
+
         public async Task<Result> DeleteGoalAsync(Guid financialGoalId, Guid accountId)
         {
             var goal = await _financialGoalRepository.GetFirstOrDefaultAsync(

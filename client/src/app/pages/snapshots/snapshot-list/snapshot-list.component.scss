@@ -7,14 +7,15 @@ tr, th, td{
 }
 
 .options-icon{
-    color: currentColor;
+    color: gray;
     cursor: pointer;
     padding-left: 10px;
     padding-right: 10px;
+    transition: color 0.2s ease;
 }
 
 .options-icon:hover{
-    color: red;
+    color: #595959;
 }
 
 nb-tab{

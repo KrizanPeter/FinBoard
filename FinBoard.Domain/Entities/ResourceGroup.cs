@@ -13,6 +13,7 @@ namespace FinBoard.Domain.Entities
         public Guid ResourceGroupId { get; set; }
         public Guid AccountId { get; set; }
         public string ResourceGroupName { get; set; }
+        public int AnalyticsOrderIndex { get; set; }
 
         [JsonIgnore]
         public virtual ICollection<Resource>? Resources { get; set; }

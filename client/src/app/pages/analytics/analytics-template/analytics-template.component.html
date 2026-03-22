@@ -1,0 +1,32 @@
+<div class="period-selector">
+    <nb-radio-group [(value)]="selectedPeriod" (valueChange)="onPeriodChange($event)">
+        <nb-radio value="quarterly">Quarters</nb-radio>
+        <nb-radio value="yearly">Years</nb-radio>
+    </nb-radio-group>
+</div>
+
+<div style="text-align: center; padding: 2rem;" *ngIf="isLoading">
+    <app-loading-spinner></app-loading-spinner>
+</div>
+
+<div class="row" *ngIf="!isLoading">
+    <div class="col-12 col-md-4" *ngFor="let tile of tiles; let i = index">
+        <app-analytics-card
+            [tile]="tile"
+            [selectedPeriod]="selectedPeriod"
+            [cardIndex]="i"
+            [cardTotal]="tiles.length"
+            (moveLeftEvent)="moveLeft($event)"
+            (moveRightEvent)="moveRight($event)">
+        </app-analytics-card>
+    </div>
+</div>
+
+<div class="empty-state" *ngIf="!isLoading && tiles.length === 0">
+    <nb-card>
+        <nb-card-body style="text-align: center; padding: 3rem;">
+            <p>No resources or resource groups found.</p>
+            <p>Create some resources and add snapshots to see analytics here.</p>
+        </nb-card-body>
+    </nb-card>
+</div>

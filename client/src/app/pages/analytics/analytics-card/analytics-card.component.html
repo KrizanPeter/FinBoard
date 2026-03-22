@@ -1,0 +1,30 @@
+<nb-card class="col-12 col-md-12 analytics-window">
+    <nb-card-header class="analytics-header">
+        <div class="header-center">
+            <a class="nav-arrow" [class.disabled]="cardIndex === 0" (click)="moveLeftEvent.emit(cardIndex)">
+                <nb-icon icon="arrow-back-outline" pack="eva"></nb-icon>
+            </a>
+            <b>{{tile.name}}</b>
+            <a class="nav-arrow" [class.disabled]="cardIndex === cardTotal - 1" (click)="moveRightEvent.emit(cardIndex)">
+                <nb-icon icon="arrow-forward-outline" pack="eva"></nb-icon>
+            </a>
+        </div>
+        <span class="entity-badge" *ngIf="tile.entityType === 'group'">Group</span>
+    </nb-card-header>
+    <nb-card-body class="analytics-body">
+        <div class="value-section">
+            <span class="current-label">Current value</span>
+            <span class="current-value">{{ tile.currentValue | number:'1.2-2' }} €</span>
+        </div>
+        <div class="growth-table">
+            <div class="growth-row" *ngFor="let p of periods"
+                 [ngClass]="growthClass(p.growth)">
+                <span class="period-label">{{ p.label }}</span>
+                <span class="period-value">{{ growthText(p.growth) }}</span>
+            </div>
+            <div class="growth-row neutral" *ngIf="periods.length === 0">
+                <span class="period-value">No snapshot data</span>
+            </div>
+        </div>
+    </nb-card-body>
+</nb-card>

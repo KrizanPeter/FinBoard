@@ -126,7 +126,7 @@ namespace FinBoard.Services.Services.Move
 
         public async Task<Result<IEnumerable<SnapshotDto>>> GetAllSnapshotsForDate(Guid accountId, DateTime date)
         {
-            var result = await _snapshotRepository.GetAllAsync(a => a.AccountId == accountId && a.DateOfSnapshot.Date == date);
+            var result = await _snapshotRepository.GetAllAsync(a => a.AccountId == accountId && a.DateOfSnapshot.Date == date.Date);
             var movesDtoList = _mapper.Map<IEnumerable<SnapshotDto>>(result);
 
             return Result.Ok(movesDtoList);

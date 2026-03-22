@@ -61,23 +61,24 @@
     cursor: pointer;
     padding-left: 10px;
     padding-right: 10px;
+    transition: color 0.2s ease;
 }
 .options-icon:hover{
-    color: red;
+    color: #595959;
 }
 
 .goal-icon{
     position: absolute;
     left: 0;
-    color: #ff3d71;
+    color: gray;
     cursor: pointer;
     padding-left: 10px;
     padding-right: 10px;
     display: flex;
     align-items: center;
-    transition: transform 0.2s ease;
+    transition: transform 0.2s ease, color 0.2s ease;
 }
 .goal-icon:hover{
     transform: scale(1.2);
-    color: #ff3d71;
+    color: #595959;
 }

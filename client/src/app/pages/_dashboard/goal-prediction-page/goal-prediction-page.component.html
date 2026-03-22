@@ -1,0 +1,71 @@
+<app-dashboard-summary-data class="col-12"></app-dashboard-summary-data>
+
+<nb-card class="prediction-page-card">
+    <nb-card-header class="page-header">
+        <a class="nav-link" (click)="goToDashboard()">
+            <nb-icon icon="grid-outline" pack="eva"></nb-icon>
+            Go to dashboard
+        </a>
+        <h5>{{chartName}} — Goal Prediction</h5>
+        <a class="nav-link" (click)="editGoal()">
+            <nb-icon icon="edit-outline" pack="eva"></nb-icon>
+            Edit my goal
+        </a>
+    </nb-card-header>
+    <nb-card-body>
+        <div style="text-align: center; padding: 2rem;" *ngIf="isLoading">
+            <app-loading-spinner></app-loading-spinner>
+        </div>
+
+        <div class="prediction-layout" *ngIf="!isLoading">
+            <div class="info-panel">
+                <div class="verdict-banner" [ngClass]="achievementClass">
+                    <nb-icon [icon]="achievementIcon" pack="eva"></nb-icon>
+                    <div class="verdict-text">
+                        <span class="verdict-headline">{{goalVerdict}}</span>
+                        <span class="verdict-detail">{{verdictReason}}</span>
+                        <span class="verdict-detail" *ngIf="verdictEstimated">Estimated: {{verdictEstimated}}</span>
+                        <span class="verdict-detail" *ngIf="verdictDelay">{{verdictDelay}}</span>
+                    </div>
+                </div>
+
+                <div class="info-grid">
+                    <div class="info-section">
+                        <div class="info-label">{{sourceTypeLabel}}</div>
+                        <div class="info-value">{{chartName}}</div>
+                    </div>
+
+                    <div class="info-section">
+                        <div class="info-label">Current</div>
+                        <div class="info-value info-value--large">{{goal.currentValue | number}}</div>
+                    </div>
+
+                    <div class="info-section">
+                        <div class="info-label">Target</div>
+                        <div class="info-value">{{goal.targetValue | number}}</div>
+                        <div class="info-sub" *ngIf="goal.dueDate">Due {{goal.dueDate | date:'mediumDate'}}</div>
+                    </div>
+
+                    <div class="info-section" *ngIf="goal.remainingDays > 0">
+                        <div class="info-label">Time left</div>
+                        <div class="info-value">{{goal.remainingDays}} days</div>
+                    </div>
+                </div>
+
+                <div class="info-section progress-section">
+                    <div class="progress-header">
+                        <span class="info-label">Progress</span>
+                        <span class="info-sub">{{goal.percentageFulfilled | number:'1.0-1'}}%</span>
+                    </div>
+                    <div class="progress-bar-wrapper">
+                        <div class="progress-bar-fill" [ngClass]="achievementClass" [style.width.%]="goal.percentageFulfilled > 100 ? 100 : goal.percentageFulfilled"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="chart-panel">
+                <div echarts [options]="predictionOptions" class="prediction-chart"></div>
+            </div>
+        </div>
+    </nb-card-body>
+</nb-card>

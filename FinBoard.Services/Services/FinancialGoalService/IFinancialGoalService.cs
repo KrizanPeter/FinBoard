@@ -12,6 +12,7 @@ namespace FinBoard.Services.Services.FinancialGoalService
     {
         Task<Result<IEnumerable<FinancialGoalDto>>> GetAllGoalsOfAccountAsync(Guid accountId);
         Task<Result> CreateGoalAsync(CreateFinancialGoalDto goalDto, Guid accountId);
+        Task<Result> UpdateGoalAsync(UpdateFinancialGoalDto goalDto, Guid accountId);
         Task<Result> DeleteGoalAsync(Guid financialGoalId, Guid accountId);
     }
 }

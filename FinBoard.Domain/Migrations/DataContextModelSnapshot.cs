@@ -270,6 +270,9 @@ namespace FinBoard.Domain.Migrations
                     b.Property<Guid>("AccountId")
                         .HasColumnType("uuid");
 
+                    b.Property<int>("AnalyticsOrderIndex")
+                        .HasColumnType("integer");
+
                     b.Property<Guid>("CreatedBy")
                         .HasColumnType("uuid");
 
@@ -304,6 +307,9 @@ namespace FinBoard.Domain.Migrations
 
                     b.Property<Guid>("AccountId")
                         .HasColumnType("uuid");
+
+                    b.Property<int>("AnalyticsOrderIndex")
+                        .HasColumnType("integer");
 
                     b.Property<Guid>("CreatedBy")
                         .HasColumnType("uuid");

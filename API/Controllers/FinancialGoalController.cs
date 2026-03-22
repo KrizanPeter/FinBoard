@@ -69,6 +69,27 @@ namespace API.Controllers
         }
 
         [Authorize]
+        [HttpPut("update")]
+        public async Task<IActionResult> Update(UpdateFinancialGoalDto goalDto)
+        {
+            var requestId = this.GetRequestId();
+            var accountId = GetCurrentUserAccountId();
+            _logger.LogInformation(this.LogApiAccess(requestId, MethodBase.GetCurrentMethod()));
+            _persistentService.SetupRequestProperties(GetCurrentUserId().Value, GetCurrentUserAccountId().Value);
+
+            if (accountId.IsFailure) { return BadRequest(accountId.Error); }
+
+            var result = await _financialGoalService.UpdateGoalAsync(goalDto, accountId.Value);
+
+            if (result.IsSuccess)
+            {
+                return Ok();
+            }
+
+            return BadRequest(result.Error);
+        }
+
+        [Authorize]
         [HttpDelete("delete")]
         public async Task<IActionResult> Delete(Guid financialGoalId)
         {

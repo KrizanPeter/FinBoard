@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { faTrashCan } from '@fortawesome/free-solid-svg-icons';
+import { faPenToSquare, faTrashCan } from '@fortawesome/free-solid-svg-icons';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { FinancialGoalDto } from 'src/app/_models/financialGoalModels/financialGoalDto';
 import { FinancialGoalService } from 'src/app/services/financialGoal/financialGoal.service';
@@ -12,6 +12,7 @@ import { FinancialGoalService } from 'src/app/services/financialGoal/financialGo
 export class FinancialGoalListComponent implements OnInit, OnDestroy {
 
   faTrashCan = faTrashCan;
+  faPenToSquare = faPenToSquare;
   private goalListSub: Subscription;
   goalsList: FinancialGoalDto[] = [];
   isLoading = false;
@@ -50,6 +51,10 @@ export class FinancialGoalListComponent implements OnInit, OnDestroy {
         console.log(error);
       }
     );
+  }
+
+  editClick(goal: FinancialGoalDto) {
+    this.financialGoalService.editGoal.next(goal);
   }
 
   getProgressStatus(percentage: number): string {

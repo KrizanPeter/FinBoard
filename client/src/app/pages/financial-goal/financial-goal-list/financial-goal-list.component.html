@@ -15,9 +15,14 @@
                         <span class="goal-type-badge" *ngIf="goal.resourceId">Resource</span>
                         <span class="goal-type-badge group" *ngIf="goal.resourceGroupId">Group</span>
                     </div>
-                    <a class="options-icon">
-                        <fa-icon [icon]="faTrashCan" (click)="deleteClick(goal.financialGoalId)"></fa-icon>
-                    </a>
+                    <div class="goal-actions">
+                        <a class="options-icon edit-icon">
+                            <fa-icon [icon]="faPenToSquare" (click)="editClick(goal)"></fa-icon>
+                        </a>
+                        <a class="options-icon">
+                            <fa-icon [icon]="faTrashCan" (click)="deleteClick(goal.financialGoalId)"></fa-icon>
+                        </a>
+                    </div>
                 </div>
                 <div class="goal-details">
                     <div class="goal-values">

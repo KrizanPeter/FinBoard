@@ -11,6 +11,11 @@ export const USER_MENU_ITEMS: NbMenuItem[] = [
     link: 'dashboard',
   },
   {
+    title: 'Analytics',
+    icon: 'bar-chart-outline',
+    link: 'analytics',
+  },
+  {
     title: 'Add snapshot',
     icon: 'done-all-outline',
     link: 'agregate-snapshot',

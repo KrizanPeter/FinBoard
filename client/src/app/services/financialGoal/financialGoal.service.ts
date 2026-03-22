@@ -1,6 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { BehaviorSubject } from "rxjs";
+import { BehaviorSubject, Subject } from "rxjs";
 import { FinancialGoalDto } from "src/app/_models/financialGoalModels/financialGoalDto";
 import { environment } from "src/environments/environment";
 
@@ -8,6 +8,7 @@ import { environment } from "src/environments/environment";
 @Injectable({providedIn:'root'})
 export class FinancialGoalService {
     reloadTrigger = new BehaviorSubject<boolean>(true);
+    editGoal = new Subject<FinancialGoalDto | null>();
     baseUrl = environment.apiUrl;
 
     constructor(private http: HttpClient) {
@@ -19,6 +20,16 @@ export class FinancialGoalService {
 
     createGoal(resourceId: string | null, resourceGroupId: string | null, targetValue: number, dueDate: string) {
         return this.http.post(this.baseUrl + 'FinancialGoal/create', {
+            resourceId: resourceId,
+            resourceGroupId: resourceGroupId,
+            targetValue: targetValue,
+            dueDate: dueDate,
+        });
+    }
+
+    updateGoal(financialGoalId: string, resourceId: string | null, resourceGroupId: string | null, targetValue: number, dueDate: string) {
+        return this.http.put(this.baseUrl + 'FinancialGoal/update', {
+            financialGoalId: financialGoalId,
             resourceId: resourceId,
             resourceGroupId: resourceGroupId,
             targetValue: targetValue,

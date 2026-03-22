@@ -1,5 +1,5 @@
 <nb-card>
-    <nb-card-header>Create Financial Goal</nb-card-header>
+    <nb-card-header>{{ isEditMode ? 'Edit Financial Goal' : 'Create Financial Goal' }}</nb-card-header>
     <nb-card-body>
         <form class="auth-form" #createGoalForm="ngForm" (ngSubmit)="onSubmit(createGoalForm)">
             <div class="form-group">
@@ -41,7 +41,12 @@
 
             <div class="btn-container">
                 <button type="submit" nbButton status="danger"
-                    [disabled]="!createGoalForm.valid || !selectedEntityId || !targetValue || !dueDate">Create Goal</button>
+                    [disabled]="!createGoalForm.valid || !selectedEntityId || !targetValue || !dueDate">
+                    {{ isEditMode ? 'Update Goal' : 'Create Goal' }}
+                </button>
+                <button *ngIf="isEditMode" type="button" nbButton status="basic" (click)="cancelEdit()" style="margin-left: 0.5rem;">
+                    Cancel
+                </button>
             </div>
         </form>
     </nb-card-body>

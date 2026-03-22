@@ -14,6 +14,8 @@ import { LandingPageComponent } from './publicPages/landing-page/landing-page.co
 import { ReleaseNotesComponent } from './publicPages/release-notes/release-notes.component';
 import { DataBackupComponent } from './pages/data-backup/data-backup.component';
 import { FinancialGoalTemplateComponent } from './pages/financial-goal/financial-goal-template/financial-goal-template.component';
+import { GoalPredictionPageComponent } from './pages/_dashboard/goal-prediction-page/goal-prediction-page.component';
+import { AnalyticsTemplateComponent } from './pages/analytics/analytics-template/analytics-template.component';
 
 
 const routes: Routes = [
@@ -26,11 +28,13 @@ const routes: Routes = [
   { path:'resource', component: ResourceTemplateComponent, canActivate: [AuthGuard]},
   { path:'snapshot', component: SnapshotTemplateComponent, canActivate: [AuthGuard]},
   { path:'dashboard', component: DashboardTemplateComponent, canActivate: [AuthGuard]},
+  { path:'analytics', component: AnalyticsTemplateComponent, canActivate: [AuthGuard]},
   { path:'agregate-snapshot', component:SnapshotAgregateComponent, canActivate: [AuthGuard]},
   { path:'resource-group', component:ResourceGroupTemplateComponent, canActivate: [AuthGuard]},
   { path:'create-guide', component:CreateGuideComponent, canActivate: [AuthGuard]},
   { path:'data-backup', component:DataBackupComponent, canActivate: [AuthGuard]},
   { path:'financial-goals', component:FinancialGoalTemplateComponent, canActivate: [AuthGuard]},
+  { path:'goal-prediction/:dashboardChartId', component:GoalPredictionPageComponent, canActivate: [AuthGuard]},
 
 
 

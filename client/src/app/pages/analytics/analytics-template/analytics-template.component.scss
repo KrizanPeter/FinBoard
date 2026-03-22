@@ -1,0 +1,14 @@
+.period-selector {
+    margin-bottom: 1rem;
+    padding: 0.5rem 0;
+
+    nb-radio-group {
+        display: flex;
+        gap: 1.5rem;
+        flex-wrap: wrap;
+    }
+}
+
+.empty-state {
+    margin-top: 1rem;
+}

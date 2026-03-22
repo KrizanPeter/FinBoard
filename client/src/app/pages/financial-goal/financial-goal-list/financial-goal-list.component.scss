@@ -42,13 +42,20 @@
 }
 
 .options-icon {
+    color: gray;
     cursor: pointer;
     padding-left: 10px;
     padding-right: 10px;
+    transition: color 0.2s ease;
 
     &:hover {
-        color: red;
+        color: #595959;
     }
+}
+
+.goal-actions {
+    display: flex;
+    align-items: center;
 }
 
 .goal-values {

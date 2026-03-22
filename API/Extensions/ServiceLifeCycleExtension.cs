@@ -17,6 +17,7 @@ using FinBoard.Services.Services.TimeLIneService;
 using FinBoard.Services.Services.RestoreService;
 using FinBoard.Services.Services.FinancialGoalService;
 using FinBoard.Domain.Repositories.FinancialGoal;
+using FinBoard.Services.Services.AnalyticsService;
 
 namespace API.Extensions
 {
@@ -36,6 +37,7 @@ namespace API.Extensions
             services.AddScoped<ITimeLineService, TimeLineService>();
             services.AddScoped<IRestoreService, RestoreService>();
             services.AddScoped<IFinancialGoalService, FinancialGoalService>();
+            services.AddScoped<IAnalyticsService, AnalyticsService>();
 
             services.AddScoped<ISnapshotRepository, SnapshotRepository>();
             services.AddScoped<IAccountRepository, AccountRepository>();

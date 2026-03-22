@@ -1,0 +1,121 @@
+.analytics-window {
+    min-height: 16rem;
+}
+
+.analytics-header {
+    margin-right: 10px;
+    margin-left: 10px;
+    padding: 8px 0px 4px 0px;
+    border-bottom: 1px solid gray;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.header-center {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.nav-arrow {
+    cursor: pointer;
+    color: gray;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    transition: opacity 0.2s ease;
+
+    &:hover {
+        opacity: 1;
+        color: gray;
+    }
+
+    &.disabled {
+        opacity: 0.3;
+        pointer-events: none;
+    }
+}
+
+.entity-badge {
+    position: absolute;
+    right: 0;
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 2px 8px;
+    border-radius: 4px;
+    opacity: 0.7;
+    background: rgba(128, 128, 128, 0.15);
+}
+
+.analytics-body {
+    padding: 1rem !important;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.8rem;
+}
+
+.value-section {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.current-label {
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    opacity: 0.55;
+}
+
+.current-value {
+    font-size: 1.5rem;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.growth-table {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+}
+
+.growth-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.35rem 0.7rem;
+    border-radius: 5px;
+    font-size: 0.8rem;
+
+    &.positive {
+        color: #00d68f;
+        .period-value { color: #00d68f; }
+    }
+
+    &.negative {
+        color: #ff3d71;
+        .period-value { color: #ff3d71; }
+    }
+
+    &.neutral {
+        color: gray;
+        .period-value { color: gray; }
+    }
+}
+
+.period-label {
+    opacity: 0.7;
+    font-weight: 600;
+    white-space: nowrap;
+    min-width: 5rem;
+}
+
+.period-value {
+    white-space: nowrap;
+    text-align: right;
+}

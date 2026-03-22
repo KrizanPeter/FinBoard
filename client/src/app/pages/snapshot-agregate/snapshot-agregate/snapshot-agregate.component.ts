@@ -142,4 +142,15 @@ export class SnapshotAgregateComponent implements OnInit {
 
   }
 
+  copyFromPrevious() {
+    if (!this.snapshotTimeline || !this.dateFromDto) return;
+    const currentTime = new Date(this.dateFromDto).setHours(0, 0, 0, 0);
+    const currentIdx = this.snapshotTimeline.findIndex(
+      t => new Date(t.date).setHours(0, 0, 0, 0) === currentTime
+    );
+    if (currentIdx <= 0) return;
+    const previousEntry = this.snapshotTimeline[currentIdx - 1];
+    this.getSnapshotForDate(new Date(previousEntry.date));
+  }
+
 }

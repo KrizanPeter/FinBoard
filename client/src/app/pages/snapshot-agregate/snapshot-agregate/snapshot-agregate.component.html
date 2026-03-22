@@ -34,7 +34,13 @@
     </nb-card>
 
     <nb-card class="card-padding col col-md-10">
-        <nb-card-header>Create aggregated snapshot</nb-card-header>
+        <nb-card-header class="agregate-header">
+            <span>Create aggregated snapshot</span>
+            <button nbButton size="small" status="basic" type="button" (click)="copyFromPrevious()">
+                <nb-icon icon="copy-outline" pack="eva"></nb-icon>
+                Copy from previous
+            </button>
+        </nb-card-header>
         <nb-card-body>
 
             <form class="auth-form" #createAggregatedSnapshotForm="ngForm"

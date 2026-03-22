@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Router } from '@angular/router';
 import { faTrashCan } from '@fortawesome/free-solid-svg-icons';
-import { NbDialogService } from '@nebular/theme';
 import { DashboardService } from 'src/app/services/dashboard/dashboard.service';
 import { FinancialGoalService } from 'src/app/services/financialGoal/financialGoal.service';
 import { ResourceService } from 'src/app/services/resource/resource.service';
@@ -10,7 +10,6 @@ import { ChartType, DashboardDto, SourceType } from 'src/app/_models/dashboard/d
 import { FinancialGoalDto } from 'src/app/_models/financialGoalModels/financialGoalDto';
 import { ResourceDto } from 'src/app/_models/resourceModels/resourceDto';
 import { SnapshotDto } from 'src/app/_models/snapshotModels/snapshotDto';
-import { GoalPredictionDialogComponent } from '../goal-prediction-dialog/goal-prediction-dialog.component';
 
 @Component({
   selector: 'app-dashboard-chart',
@@ -35,7 +34,7 @@ export class DashboardChartComponent implements OnInit {
     private resourceService: ResourceService,
     private dashboardService: DashboardService,
     private financialGoalService: FinancialGoalService,
-    private dialogService: NbDialogService
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -114,14 +113,7 @@ export class DashboardChartComponent implements OnInit {
 
   openGoalPrediction() {
     if (!this.matchingGoal || !this.lineChartData) return;
-    this.dialogService.open(GoalPredictionDialogComponent, {
-      autoFocus: false,
-      context: {
-        chartName: this.chartInfo.chartName,
-        originalChartData: this.lineChartData,
-        goal: this.matchingGoal,
-      }
-    });
+    this.router.navigate(['/goal-prediction', this.chartInfo.dashboardChartId]);
   }
 
   deleteChart(){
